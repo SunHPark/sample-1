@@ -1310,19 +1310,28 @@
   }
 
   /* Step 1: scan */
+  .how-step-visual.s1 {
+    position: relative;
+  }
   .how-step-visual.s1 .scan-frame {
-    width: 110px;
-    height: 220px;
-    border: 2px solid var(--primary);
-    border-radius: 18px;
+    position: relative;
+    width: 160px;
+    height: 280px;
     background: white;
+    border-radius: 28px;
     box-shadow:
-      0 0 24px rgba(255, 31, 61, 0.25),
-      0 12px 32px -8px rgba(255, 31, 61, 0.3);
+      0 0 0 2.5px var(--primary),
+      0 0 32px rgba(255, 31, 61, 0.25),
+      0 0 60px rgba(255, 31, 61, 0.18),
+      0 16px 40px -10px rgba(255, 31, 61, 0.3);
+    overflow: hidden;
+    background-image: linear-gradient(180deg, rgba(255, 31, 61, 0.03) 0%, rgba(255, 255, 255, 1) 50%, rgba(255, 31, 61, 0.06) 100%);
   }
   .how-step-visual.s1 .scan-line {
     position: absolute;
-    width: 140px;
+    top: 50%;
+    left: 6px;
+    right: 6px;
     height: 3px;
     background: var(--primary);
     box-shadow:
@@ -1331,10 +1340,11 @@
       0 0 48px rgba(255, 31, 61, 0.35);
     border-radius: 2px;
     animation: scan 2.4s ease-in-out infinite;
+    pointer-events: none;
   }
   @keyframes scan {
-    0%, 100% { transform: translateY(-90px); opacity: 0.6; }
-    50% { transform: translateY(90px); opacity: 1; }
+    0%, 100% { transform: translateY(-110px); opacity: 0.5; }
+    50% { transform: translateY(110px); opacity: 1; }
   }
 
   /* Step 2: phone with swipeable card stack (Tinder-style discovery) */
@@ -2412,8 +2422,9 @@
             <p class="how-step-desc" data-i18n="how.1.d">AI가 자동으로 멤버·앨범·상태를 인식해요.<br>사진 한 장이면 5초만에 등록이 끝납니다.</p>
           </div>
           <div class="how-step-visual s1">
-            <div class="scan-frame"></div>
-            <div class="scan-line"></div>
+            <div class="scan-frame">
+              <div class="scan-line"></div>
+            </div>
           </div>
         </article>
 
@@ -2637,11 +2648,11 @@
     <div class="proof-stats">
       <div class="proof-stat">
         <div class="proof-stat-label" data-i18n="proof.stat1.label">사전예약 팬덤</div>
-        <div class="proof-stat-num"><span id="proofPreregCount">158</span><span class="unit">명</span></div>
+        <div class="proof-stat-num"><span id="proofPreregCount">158</span><span class="unit" data-i18n="proof.unit">명</span></div>
       </div>
       <div class="proof-stat">
         <div class="proof-stat-label" data-i18n="proof.stat2.label">베타테스터</div>
-        <div class="proof-stat-num"><span id="proofBetaCount">75</span><span class="unit">명</span></div>
+        <div class="proof-stat-num"><span id="proofBetaCount">75</span><span class="unit" data-i18n="proof.unit">명</span></div>
       </div>
     </div>
 
@@ -3495,6 +3506,7 @@
       'loop.stat2.label': '다른 팬과 매칭 예정',
       'proof.h': '글로벌 팬들이<br>교환을 기다리고 있어요.',
       'proof.stat1.label': '사전예약 팬덤',
+      'proof.unit': '명',
       'proof.stat2.label': '베타테스터',
       'proof.interests.h': '관심 컬렉터블',
       'proof.interests.sub': 'FNDM이 곧 다룰 컬렉터블 카테고리예요.<br>옆으로 드래그해보세요.',
@@ -3604,6 +3616,7 @@
       'loop.stat2.label': 'Fans waiting to match',
       'proof.h': 'Fans worldwide are<br>waiting to trade.',
       'proof.stat1.label': 'Pre-registered',
+      'proof.unit': ' fans',
       'proof.stat2.label': 'Beta testers',
       'proof.interests.h': 'Collectibles you love',
       'proof.interests.sub': 'Categories FNDM is launching with.<br>Drag to explore.',
@@ -3713,6 +3726,7 @@
       'loop.stat2.label': '他ファンとマッチング予定',
       'proof.h': '世界中のファンが<br>交換を待っています。',
       'proof.stat1.label': '事前予約数',
+      'proof.unit': '人',
       'proof.stat2.label': 'ベータテスター',
       'proof.interests.h': '興味のあるコレクタブル',
       'proof.interests.sub': 'FNDMがまもなく扱うコレクタブルカテゴリー。<br>横にドラッグしてみて。',
@@ -3822,6 +3836,7 @@
       'loop.stat2.label': '粉丝等你匹配',
       'proof.h': '全球粉丝<br>都在等交换。',
       'proof.stat1.label': '已预约',
+      'proof.unit': '人',
       'proof.stat2.label': '内测用户',
       'proof.interests.h': '你感兴趣的收藏',
       'proof.interests.sub': 'FNDM即将上线的收藏品类。<br>向旁边拖动看看。',
@@ -3931,6 +3946,7 @@
       'loop.stat2.label': 'Fans esperando hacer match',
       'proof.h': 'Fans de todo el mundo<br>esperan intercambiar.',
       'proof.stat1.label': 'Pre-registradas',
+      'proof.unit': ' fans',
       'proof.stat2.label': 'Beta testers',
       'proof.interests.h': 'Coleccionables que amás',
       'proof.interests.sub': 'Las categorías con las que arranca FNDM.<br>Arrastrá para explorar.',
@@ -4061,7 +4077,7 @@
   // ============================================================
   // Language Suggestion Modal — first-visit only
   // ============================================================
-  (function() {
+  function initLangModal() {
     const modal = document.getElementById('langModal');
     if (!modal) {
       console.warn('[lang-modal] Modal element not found in DOM');
@@ -4074,22 +4090,37 @@
       try {
         localStorage.removeItem('fndm-lang-prompted');
         localStorage.removeItem('fndm-locale');
-        console.log('[lang-modal] localStorage reset');
+        console.log('[lang-modal] localStorage reset via ?reset param');
       } catch (e) {}
     }
 
-    let dismissed = false;
+    // Check if storage is available at all (private mode / in-app browsers can throw)
+    let storageWorks = true;
     try {
-      dismissed = localStorage.getItem('fndm-lang-prompted') === '1';
-    } catch (e) {}
+      localStorage.setItem('__fndm_test', '1');
+      localStorage.removeItem('__fndm_test');
+    } catch (e) {
+      storageWorks = false;
+      console.log('[lang-modal] localStorage not available — using session-only state');
+    }
 
+    let dismissed = false;
     let hasManualChoice = false;
-    try {
-      hasManualChoice = !!localStorage.getItem('fndm-locale');
-    } catch (e) {}
+    if (storageWorks) {
+      try {
+        dismissed = localStorage.getItem('fndm-lang-prompted') === '1';
+        hasManualChoice = !!localStorage.getItem('fndm-locale');
+      } catch (e) {}
+    }
 
     const suggested = detectSuggestedLocale();
-    console.log('[lang-modal] dismissed:', dismissed, '| hasManualChoice:', hasManualChoice, '| suggested:', suggested, '| current:', currentLocale, '| browser:', navigator.language);
+    console.log('[lang-modal] state:', {
+      dismissed, hasManualChoice, suggested,
+      current: currentLocale,
+      browser: navigator.language,
+      browserList: navigator.languages,
+      storageWorks
+    });
 
     if (dismissed) {
       console.log('[lang-modal] Skipping: user already dismissed');
@@ -4100,8 +4131,10 @@
       return;
     }
     if (suggested === 'EN' || suggested === currentLocale) {
-      console.log('[lang-modal] Skipping: suggested locale matches current/EN');
-      try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+      console.log('[lang-modal] Skipping: browser language is EN or matches current');
+      if (storageWorks) {
+        try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+      }
       return;
     }
 
@@ -4117,16 +4150,20 @@
     // Show after slight delay for smooth perception
     setTimeout(() => {
       modal.classList.add('show');
-    }, 700);
+    }, 600);
 
     function dismiss() {
       modal.classList.remove('show');
-      try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+      if (storageWorks) {
+        try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+      }
     }
 
     document.getElementById('langModalYes').addEventListener('click', () => {
       currentLocale = suggested;
-      try { localStorage.setItem('fndm-locale', suggested); } catch (e) {}
+      if (storageWorks) {
+        try { localStorage.setItem('fndm-locale', suggested); } catch (e) {}
+      }
       applyLocale(suggested);
       dismiss();
     });
@@ -4137,7 +4174,14 @@
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('show')) dismiss();
     });
-  })();
+  }
+
+  // Run modal init when DOM is fully ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initLangModal);
+  } else {
+    initLangModal();
+  }
 
   // Language switcher dropdown — wired to i18n
   (function() {

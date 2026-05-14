@@ -1,184 +1,71 @@
-# FNDM Landing Page
+# FNDM 랜딩 페이지
 
-K-POP photocard trading platform — pre-launch landing page.
-**Frontend complete. Backend integration pending.**
+K-POP 포카 교환 플랫폼 — 정식 출시 전 사전 가입 랜딩 페이지.
+**프론트엔드 완성. 백엔드 연동 대기 중.**
 
 ---
 
-## 📁 File Structure
+## 📁 파일 구조
 
 ```
 fndm-site/
-├── index.html              # Main landing page
-├── legal.html              # Privacy Policy + Terms of Use (5 languages)
-├── fndm-logo.png           # Red FNDM logo (transparent BG) — used in nav
-├── fndm-logo-black.png     # Black FNDM logo (transparent BG) — used in legal page hero
-├── og-image.png            # Open Graph image (1200x630)
-├── favicon.ico             # Multi-size favicon (16/32/48)
-├── favicon-32.png          # 32x32 favicon
+├── index.html              # 메인 랜딩 페이지
+├── legal.html              # 개인정보처리방침 + 이용약관 (5개 언어)
+├── README.md               # 이 문서
+├── fndm-logo.png           # 빨간 FNDM 로고 (투명 배경) — 네비게이션 바
+├── fndm-logo-black.png     # 검정 FNDM 로고 (투명 배경) — 법적 페이지 hero
+├── og-image.png            # Open Graph 미리보기 이미지 (1200x630)
+├── favicon.ico             # 멀티사이즈 favicon
+├── favicon-32.png          # 32x32
 ├── favicon-192.png         # 192x192 (Apple touch icon)
 ├── favicon-512.png         # 512x512 (PWA)
-├── photocard-1.jpg         # Demo card image
-├── photocard-2.jpg         # Demo card image
-└── photocard-3.jpg         # Demo card image
+├── photocard-1.jpg ~ 5.jpg # 데모 포카 이미지 (블러 처리됨)
 ```
 
 ---
 
-## 🌐 Internationalization (i18n)
+## 🌐 다국어 (i18n) 시스템
 
-Site supports **5 languages**: KOR, EN, JP, CN, Esp
-- Browser language auto-detected on first visit
-- User selection saved to `localStorage` as `fndm-locale`
-- Same locale applies across `index.html` and `legal.html`
+**5개 언어 지원**: 한국어(KOR), 영어(EN), 일본어(JP), 중국어(CN), 스페인어(Esp)
 
-All UI text lives in the `I18N` object in `index.html` (search for `const I18N`).
-Each language has the same key structure.
+### 작동 방식
+- **기본 언어는 영어**
+- **첫 방문 시** 브라우저 언어를 감지해서 모달 표시 ("한국에서 오셨군요! 한국어로 변경해드릴까요?")
+- 사용자가 선택한 언어는 `localStorage` (`fndm-locale`)에 저장됨
+- `index.html`과 `legal.html`이 같은 언어 설정 공유
+
+### 번역 텍스트 위치
+모든 UI 텍스트는 `index.html` 하단 `<script>` 안의 `const I18N` 객체에 있어요.
+같은 키 구조가 5개 언어에 모두 들어있어요.
+
+### 모달 다시 표시 (테스트용)
+URL 뒤에 `?reset` 붙이면 localStorage 초기화되어서 모달 다시 표시:
+```
+https://www.thefndm.com/?reset
+```
 
 ---
 
-## 🔧 Backend Integration TODO
+## 🟢 백엔드 — Supabase 무료 티어 가이드
 
-The signup form currently shows a static success screen on submit.
-**No data is being saved.** Backend dev needs to wire this up.
+백엔드는 **Supabase 무료 티어**로 구축할 예정. 신용카드 필요 없음.
 
-### 1. Form submission endpoint
+### 무료 티어 한도 (사전출시 단계에 충분)
+- **500 MB** PostgreSQL DB
+- **50,000명** 월 활성 사용자
+- **5 GB** 월 대역폭
+- **500,000회** Edge Function 호출/월
+- 무제한 API 요청
 
-**Form location:** `index.html` line ~2710 (`<form id="signup-form">`)
+### 1단계 — 프로젝트 생성
+1. https://supabase.com 무료 가입 (신용카드 불필요)
+2. New project → **지역은 한국 가까운 곳 (Tokyo 또는 Seoul)** 선택
+3. DB 패스워드 설정 (꼭 저장)
+4. 약 2분 대기 (프로젝트 생성)
 
-**Current submit handler:** `function submitForm(e)` in the bottom `<script>` block.
+### 2단계 — `registrations` 테이블 생성
 
-**Fields collected:**
-| Name | ID | Required | Notes |
-|------|----|----|-------|
-| `email` | `#email` | ✅ | Validated with regex |
-| `artist` | `#artist` | ✅ | Dropdown with K-POP groups + "other" option |
-| `artist_other` | `#artist-other` | conditional | Visible only when `artist === 'other'` |
-| `country` | `#country` | ✅ | 25 countries with flag emojis |
-| `tier` | `[name="tier"]` | ✅ (≥1) | Checkbox group: `preorder` and/or `beta` |
-| `agree` | `#agree` | ✅ | Consent checkbox |
-
-**Where to hook backend call:**
-After the validation block in `submitForm()`, replace this:
-```js
-form.style.display = 'none';
-document.getElementById('form-success').hidden = false;
-```
-with a `fetch('/api/register', {...})` call, then handle the response.
-
-### 2. Required server-side logic
-
-**A. Beta tester cap (11,000)**
-- Frontend counter (`#betaCount` in `index.html`) is currently a static `75`.
-- Frontend already has `checkBetaCap()` that auto-disables the beta checkbox when count ≥ 11,000.
-- To make it real: backend should expose the current beta count, and frontend should fetch it on page load and update `#betaCount`.
-- When 11,001st+ user tries to register for beta:
-  - Server rejects beta selection, accepts pre-register only
-  - Returns error code `BETA_CAP_REACHED`
-  - Frontend should show: "베타테스터 모집이 마감되었습니다." (already has translations — see `form.type.beta.soldout` key in I18N)
-
-**B. Duplicate email check**
-- Before saving, check if email already exists in DB.
-- If duplicate → return error code `EMAIL_EXISTS`
-- Frontend should show: **"이미 팬덤과 매칭이 되신 유저입니다"** message
-  - **Translations needed in i18n** (not yet added — add to all 5 langs):
-    - KOR: `이미 팬덤과 매칭이 되신 유저입니다. FNDM 론칭 소식을 가장 먼저 받게 됩니다.`
-    - EN: `You're already matched with the fandom. We'll be the first to send you FNDM launch news.`
-    - JP: `すでにファンダムとマッチング済みのユーザーです。FNDMローンチの最新情報を最初にお届けします。`
-    - CN: `您已经与粉丝群匹配。FNDM 上线消息将第一时间送达。`
-    - Esp: `Ya estás matcheado con el fandom. Serás el primero en recibir las novedades de FNDM.`
-
-### 3. Suggested API contract
-
-```
-POST /api/register
-Content-Type: application/json
-
-Request body:
-{
-  "email": "user@example.com",
-  "artist": "NewJeans",
-  "artist_other": "",           // only if artist === "other"
-  "country": "KR",
-  "tier": ["preorder", "beta"], // array
-  "locale": "KOR"               // currently selected UI language
-}
-
-Response (success):
-{
-  "ok": true,
-  "stats": {
-    "preorder_count": 159,
-    "beta_count": 76
-  }
-}
-
-Response (email exists):
-{
-  "ok": false,
-  "error": "EMAIL_EXISTS"
-}
-
-Response (beta cap reached):
-{
-  "ok": false,
-  "error": "BETA_CAP_REACHED",
-  "accepted_tier": ["preorder"],   // server saved pre-register only
-  "stats": {
-    "preorder_count": 159,
-    "beta_count": 11000
-  }
-}
-
-Response (server error):
-{
-  "ok": false,
-  "error": "SERVER_ERROR"
-}
-```
-
-### 4. Counter updates
-
-Two counters in the UI need real-time data:
-
-**A. Pre-register card** (`index.html` line ~2200):
-```html
-<div class="stat-value">158</div>           <!-- preorder count -->
-<div class="stat-value" id="betaCount">75</div>  <!-- beta count -->
-```
-
-**B. Proof section** (`index.html` line ~2480):
-```html
-<div class="proof-stat-num">158<span class="unit">명</span></div>
-<div class="proof-stat-num">75<span class="unit">명</span></div>
-```
-
-Backend should expose `GET /api/stats` returning `{ preorder_count, beta_count }`, frontend should fetch on page load and update these.
-
----
-
-## 🟢 Supabase Setup Guide (Free Tier)
-
-The backend will be built with **Supabase** — this section explains how to set up the registration system using the free tier.
-
-### Free tier limits (more than enough for pre-launch)
-- **500 MB** Postgres database
-- **50,000** monthly active users
-- **5 GB** bandwidth/month
-- **500K** Edge Function invocations/month
-- Unlimited API requests
-
-For a pre-launch signup form, this is far more than enough.
-
-### Step 1 — Create project at https://supabase.com
-1. Sign up (free, no credit card)
-2. New project → choose region close to KR (Tokyo or Seoul)
-3. Set database password (save it)
-4. Wait ~2 minutes for provisioning
-
-### Step 2 — Create the `registrations` table
-
-In Supabase SQL Editor:
+Supabase SQL 에디터에서 실행:
 
 ```sql
 create table registrations (
@@ -187,33 +74,32 @@ create table registrations (
   artist          text not null,
   artist_other    text,
   country         text not null,
-  tier            text[] not null,        -- ['preorder'] or ['preorder', 'beta']
+  tier            text[] not null,        -- ['preorder'] 또는 ['preorder', 'beta']
   locale          text not null default 'KOR',
   created_at      timestamptz default now()
 );
 
-create index registrations_email_idx on registrations (email);
+-- 이메일 검색 빠르게 (UNIQUE 제약으로 자동 생성됨)
 create index registrations_tier_idx on registrations using gin (tier);
 ```
 
-### Step 3 — Row Level Security (RLS) policies
+### 3단계 — Row Level Security (RLS) 설정
 
 ```sql
 alter table registrations enable row level security;
 
--- Anyone can INSERT (anonymous signups allowed)
-create policy "anon can insert" on registrations
+-- 누구나 INSERT 가능 (익명 가입 허용)
+create policy "anon insert" on registrations
   for insert
   to anon
   with check (true);
 
--- Anyone can SELECT count only (for live counter)
--- Restrict full row visibility — use RPC functions for counts instead
+-- SELECT는 차단 (이메일 노출 방지) — 카운트는 RPC 함수로만 제공
 ```
 
-### Step 4 — Counter functions
+### 4단계 — 통계 카운터 함수
 
-Expose counts safely without leaking emails:
+이메일 노출 없이 카운트만 제공:
 
 ```sql
 create or replace function get_registration_stats()
@@ -237,7 +123,7 @@ $$;
 grant execute on function get_registration_stats() to anon;
 ```
 
-### Step 5 — Registration function with email + cap checks
+### 5단계 — 등록 함수 (중복 + 베타 마감 자동 처리)
 
 ```sql
 create or replace function register_user(
@@ -258,18 +144,18 @@ declare
   accepted_tier text[];
   preorder_n int;
 begin
-  -- Check duplicate email
+  -- ① 이메일 중복 체크 → "이미 팬덤과 매칭이 되신 유저입니다"
   select id into existing_id from registrations where email = p_email;
   if existing_id is not null then
     return json_build_object('ok', false, 'error', 'EMAIL_EXISTS');
   end if;
 
-  -- Check beta cap (11,000)
+  -- ② 베타 11,000명 마감 체크
   accepted_tier := p_tier;
   if 'beta' = any(p_tier) then
     select count(*) into beta_n from registrations where 'beta' = any(tier);
     if beta_n >= 11000 then
-      -- Strip 'beta' from tier; keep preorder if present
+      -- 베타 제외하고 사전예약만 남기기
       accepted_tier := array_remove(p_tier, 'beta');
       if array_length(accepted_tier, 1) is null then
         accepted_tier := array['preorder'];
@@ -277,15 +163,16 @@ begin
     end if;
   end if;
 
-  -- Insert
+  -- ③ DB에 저장
   insert into registrations (email, artist, artist_other, country, tier, locale)
   values (p_email, p_artist, p_artist_other, p_country, accepted_tier, p_locale);
 
-  -- Return stats + whether beta was rejected
+  -- ④ 통계 + 베타 거부 안내 응답
   select count(*) into preorder_n from registrations where 'preorder' = any(tier);
   select count(*) into beta_n from registrations where 'beta' = any(tier);
 
   if 'beta' = any(p_tier) and not ('beta' = any(accepted_tier)) then
+    -- 베타 신청했지만 마감되어 사전예약으로만 등록됨
     return json_build_object(
       'ok', false,
       'error', 'BETA_CAP_REACHED',
@@ -304,26 +191,26 @@ $$;
 grant execute on function register_user(text, text, text, text, text[], text) to anon;
 ```
 
-### Step 6 — Frontend integration (in index.html)
+### 6단계 — 프론트엔드 연동 (`index.html`)
 
-Add Supabase client to `<head>`:
+`<head>`에 Supabase JS 라이브러리 추가:
 
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 ```
 
-In the bottom `<script>`, initialize and wire up the form:
+하단 `<script>` 안의 `submitForm()` 함수를 다음과 같이 수정:
 
 ```js
-const supabase = supabase.createClient(
-  'https://YOUR_PROJECT.supabase.co',
-  'YOUR_ANON_PUBLIC_KEY'   // safe to expose — RLS protects data
+// Supabase 클라이언트 초기화 (페이지 로드 시 1회)
+const sb = supabase.createClient(
+  'https://[YOUR_PROJECT].supabase.co',
+  '[YOUR_ANON_PUBLIC_KEY]'   // 프론트에 노출해도 안전 — RLS가 보호함
 );
 
-// Update form submission
 async function submitForm(e) {
   e.preventDefault();
-  // ... existing validation code stays ...
+  // ... 기존 검증 코드 그대로 유지 ...
 
   const dict = (typeof I18N !== 'undefined') ? I18N[currentLocale] : null;
 
@@ -336,29 +223,31 @@ async function submitForm(e) {
     p_locale: currentLocale
   };
 
-  const { data, error } = await supabase.rpc('register_user', payload);
+  const { data, error } = await sb.rpc('register_user', payload);
 
+  // 서버 오류
   if (error) {
     showFormToast((dict && dict['form.error.server']) || 'Something went wrong. Please try again.');
     return false;
   }
 
   if (!data.ok) {
+    // 이메일 중복
     if (data.error === 'EMAIL_EXISTS') {
-      showFormToast((dict && dict['form.error.dup']) || 'You\'re already matched with the fandom.');
+      showFormToast((dict && dict['form.error.dup']) || 'You are already matched with the fandom.');
       return false;
     }
+    // 베타 마감 — 사전예약만 처리됨
     if (data.error === 'BETA_CAP_REACHED') {
-      // Saved as pre-register only; show success with note
       showFormToast((dict && dict['form.error.betacap']) || 'Beta is closed — registered for pre-launch instead.');
-      // Continue to success screen
+      // 그래도 사전예약은 성공이니까 success 화면으로 진행
     }
   }
 
-  // Update counters
+  // 카운터 업데이트
   if (data.stats) {
     document.getElementById('betaCount').textContent = data.stats.beta_count;
-    // Update preorder counters too
+    // 사전예약 카운터도 함께 업데이트
   }
 
   form.style.display = 'none';
@@ -366,73 +255,156 @@ async function submitForm(e) {
   return false;
 }
 
-// On page load, fetch live stats
+// 페이지 로드 시 실시간 통계 가져오기
 (async () => {
-  const { data } = await supabase.rpc('get_registration_stats');
+  const { data } = await sb.rpc('get_registration_stats');
   if (data) {
     document.getElementById('betaCount').textContent = data.beta_count;
-    // Update preorder counter too
-    checkBetaCap();   // re-check cap with real number
+    // 사전예약 카운터도 함께 업데이트
+    checkBetaCap();   // 실제 베타 카운트로 11,000 마감 체크 재실행
   }
 })();
 ```
 
-### Step 7 — i18n keys to add (5 langs)
+### 7단계 — 다국어 안내 메시지 i18n 키 추가
 
-Add to all 5 locale blocks in `I18N`:
+`index.html`의 `I18N` 객체 안 5개 언어 블록 모두에 추가:
 
 ```js
-'form.error.dup': '이미 팬덤과 매칭이 되신 유저입니다.',     // KOR
-'form.error.betacap': '베타 모집이 마감되어 사전예약으로 등록되었습니다.',
-'form.error.server': '일시적인 오류가 발생했어요. 다시 시도해주세요.',
+// 한국어 (KOR)
+'form.error.dup': '이미 팬덤과 매칭이 되신 유저입니다. FNDM 론칭 소식을 가장 먼저 받게 됩니다.',
+'form.error.betacap': '베타테스터 모집이 마감되어 사전예약으로 등록되었습니다.',
+'form.error.server': '일시적인 오류가 발생했어요. 잠시 후 다시 시도해주세요.',
+
+// 영어 (EN)
+'form.error.dup': "You're already matched with the fandom. We'll be the first to send you FNDM launch news.",
+'form.error.betacap': 'Beta registration is closed. You have been registered for pre-launch instead.',
+'form.error.server': 'Something went wrong. Please try again shortly.',
+
+// 일본어 (JP)
+'form.error.dup': 'すでにファンダムとマッチング済みのユーザーです。FNDMローンチの最新情報を最初にお届けします。',
+'form.error.betacap': 'ベータテスター募集は終了しました。事前登録として登録されました。',
+'form.error.server': '一時的なエラーが発生しました。少し時間をおいて再度お試しください。',
+
+// 중국어 (CN)
+'form.error.dup': '您已经与粉丝群匹配。FNDM 上线消息将第一时间送达。',
+'form.error.betacap': '内测招募已结束。已为您登记为预约用户。',
+'form.error.server': '发生临时错误。请稍后再试。',
+
+// 스페인어 (Esp)
+'form.error.dup': 'Ya estás matcheado con el fandom. Serás el primero en recibir las novedades de FNDM.',
+'form.error.betacap': 'El registro de beta testers está cerrado. Te registramos para el pre-lanzamiento.',
+'form.error.server': 'Algo salió mal. Por favor intentá de nuevo en unos momentos.',
 ```
 
-(Translations for EN/JP/CN/Esp follow the same pattern — backend dev can ask if needed.)
+### 8단계 — 이메일 알림 (선택사항)
 
-### Step 8 — Email notifications (optional)
+신규 등록 시 관리자에게 알림 보내는 방법:
 
-Use Supabase Database Webhooks → trigger when new row inserted to `registrations` → call Slack/email webhook. Or set up Supabase Auth Email feature for confirmation emails.
+**방법 A**: Supabase Database Webhooks 사용
+- Database → Webhooks → 새 웹훅 생성
+- `INSERT` on `registrations` 테이블 트리거
+- Slack incoming webhook 또는 이메일 서비스 (Resend, SendGrid 등)로 POST
 
-### Notes
-- **Anon key is safe to expose in frontend** — RLS + RPC functions prevent unauthorized data access
-- Service Role Key must **never** be in frontend code
-- For admin dashboard (viewing all registrations): use Supabase Studio (built-in) or build a separate authenticated page
-- Free tier auto-pauses after 1 week of inactivity — pings the API endpoint daily via cron-job.org keeps it warm
+**방법 B**: Supabase Edge Function 사용
+- 등록 시 `pg_notify` 트리거 → Edge Function이 이메일 발송
+
+### 추가 사항
+- **anon key는 프론트엔드에 노출해도 안전** — RLS + RPC 함수가 데이터 보호
+- **Service Role Key는 절대 프론트엔드에 넣으면 안 됨**
+- 관리자 페이지 (모든 등록 조회): Supabase Studio 사용 (Supabase에 기본 제공)
+- 무료 티어는 **1주일 미사용 시 자동 일시정지** — https://cron-job.org 같은 서비스로 매일 API 한 번 호출하면 유지 가능
 
 ---
 
-## 🎨 Design Tokens
+## 🔧 백엔드가 처리할 핵심 로직 요약
+
+### A. 베타테스터 11,000명 마감
+
+**프론트엔드 이미 구현됨**:
+- `index.html`의 `#betaCount` 카운터 (현재 75 하드코딩)
+- `checkBetaCap()` 함수가 11,000 이상이면 베타 체크박스 자동 비활성화 + "마감" 배지 표시
+
+**백엔드가 해야 할 일**:
+- 페이지 로드 시 `get_registration_stats()` 호출해서 실제 카운트로 `#betaCount` 업데이트
+- 사용자가 베타 신청했지만 이미 11,000명 차있으면 → `BETA_CAP_REACHED` 응답 → 사전예약으로만 등록
+
+### B. 이메일 중복 감지
+
+**프론트엔드 이미 구현됨**:
+- 5개 언어로 "이미 팬덤과 매칭이 되신 유저입니다" 메시지 준비됨 (`form.error.dup` 키)
+- `showFormToast()` 함수로 다크 모달 토스트 표시
+
+**백엔드가 해야 할 일**:
+- 등록 전 이메일 존재 여부 체크
+- 이미 있으면 → `EMAIL_EXISTS` 응답
+- 프론트엔드가 자동으로 토스트 안내
+
+### C. 통계 카운터 실시간 동기화
+
+**프론트엔드 이미 구현됨**:
+- 사전예약 카드 + Proof 섹션에 카운터 2벌 (각각 사전예약 / 베타)
+
+**백엔드가 해야 할 일**:
+- `get_registration_stats()` RPC 제공
+- 페이지 로드 시 + 등록 성공 시 카운터 업데이트
+
+---
+
+## 📤 등록 폼 필드 명세
+
+폼 위치: `index.html` 약 2710번째 줄 (`<form id="signup-form">`)
+
+| 필드명 | DOM ID | 필수 | 비고 |
+|---|---|---|---|
+| `email` | `#email` | ✅ | 정규식 검증 적용 |
+| `artist` | `#artist` | ✅ | K-POP 그룹 16개 + "기타" 옵션 (ABC순) |
+| `artist_other` | `#artist-other` | 조건부 | `artist === 'other'` 일 때만 표시 |
+| `country` | `#country` | ✅ | 25개 국가 + 국기 이모지 |
+| `tier` | `[name="tier"]` | ✅ (1개 이상) | 체크박스: `preorder` 또는 `beta` |
+| `agree` | `#agree` | ✅ | 약관 동의 |
+
+---
+
+## 🎨 디자인 토큰
 
 ```css
---bg: #FFFFFF;
---ink: #0A0E1A;        /* primary text */
---ink-3: #5A6172;       /* secondary text */
---primary: #FF1F3D;     /* FNDM red */
+--bg: #FFFFFF;            /* 배경 */
+--ink: #0A0E1A;           /* 메인 텍스트 */
+--ink-3: #5A6172;         /* 보조 텍스트 */
+--primary: #FF1F3D;       /* FNDM 빨강 */
 ```
 
-Fonts: **Inter** (display, English), **Pretendard** (display+body, Korean), **JetBrains Mono** (mono labels).
+**폰트**:
+- **Inter** (영문 디스플레이)
+- **Pretendard** (한글 디스플레이+본문)
+- **JetBrains Mono** (작은 라벨)
 
 ---
 
-## 📧 Contact / Brand
+## 📧 회사 정보
 
-- Company: **CultureCode Inc.** (㈜컬처코드)
-- Business reg: **158-87-03985**
-- Email: `fndm@culturecode.co.kr`
-- Personal Information Manager: 임형중 (Hyungjoong Lim)
-- Web: https://www.culturecode.co.kr
-- Target domain: **www.thefndm.com**
+- **회사명**: 주식회사 컬처코드 (CultureCode Inc.)
+- **사업자등록번호**: 158-87-03985
+- **개인정보 처리담당자 / 일반 문의**: fndm@culturecode.co.kr (담당자: 임형중)
+- **이용약관 관련 회사 문의**: hello@culturecode.co.kr
+- **회사 웹사이트**: https://www.culturecode.co.kr
+- **목표 도메인**: www.thefndm.com
 
 ---
 
-## 🚀 Deployment Notes
+## 🚀 배포 가이드
 
-1. **Static deployment** — works on Vercel, Netlify, Cloudflare Pages out of the box.
-2. **Custom domain** — OG meta tags point to `https://www.thefndm.com/og-image.png`. After domain connection, social previews (KakaoTalk, X, Facebook) will work automatically. If using a Vercel preview URL for testing, update the 3 og:image URLs in `<head>` of `index.html` to that URL.
-3. **No build step** — pure HTML/CSS/JS, no bundler needed.
-4. **MIME type for `.ico`** — make sure your host serves `image/x-icon`. Vercel handles this automatically.
+### 정적 배포 (Vercel / Netlify / Cloudflare Pages)
+빌드 단계 없음. 폴더 통째로 업로드만 하면 됨.
 
-### Recommended cache headers (Vercel `vercel.json`)
+### 정식 도메인 연결 후 OG 이미지 처리
+현재 메타 태그의 `og:image`는 `https://www.thefndm.com/og-image.png`를 가리킴.
+- 정식 도메인 연결되면 자동 작동
+- Vercel preview 도메인에서 테스트 중이면 카카오톡 OG가 안 뜰 수 있음
+- 카카오톡 캐시 강제 갱신: https://developers.kakao.com/tool/clear/og
+
+### Vercel 캐시 설정 (`vercel.json`)
 ```json
 {
   "headers": [
@@ -454,58 +426,58 @@ Fonts: **Inter** (display, English), **Pretendard** (display+body, Korean), **Je
 
 ---
 
-## 📋 Page Sections (index.html)
+## 📋 페이지 섹션 구성
 
-1. **NAV** — sticky FNDM logo + language switcher (gradient fade)
-2. **HERO** — "포카 교환, 이제 그만 기다려요."
-3. **AUTO SWIPE DEMO** — iPhone mockup with auto-swiping cards + "매칭되었습니다!" banner
-4. **PRE-REGISTER CARD** — counters (158/75) + 2 action buttons
-5. **PROBLEM** — 4 pain point cards
-6. **HOW IT WORKS** — 3-step (scan / swipe / safe check)
-7. **SOLUTION** — 4 axis cards
-8. **TRADE LOOP** — Globe with city dots (Seoul, Tokyo, Shanghai, Dubai, LA, NY, Paris, Jakarta, Sydney, São Paulo)
-9. **PROOF** — Stat cards + 9-chip interests carousel (draggable horizontal scroll)
-10. **APP NAV PREVIEW** — 5 boxes (CONTENT / SHOP / TRADE-NEW / EVENTS / COMMUNITY)
-11. **CTA / FORM** — Signup form
-12. **FOOTER** — Socials + tagline + legal links + copyright
+### `index.html` (메인 페이지)
+1. **NAV** — 스티키 FNDM 로고 + 언어 스위처 (그라데이션 페이드)
+2. **HERO** — "포카 교환, 이제 그만 기다려요." 헤드라인
+3. **AUTO SWIPE DEMO** — 아이폰 mockup, 자동 스와이프 카드 + "매칭되었습니다!" 배너
+4. **PRE-REGISTER CARD** — 카운터 (158/75) + 2개 액션 버튼
+5. **PROBLEM** — 4개 페인 포인트 카드
+6. **HOW IT WORKS** — 3단계 (스캔 / 스와이프 / 안전 체크)
+7. **SOLUTION** — 4축 카드
+8. **TRADE LOOP** — 지구본 + 10개 도시 도트 (Seoul, Tokyo, Shanghai, Dubai, LA, NY, Paris, Jakarta, Sydney, São Paulo)
+9. **PROOF** — 통계 카드 + 9개 관심사 칩 캐러셀 (드래그 가능)
+10. **APP NAV PREVIEW** — 5개 박스 (CONTENT / SHOP / TRADE-NEW / EVENTS / COMMUNITY)
+11. **CTA / 가입 폼**
+12. **FOOTER** — SNS + 태그라인 + 법적 링크 + 저작권
 
-## 📋 Legal Page (legal.html)
-
-- Sticky nav with red FNDM logo + back link
-- Big black FNDM logo + "For the Real Ones." headline
-- Language switcher (5 langs)
-- Tab switcher (Privacy ↔ Terms)
-- URL hash for direct linking: `#privacy` or `#terms`
-- Same footer as main page
-- Business registration number included
-
----
-
-## ✅ What's Already Working
-
-- All UI, animations, transitions
-- 5-language i18n with browser auto-detect
-- Form client-side validation (email format, tier selection, consent)
-- Custom centered toast for form errors (replaces native `alert()`)
-- Page-to-page fade transitions
-- Mailto link with auto-localized subject
-- Share link copy-to-clipboard
-- "Other" artist write-in field
-- Country selector (25 countries)
-- Beta cap check (frontend-only, ready for backend)
-- SEO meta tags + Open Graph + Twitter Card + JSON-LD
-- Hreflang for 5 languages
-- Mobile responsive (all sections)
-- Light-mode forced (no dark mode override)
-
-## ⏳ What's Pending (Backend)
-
-- Real form submission (currently shows success screen statically)
-- Email duplicate detection
-- Beta tester cap enforcement (currently visual only)
-- Counter live updates
-- Email notifications to admin
+### `legal.html` (법적 페이지)
+- 스티키 nav: 빨간 FNDM 로고 + 뒤로가기 버튼
+- 큰 검정 FNDM 로고 + "For the Real Ones." + "Legal"
+- 5개 언어 스위처
+- 탭 스위처 (개인정보처리방침 ↔ 이용약관)
+- URL 해시로 직접 링크: `#privacy` 또는 `#terms`
+- 메인과 동일한 푸터 + 사업자등록번호 포함
+- 개인정보처리방침 최상단 요약 카드 (수집 항목 / 이용 목적 / 보유 기간)
 
 ---
 
-Last updated: May 14, 2026
+## ✅ 이미 작동하는 기능
+
+- 모든 UI, 애니메이션, 트랜지션
+- 5개 언어 i18n + 브라우저 자동 감지 모달
+- 폼 클라이언트 검증 (이메일 형식, tier 선택, 동의 체크)
+- 가운데 모달 토스트 (네이티브 alert 대체)
+- 페이지 간 페이드 트랜지션 (index ↔ legal)
+- 메일 아이콘 mailto 자동 언어별 제목
+- 친구에게 공유하기 (클립보드 복사)
+- "기타" 아티스트 직접 입력 필드
+- 25개 국가 선택 (국기 이모지)
+- 베타 마감 자동 처리 (프론트엔드 준비됨)
+- SEO 메타 + Open Graph + Twitter Card + JSON-LD
+- 5개 언어 hreflang
+- 모바일 반응형 (모든 섹션)
+- 라이트 모드 강제 (다크 모드 오버라이드 방지)
+
+## ⏳ 백엔드 작업 대기 중
+
+- 실제 폼 제출 (현재 정적 success 화면만 표시)
+- 이메일 중복 감지 (Supabase RPC `register_user`)
+- 베타 11,000명 마감 적용 (Supabase RPC)
+- 카운터 실시간 업데이트 (Supabase RPC `get_registration_stats`)
+- 관리자용 이메일/슬랙 알림 (선택)
+
+---
+
+마지막 업데이트: 2026년 5월 14일
