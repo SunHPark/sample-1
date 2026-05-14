@@ -2203,8 +2203,22 @@
     .how-step-h { font-size: 22px; line-height: 1.3; }
     .how-step-desc { font-size: 15px; }
 
-    /* STEP 01 & 03 — landscape visuals */
-    .how-step-visual.s1,
+    /* STEP 01 — portrait phone visual fits properly on mobile */
+    .how-step-visual.s1 {
+      aspect-ratio: auto;
+      height: 260px;
+      padding: 20px 0;
+    }
+    .how-step-visual.s1 .scan-frame {
+      width: 130px;
+      height: 220px;
+      border-radius: 24px;
+    }
+    @keyframes scan {
+      0%, 100% { transform: translateY(-85px); opacity: 0.5; }
+      50% { transform: translateY(85px); opacity: 1; }
+    }
+    /* STEP 03 — keep landscape */
     .how-step-visual.s3 {
       aspect-ratio: 16 / 10;
     }
@@ -4084,8 +4098,9 @@
       return;
     }
 
-    // ?reset URL param forces clear localStorage (useful for testing)
     const urlParams = new URLSearchParams(window.location.search);
+
+    // ?reset = clear all stored state
     if (urlParams.has('reset')) {
       try {
         localStorage.removeItem('fndm-lang-prompted');
@@ -4094,14 +4109,16 @@
       } catch (e) {}
     }
 
-    // Check if storage is available at all (private mode / in-app browsers can throw)
+    // ?debug = show on-screen diagnostic banner (visible on mobile)
+    const debugMode = urlParams.has('debug');
+
+    // Check if storage is available at all
     let storageWorks = true;
     try {
       localStorage.setItem('__fndm_test', '1');
       localStorage.removeItem('__fndm_test');
     } catch (e) {
       storageWorks = false;
-      console.log('[lang-modal] localStorage not available — using session-only state');
     }
 
     let dismissed = false;
@@ -4114,40 +4131,56 @@
     }
 
     const suggested = detectSuggestedLocale();
-    console.log('[lang-modal] state:', {
+    const state = {
       dismissed, hasManualChoice, suggested,
       current: currentLocale,
       browser: navigator.language,
-      browserList: navigator.languages,
-      storageWorks
-    });
+      browserList: (navigator.languages || []).join(','),
+      storageWorks,
+      forceShow: urlParams.has('force')
+    };
+    console.log('[lang-modal] state:', state);
 
-    if (dismissed) {
-      console.log('[lang-modal] Skipping: user already dismissed');
-      return;
+    // ?debug shows banner on screen
+    if (debugMode) {
+      const banner = document.createElement('div');
+      banner.style.cssText = 'position:fixed;top:0;left:0;right:0;z-index:999999;background:#000;color:#0f0;font-family:monospace;font-size:11px;padding:8px;line-height:1.5;white-space:pre-wrap;';
+      banner.textContent = '[DEBUG]\n' + JSON.stringify(state, null, 2);
+      document.body.appendChild(banner);
     }
-    if (hasManualChoice) {
-      console.log('[lang-modal] Skipping: user already chose a locale');
-      return;
-    }
-    if (suggested === 'EN' || suggested === currentLocale) {
-      console.log('[lang-modal] Skipping: browser language is EN or matches current');
-      if (storageWorks) {
-        try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+
+    // ?force = always show modal regardless (for testing)
+    const forceShow = urlParams.has('force');
+
+    if (!forceShow) {
+      if (dismissed) {
+        console.log('[lang-modal] Skipping: already dismissed');
+        return;
       }
-      return;
+      if (hasManualChoice) {
+        console.log('[lang-modal] Skipping: already chose locale');
+        return;
+      }
+      if (suggested === 'EN' || suggested === currentLocale) {
+        console.log('[lang-modal] Skipping: browser is EN or matches current');
+        if (storageWorks) {
+          try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+        }
+        return;
+      }
     }
 
-    const dict = I18N[suggested] || I18N.EN;
+    // If forced and browser is EN, default to KOR for demo
+    const shownLocale = (forceShow && suggested === 'EN') ? 'KOR' : suggested;
+    const dict = I18N[shownLocale] || I18N.EN;
     document.getElementById('langModalFlag').textContent = dict['lang.modal.flag'] || '🌐';
     document.getElementById('langModalTitle').textContent = dict['lang.modal.title'] || 'Welcome!';
     document.getElementById('langModalSub').textContent = dict['lang.modal.sub'] || 'Switch to your language?';
     document.getElementById('langModalYes').textContent = dict['lang.modal.yes'] || 'Yes';
     document.getElementById('langModalNo').textContent = dict['lang.modal.no'] || 'No';
 
-    console.log('[lang-modal] Showing modal for:', suggested);
+    console.log('[lang-modal] Showing modal for:', shownLocale);
 
-    // Show after slight delay for smooth perception
     setTimeout(() => {
       modal.classList.add('show');
     }, 600);
@@ -4160,11 +4193,11 @@
     }
 
     document.getElementById('langModalYes').addEventListener('click', () => {
-      currentLocale = suggested;
+      currentLocale = shownLocale;
       if (storageWorks) {
-        try { localStorage.setItem('fndm-locale', suggested); } catch (e) {}
+        try { localStorage.setItem('fndm-locale', shownLocale); } catch (e) {}
       }
-      applyLocale(suggested);
+      applyLocale(shownLocale);
       dismiss();
     });
 
