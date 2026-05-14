@@ -2,12 +2,32 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
+
+<!-- ============ Google Analytics (GA4) ============ -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-QM6D9VWGLR"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-QM6D9VWGLR');
+  window.fndmTrack = function(event, params) {
+    try {
+      if (typeof gtag === 'function') {
+        gtag('event', event, params || {});
+      }
+    } catch (e) {}
+  };
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light only">
 <meta name="supported-color-schemes" content="light">
 <title>FNDM | Legal</title>
 <meta name="description" content="FNDM Privacy Policy and Terms of Use">
+
+<!-- Search Engine Verification -->
+<meta name="google-site-verification" content="GOOGLE_VERIFICATION_CODE_HERE">
+<meta name="naver-site-verification" content="NAVER_VERIFICATION_CODE_HERE">
 <meta name="robots" content="noindex, follow">
 <link rel="canonical" href="https://www.thefndm.com/legal.html">
 

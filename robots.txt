@@ -1,0 +1,13 @@
+# FNDM - robots.txt
+# https://www.thefndm.com
+
+User-agent: *
+Allow: /
+
+# Block search crawlers from query-param URLs (avoid duplicate indexing)
+Disallow: /*?reset
+Disallow: /*?force
+Disallow: /*?debug
+
+# Sitemap location
+Sitemap: https://www.thefndm.com/sitemap.xml

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+
+  <!-- Main landing page -->
+  <url>
+    <loc>https://www.thefndm.com/</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="ko" href="https://www.thefndm.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.thefndm.com/" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://www.thefndm.com/" />
+    <xhtml:link rel="alternate" hreflang="zh" href="https://www.thefndm.com/" />
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.thefndm.com/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.thefndm.com/" />
+  </url>
+
+  <!-- Privacy Policy -->
+  <url>
+    <loc>https://www.thefndm.com/legal.html</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+
+  <!-- Privacy direct link -->
+  <url>
+    <loc>https://www.thefndm.com/legal.html#privacy</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+  <!-- Terms direct link -->
+  <url>
+    <loc>https://www.thefndm.com/legal.html#terms</loc>
+    <lastmod>2026-05-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.3</priority>
+  </url>
+
+</urlset>
