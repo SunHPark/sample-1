@@ -3009,7 +3009,7 @@
 
       <div class="footer-copy">
         <p data-i18n="footer.copyright">© CultureCode Inc. All rights reserved</p>
-        <p data-i18n="footer.location">Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" onclick="fndmTrack('external_link', { destination: 'culturecode' })">www.culturecode.co.kr</a></p>
+        <p data-i18n="footer.location">Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" class="culturecode-link">www.culturecode.co.kr</a></p>
       </div>
     </div>
   </footer>
@@ -3620,7 +3620,7 @@
       'appnav.events': '경험',
       'appnav.community': '연결',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
-      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" onclick="fndmTrack('external_link', { destination: 'culturecode' })">www.culturecode.co.kr</a>'
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" class="culturecode-link">www.culturecode.co.kr</a>'
     },
 
     EN: {
@@ -3730,7 +3730,7 @@
       'appnav.events': 'Experience',
       'appnav.community': 'Connect',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
-      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" onclick="fndmTrack('external_link', { destination: 'culturecode' })">www.culturecode.co.kr</a>'
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" class="culturecode-link">www.culturecode.co.kr</a>'
     },
 
     JP: {
@@ -3840,7 +3840,7 @@
       'appnav.events': '体験',
       'appnav.community': '繋がる',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
-      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" onclick="fndmTrack('external_link', { destination: 'culturecode' })">www.culturecode.co.kr</a>'
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" class="culturecode-link">www.culturecode.co.kr</a>'
     },
 
     CN: {
@@ -3950,7 +3950,7 @@
       'appnav.events': '体验',
       'appnav.community': '社区',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
-      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" onclick="fndmTrack('external_link', { destination: 'culturecode' })">www.culturecode.co.kr</a>'
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer" class="culturecode-link">www.culturecode.co.kr</a>'
     },
 
     Esp: {
@@ -4276,6 +4276,14 @@
   } else {
     initLangModal();
   }
+
+  // Track culturecode link clicks (delegated to handle re-rendered i18n)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('.culturecode-link');
+    if (link) {
+      fndmTrack('external_link', { destination: 'culturecode' });
+    }
+  });
 
   // Language switcher dropdown — wired to i18n
   (function() {
