@@ -252,6 +252,52 @@
     color: var(--ink);
     margin-bottom: 8px;
   }
+
+  /* Privacy summary card — quick-glance overview */
+  .legal-content .summary-card {
+    background: linear-gradient(180deg, rgba(255, 31, 61, 0.04) 0%, rgba(255, 31, 61, 0.01) 100%);
+    border: 1px solid rgba(255, 31, 61, 0.15);
+    border-radius: 14px;
+    padding: 22px 26px;
+    margin: 0 0 32px;
+  }
+  .legal-content .summary-card .summary-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 31, 61, 0.08);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+  .legal-content .summary-card .summary-row:last-child {
+    border-bottom: none;
+  }
+  .legal-content .summary-card .summary-row:first-child {
+    padding-top: 4px;
+  }
+  .legal-content .summary-card .summary-label {
+    flex-shrink: 0;
+    width: 110px;
+    font-weight: 700;
+    color: var(--primary);
+    font-size: 13px;
+    letter-spacing: -0.01em;
+  }
+  .legal-content .summary-card .summary-value {
+    flex: 1;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  @media (max-width: 720px) {
+    .legal-content .summary-card { padding: 16px 18px; margin-bottom: 24px; }
+    .legal-content .summary-card .summary-row {
+      flex-direction: column;
+      gap: 4px;
+      padding: 8px 0;
+    }
+    .legal-content .summary-card .summary-label { width: auto; }
+  }
   .legal-content a {
     color: var(--primary);
     text-decoration: none;
@@ -448,6 +494,7 @@
 
     <div class="footer-copy">
       <p>© CultureCode Inc. All rights reserved</p>
+      <p>Business Registration No. 158-87-03985</p>
       <p>Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a></p>
     </div>
   </div>
@@ -468,6 +515,21 @@
       'footer.terms': '이용약관',
       'privacy': `
         <h2>개인정보처리방침</h2>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <div class="summary-label">수집 항목</div>
+            <p class="summary-value">이메일, 국가, 최애 아티스트, 접속 기록 등 서비스 이용 과정에서 자동으로 생성되는 정보</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">이용 목적</div>
+            <p class="summary-value">사전예약, 베타테스트 안내, 서비스 소식 발송</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">보유 기간</div>
+            <p class="summary-value">정식 출시 후 1년 또는 동의 철회 시까지</p>
+          </div>
+        </div>
         <p>㈜컬처코드(이하 "회사")는 이용자의 개인정보를 중요하게 생각하며, 관련 법령에 따라 개인정보를 안전하게 보호하기 위해 최선을 다합니다.</p>
         <p>회사는 서비스 제공, 사전 알림 신청, 문의 응대, 서비스 개선을 위해 필요한 최소한의 개인정보를 수집할 수 있습니다.</p>
 
@@ -491,7 +553,7 @@
           <li>법령상 의무 이행</li>
         </ol>
 
-        <p>회사는 개인정보를 수집 및 이용 목적이 달성된 후 지체 없이 파기합니다. 단, 관련 법령에 따라 일정 기간 보관이 필요한 경우에는 해당 기간 동안 보관할 수 있습니다.</p>
+        <p>회사는 수집한 개인정보를 <strong>정식 출시 후 1년</strong> 또는 <strong>이용자가 동의를 철회할 때까지</strong> 보유합니다. 보유 기간이 종료되거나 이용 목적이 달성된 경우 지체 없이 파기합니다. 단, 관련 법령에 따라 일정 기간 보관이 필요한 경우에는 해당 기간 동안 보관할 수 있습니다.</p>
         <p>회사는 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 다만, 법령에 따른 요청이 있거나 이용자의 사전 동의가 있는 경우에는 예외로 합니다.</p>
         <p>이용자는 언제든지 자신의 개인정보에 대한 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다.</p>
 
@@ -541,6 +603,21 @@
       'footer.terms': 'Terms of Use',
       'privacy': `
         <h2>Privacy Policy</h2>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <div class="summary-label">What we collect</div>
+            <p class="summary-value">Email, country, favorite artist, and information automatically generated during service use (e.g., access logs)</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">Purpose</div>
+            <p class="summary-value">Pre-registration, beta tester notifications, and service updates</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">Retention</div>
+            <p class="summary-value">Until 1 year after official launch, or until consent is withdrawn</p>
+          </div>
+        </div>
         <p>CultureCode Inc. (the "Company," "we," "us," or "our") values users' personal information and is committed to protecting it safely in accordance with applicable laws and regulations.</p>
         <p>We may collect the minimum personal information necessary to provide our services, manage pre-launch notifications, respond to inquiries, and improve our services.</p>
 
@@ -564,7 +641,7 @@
           <li>Complying with legal obligations</li>
         </ol>
 
-        <p>We delete personal information without delay once the purposes of collection and use have been achieved. However, if retention is required under applicable laws, we may retain such information for the legally required period.</p>
+        <p>We retain personal information for <strong>up to 1 year after official launch</strong> or <strong>until you withdraw consent</strong>. Once retention period ends or the purposes of collection and use are achieved, we delete the information without delay. However, if retention is required under applicable laws, we may retain such information for the legally required period.</p>
         <p>We do not provide users' personal information to third parties without consent, except where required by law or with the user's prior consent.</p>
         <p>Users may request access to, correction, deletion, or suspension of processing of their personal information at any time.</p>
 
@@ -614,6 +691,21 @@
       'footer.terms': '利用規約',
       'privacy': `
         <h2>プライバシーポリシー</h2>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <div class="summary-label">収集項目</div>
+            <p class="summary-value">メールアドレス、国、好きなアーティスト、アクセス記録など、サービス利用過程で自動的に生成される情報</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">利用目的</div>
+            <p class="summary-value">事前登録、ベータテストのご案内、サービス情報の配信</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">保有期間</div>
+            <p class="summary-value">正式リリース後1年、または同意の撤回まで</p>
+          </div>
+        </div>
         <p>株式会社CultureCode(以下「当社」といいます)は、利用者の個人情報を重要なものと認識し、関連法令に従って個人情報を安全に保護するよう努めます。</p>
         <p>当社は、サービスの提供、事前通知の申請受付、お問い合わせ対応、サービス改善のために必要最小限の個人情報を収集する場合があります。</p>
 
@@ -637,7 +729,7 @@
           <li>法令上の義務の履行</li>
         </ol>
 
-        <p>当社は、個人情報の収集および利用目的が達成された後、遅滞なく当該情報を削除します。ただし、関連法令により一定期間の保管が必要な場合は、その期間中保管することがあります。</p>
+        <p>当社は収集した個人情報を<strong>正式リリース後1年間</strong>、または<strong>利用者が同意を撤回するまで</strong>保有します。保有期間が終了するか、利用目的が達成された場合は、遅滞なく削除します。ただし、関連法令により一定期間の保管が必要な場合は、その期間中保管することがあります。</p>
         <p>当社は、利用者の同意なく個人情報を第三者に提供しません。ただし、法令に基づく要請がある場合、または利用者の事前同意がある場合を除きます。</p>
         <p>利用者は、自己の個人情報について、開示、訂正、削除、処理停止をいつでも請求することができます。</p>
 
@@ -687,6 +779,21 @@
       'footer.terms': '使用条款',
       'privacy': `
         <h2>隐私政策</h2>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <div class="summary-label">收集项目</div>
+            <p class="summary-value">邮箱、国家、最喜欢的艺人,以及在服务使用过程中自动生成的信息(如访问记录)</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">使用目的</div>
+            <p class="summary-value">预约登记、内测通知、服务相关消息发送</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">保存期限</div>
+            <p class="summary-value">正式上线后1年内,或至撤回同意为止</p>
+          </div>
+        </div>
         <p>CultureCode Inc.(以下简称"公司")重视用户的个人信息,并将根据相关法律法规尽力安全保护用户的个人信息。</p>
         <p>公司可能会在提供服务、管理上线前通知申请、回复咨询以及改善服务所需的最小范围内收集个人信息。</p>
 
@@ -710,7 +817,7 @@
           <li>履行法律法规规定的义务</li>
         </ol>
 
-        <p>公司将在个人信息的收集及使用目的达成后及时删除相关信息。但根据相关法律法规需要保存一定期限的情况除外。</p>
+        <p>公司将收集的个人信息保存至<strong>正式上线后1年</strong>,或<strong>用户撤回同意时</strong>。保存期限届满或使用目的达成后,公司将及时删除相关信息。但根据相关法律法规需要保存一定期限的情况除外。</p>
         <p>未经用户同意,公司不会向第三方提供个人信息。但根据法律法规要求或获得用户事先同意的情况除外。</p>
         <p>用户可随时要求查询、更正、删除或停止处理其个人信息。</p>
 
@@ -760,6 +867,21 @@
       'footer.terms': 'Términos de Uso',
       'privacy': `
         <h2>Política de Privacidad</h2>
+
+        <div class="summary-card">
+          <div class="summary-row">
+            <div class="summary-label">Qué recopilamos</div>
+            <p class="summary-value">Email, país, artista favorito, e información generada automáticamente durante el uso del servicio (como registros de acceso)</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">Propósito</div>
+            <p class="summary-value">Pre-registro, notificaciones de beta testing y novedades del servicio</p>
+          </div>
+          <div class="summary-row">
+            <div class="summary-label">Retención</div>
+            <p class="summary-value">Hasta 1 año después del lanzamiento oficial, o hasta retirar el consentimiento</p>
+          </div>
+        </div>
         <p>CultureCode Inc. ("la Compañía", "nosotros" o "nuestro") valora la información personal de los usuarios y se compromete a protegerla de forma segura de acuerdo con las leyes y regulaciones aplicables.</p>
         <p>Podemos recopilar la información personal mínima necesaria para prestar nuestros servicios, gestionar solicitudes de notificación previa al lanzamiento, responder consultas y mejorar nuestros servicios.</p>
 
@@ -783,7 +905,7 @@
           <li>Cumplir con obligaciones legales</li>
         </ol>
 
-        <p>Eliminaremos la información personal sin demora una vez cumplidos los fines de recopilación y uso. Sin embargo, si la legislación aplicable exige su conservación, podremos conservar dicha información durante el período legalmente requerido.</p>
+        <p>Conservamos la información personal <strong>hasta 1 año después del lanzamiento oficial</strong> o <strong>hasta que el usuario retire su consentimiento</strong>. Una vez finalizado el período de retención o cumplidos los fines de uso, eliminamos la información sin demora. Sin embargo, si la legislación aplicable exige su conservación, podremos conservar dicha información durante el período legalmente requerido.</p>
         <p>No proporcionamos información personal de los usuarios a terceros sin consentimiento, salvo cuando lo exija la ley o con el consentimiento previo del usuario.</p>
         <p>Los usuarios pueden solicitar en cualquier momento el acceso, corrección, eliminación o suspensión del tratamiento de su información personal.</p>
 

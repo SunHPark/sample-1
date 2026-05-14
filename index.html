@@ -513,6 +513,155 @@
     transform: translateX(-50%) translateY(0);
   }
 
+  /* ============ LANGUAGE SUGGESTION MODAL ============ */
+  .lang-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 100000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .lang-modal.show {
+    display: flex;
+  }
+  .lang-modal-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 14, 26, 0.45);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+  .lang-modal.show .lang-modal-backdrop {
+    opacity: 1;
+  }
+  .lang-modal-box {
+    position: relative;
+    background: white;
+    border-radius: 22px;
+    padding: 36px 32px 28px;
+    max-width: 360px;
+    width: 100%;
+    text-align: center;
+    box-shadow:
+      0 30px 60px -12px rgba(10, 14, 26, 0.35),
+      0 0 0 1px rgba(10, 14, 26, 0.04);
+    transform: scale(0.92);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+  }
+  .lang-modal.show .lang-modal-box {
+    transform: scale(1);
+    opacity: 1;
+  }
+  .lang-modal-flag {
+    font-size: 56px;
+    line-height: 1;
+    margin-bottom: 18px;
+  }
+  .lang-modal-title {
+    font-family: var(--tx-display);
+    font-weight: 800;
+    font-size: 20px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    line-height: 1.3;
+    margin-bottom: 8px;
+  }
+  .lang-modal-sub {
+    font-size: 14px;
+    color: var(--ink-3);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    letter-spacing: -0.01em;
+  }
+  .lang-modal-actions {
+    display: flex;
+    gap: 10px;
+  }
+  .lang-modal-btn {
+    flex: 1;
+    padding: 13px 16px;
+    border-radius: 12px;
+    font-family: var(--tx-body);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    transition: transform 0.12s ease, background 0.15s ease;
+    letter-spacing: -0.01em;
+  }
+  .lang-modal-btn-no {
+    background: var(--bg-soft);
+    color: var(--ink-2);
+    border: 1px solid var(--line);
+  }
+  .lang-modal-btn-no:hover {
+    background: rgba(10, 14, 26, 0.06);
+  }
+  .lang-modal-btn-yes {
+    background: var(--ink);
+    color: white;
+  }
+  .lang-modal-btn-yes:hover {
+    background: #1a1f2e;
+    transform: translateY(-1px);
+  }
+
+  /* ============ FORM ERROR TOAST (centered modal-like) ============ */
+  .form-toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.92);
+    background: rgba(10, 14, 26, 0.96);
+    color: white;
+    padding: 18px 24px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    line-height: 1.45;
+    max-width: 88vw;
+    width: max-content;
+    min-width: 240px;
+    z-index: 99999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.22s ease, transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow:
+      0 20px 50px -10px rgba(10, 14, 26, 0.55),
+      0 8px 22px -4px rgba(10, 14, 26, 0.35),
+      0 0 0 1px rgba(255, 255, 255, 0.06) inset;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+  }
+  .form-toast.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .form-toast-icon {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(255, 31, 61, 0.18);
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .form-toast-text {
+    flex: 1;
+    word-break: keep-all;
+  }
+
   /* ============ HERO ============ */
   .hero {
     padding: 120px 24px 80px;
@@ -561,6 +710,183 @@
   .hero-sub strong {
     color: var(--ink);
     font-weight: 700;
+  }
+
+  /* ============ APP NAV PREVIEW (light, compact) ============ */
+  .app-nav-section {
+    padding: 56px 24px 64px;
+    background: var(--bg-soft);
+    color: var(--ink);
+    text-align: center;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .app-nav-head {
+    max-width: 680px;
+    margin: 0 auto 36px;
+  }
+  .app-nav-kicker {
+    font-family: var(--tx-mono);
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+  .app-nav-h {
+    font-family: var(--tx-display);
+    font-weight: 900;
+    font-size: 28px;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .app-nav-sub {
+    color: var(--ink-3);
+    font-size: 14px;
+    line-height: 1.6;
+    letter-spacing: -0.01em;
+  }
+  .app-nav-grid {
+    max-width: 920px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 10px;
+  }
+  .app-nav-tile {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 20px 12px 18px;
+    text-align: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+  .app-nav-tile:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px -6px rgba(10, 14, 26, 0.1);
+    border-color: rgba(10, 14, 26, 0.14);
+  }
+  .app-nav-tile.featured {
+    background: linear-gradient(180deg, rgba(255, 31, 61, 0.04) 0%, rgba(255, 31, 61, 0.02) 100%);
+    border: 1.5px solid var(--primary);
+    box-shadow:
+      0 0 18px -2px rgba(255, 31, 61, 0.18),
+      0 4px 14px -4px rgba(255, 31, 61, 0.14);
+  }
+  .app-nav-tile.featured:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 0 24px -2px rgba(255, 31, 61, 0.28),
+      0 6px 18px -4px rgba(255, 31, 61, 0.2);
+  }
+  .app-nav-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    background: var(--bg-soft);
+    color: var(--ink-3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 12px;
+  }
+  .app-nav-tile.featured .app-nav-icon {
+    background: rgba(255, 31, 61, 0.1);
+    color: var(--primary);
+  }
+  .app-nav-label {
+    font-family: var(--tx-display);
+    font-weight: 800;
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  .app-nav-tile.featured .app-nav-label {
+    color: var(--primary);
+  }
+  .app-nav-sub-label {
+    font-size: 11px;
+    color: var(--ink-4);
+    letter-spacing: -0.005em;
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: center;
+  }
+  .app-nav-tile.featured .app-nav-sub-label {
+    color: rgba(255, 31, 61, 0.75);
+  }
+  .badge-new {
+    background: var(--primary);
+    color: white;
+    font-family: var(--tx-mono);
+    font-size: 8px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 2px 5px;
+    border-radius: 3px;
+    line-height: 1;
+  }
+
+  /* ============ ACCENT (red highlighted text) ============ */
+  .accent {
+    color: var(--primary);
+    font-weight: inherit;
+    text-shadow:
+      0 0 14px rgba(255, 31, 61, 0.35),
+      0 0 28px rgba(255, 31, 61, 0.18);
+  }
+
+  /* ============ BETA CLOSED STATE ============ */
+  .toggle.is-closed {
+    opacity: 0.55;
+    cursor: not-allowed;
+    position: relative;
+  }
+  .toggle.is-closed input {
+    pointer-events: none;
+  }
+  .toggle.is-closed .toggle-box {
+    background: rgba(10, 14, 26, 0.03);
+  }
+  .toggle.is-closed strong {
+    color: var(--ink-3);
+  }
+  .beta-closed-badge {
+    display: inline-block;
+    background: rgba(10, 14, 26, 0.85);
+    color: white;
+    font-family: var(--tx-mono);
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 3px 7px;
+    border-radius: 4px;
+    margin-left: 8px;
+    text-transform: uppercase;
+    vertical-align: middle;
+  }
+  .beta-closed-msg {
+    display: none;
+    background: rgba(255, 31, 61, 0.05);
+    border: 1px solid rgba(255, 31, 61, 0.18);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-top: 10px;
+    font-size: 12.5px;
+    color: var(--ink-2);
+    line-height: 1.55;
+    letter-spacing: -0.005em;
+  }
+  .beta-closed-msg.show {
+    display: block;
+  }
+  .beta-closed-msg .emoji {
+    margin-right: 4px;
   }
 
   /* ============ PRE-REGISTER CARD ============ */
@@ -1311,44 +1637,18 @@
     100% { stroke-dashoffset: -100; opacity: 0; }
   }
 
-  .loop-stats {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 56px;
-    padding-top: 36px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    max-width: 560px;
-    margin: 0 auto;
-  }
-
-  .loop-stat {
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
+  .loop-tagline {
     text-align: center;
-  }
-  .loop-stat-num {
-    font-family: var(--tx-body);
-    font-weight: 800;
-    font-size: 28px;
-    letter-spacing: -0.035em;
+    font-family: var(--tx-display);
+    font-weight: 700;
+    font-size: 20px;
+    letter-spacing: -0.025em;
+    line-height: 1.4;
     color: white;
-    line-height: 1;
-  }
-  .loop-stat-label {
-    font-family: var(--tx-mono);
-    font-size: 10px;
-    color: rgba(255,255,255,0.55);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    font-weight: 500;
-  }
-
-  .loop-stats-divider {
-    width: 1px;
-    height: 36px;
-    background: rgba(255, 255, 255, 0.15);
+    padding-top: 36px;
+    margin: 0 auto;
+    max-width: 720px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
   }
 
   /* ============ PROOF ============ */
@@ -1569,6 +1869,34 @@
     gap: 10px;
   }
   .toggle { display: block; cursor: pointer; }
+  .toggle.is-disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  .toggle.is-disabled .toggle-box {
+    background: rgba(10, 14, 26, 0.03);
+    border-color: rgba(10, 14, 26, 0.06);
+  }
+  .toggle.is-disabled strong::after {
+    content: '';
+    display: inline-block;
+    width: 6px;
+  }
+  .toggle.is-disabled .sold-out-badge {
+    display: inline-block;
+    margin-left: 8px;
+    background: var(--ink);
+    color: white;
+    font-family: var(--tx-mono);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    padding: 2px 6px;
+    border-radius: 4px;
+    line-height: 1;
+    vertical-align: middle;
+    text-transform: uppercase;
+  }
   .toggle input { position: absolute; opacity: 0; pointer-events: none; }
 
   .toggle-box {
@@ -1781,6 +2109,18 @@
 
   /* ============ RESPONSIVE ============ */
   @media (max-width: 768px) {
+    /* App nav mobile — 5 column compact / wrap if needed */
+    .app-nav-section { padding: 40px 16px 48px; }
+    .app-nav-h { font-size: 22px; }
+    .app-nav-sub { font-size: 13px; }
+    .app-nav-head { margin-bottom: 28px; }
+    .app-nav-grid { grid-template-columns: repeat(5, 1fr); gap: 6px; max-width: 100%; }
+    .app-nav-tile { padding: 14px 4px 12px; border-radius: 12px; }
+    .app-nav-icon { width: 30px; height: 30px; margin-bottom: 8px; border-radius: 8px; }
+    .app-nav-icon svg { width: 16px; height: 16px; }
+    .app-nav-label { font-size: 10px; letter-spacing: 0.04em; }
+    .app-nav-sub-label { font-size: 9px; }
+    .badge-new { font-size: 7px; padding: 1.5px 4px; letter-spacing: 0.05em; }
     .nav { padding: 6px 20px; }
     .hero { padding: 80px 20px 60px; }
     .hero-title { font-size: 36px; line-height: 1.15; letter-spacing: -0.045em; margin-bottom: 20px; }
@@ -1862,10 +2202,7 @@
     .loop-card { padding: 56px 28px 48px; border-radius: 24px; }
     .loop-h { font-size: 28px; }
     .loop-sub { font-size: 15px; margin-bottom: 40px; }
-    .loop-stats { gap: 24px; padding-top: 28px; }
-    .loop-stat-num { font-size: 22px; }
-    .loop-stat-label { font-size: 12px; }
-    .loop-stats-divider { height: 32px; }
+    .loop-tagline { font-size: 16px; padding-top: 28px; }
 
     .proof-stats { grid-template-columns: repeat(2, 1fr); }
     .proof-h { font-size: 28px; margin-bottom: 40px; }
@@ -1922,7 +2259,7 @@
     <div class="hero-icon-container">
       <div class="hero-icon"></div>
     </div>
-    <h1 class="hero-title" data-i18n="hero.title">포카 교환,<br>이제 그만 기다려요.</h1>
+    <h1 class="hero-title" data-i18n="hero.title"><span class="accent">포카 교환</span>,<br>이제 그만 기다려요.</h1>
     <p class="hero-sub" data-i18n="hero.sub">트위터에서 헤매던 포카 교환,<br>이제는 FNDM에서 <strong>매칭</strong>으로 한번에!</p>
   </header>
 
@@ -1987,12 +2324,12 @@
 
       <div class="stats-row">
         <div class="stat-item">
-          <div class="stat-value">158</div>
+          <div class="stat-value" id="preregCount">158</div>
           <div class="stat-label" data-i18n="prereg.stat1.label">사전예약 팬덤</div>
         </div>
         <div class="stats-divider"></div>
         <div class="stat-item">
-          <div class="stat-value">75</div>
+          <div class="stat-value" id="betaCount">75</div>
           <div class="stat-label" data-i18n="prereg.stat2.label">베타테스터</div>
         </div>
       </div>
@@ -2048,14 +2385,14 @@
   <!-- ============ HOW IT WORKS ============ -->
   <section class="how" id="how">
     <div class="how-inner">
-      <h2 class="how-h" data-i18n="how.h">포카교환 이제는,<br>3단계로 끝.</h2>
-      <p class="how-lead" data-i18n="how.lead">복잡할 필요 없어요. 3단계로 안전한 교환이 끝납니다.</p>
+      <h2 class="how-h" data-i18n="how.h">포카 교환 이제는,<br><span class="accent">3단계로 끝</span>.</h2>
+      <p class="how-lead" data-i18n="how.lead">복잡할 필요 없어요. <strong>3단계로 안전한 교환</strong>이 끝납니다.</p>
 
       <div class="how-steps">
         <article class="how-step reveal">
           <div class="how-step-text">
             <div class="how-step-num">STEP 01</div>
-            <h3 class="how-step-h" data-i18n="how.1.h">내 포카 사진과<br>위시리스트를 등록하세요</h3>
+            <h3 class="how-step-h" data-i18n="how.1.h">내 포카 사진과<br><span class="accent">위시리스트</span>를 등록하세요</h3>
             <p class="how-step-desc" data-i18n="how.1.d">AI가 자동으로 멤버·앨범·상태를 인식해요.<br>사진 한 장이면 5초만에 등록이 끝납니다.</p>
           </div>
           <div class="how-step-visual s1">
@@ -2098,7 +2435,7 @@
           <div class="how-step-text">
             <div class="how-step-num">STEP 03</div>
             <h3 class="how-step-h" data-i18n="how.3.h">안전하게 교환이 완료됩니다</h3>
-            <p class="how-step-desc" data-i18n="how.3.d">FNDM이 양쪽 발송을 확인한 후 정산해드려요.<br>잠수, 미발송, 사기 걱정은 이제 그만.</p>
+            <p class="how-step-desc" data-i18n="how.3.d">FNDM이 양쪽 발송을 확인 후<br><span class="accent">안전하게 교환</span>이 완료됩니다.</p>
           </div>
           <div class="how-step-visual s3">
             <div class="check-circle">
@@ -2112,7 +2449,7 @@
 
   <!-- ============ SOLUTION ============ -->
   <section class="section" id="solution">
-    <h2 class="solution-h" data-i18n="solution.h">내가 교환하고 싶던 포카,<br>이제는 매칭 하세요!</h2>
+    <h2 class="solution-h" data-i18n="solution.h">내가 교환하고 싶던 포카,<br><span class="accent">이제는 매칭</span> 하세요!</h2>
 
     <div class="axes">
       <article class="axis reveal">
@@ -2212,6 +2549,18 @@
               <text class="city-label" x="450" y="155" font-size="8" font-family="Inter" font-weight="500">TOKYO</text>
             </g>
 
+            <g class="city" data-city="SHANGHAI" data-x="408" data-y="160">
+              <circle class="city-main" cx="408" cy="160" r="6" fill="#FF1F3D" filter="url(#dot-glow)"/>
+              <circle class="city-dot" cx="408" cy="160" r="4" fill="#fff"/>
+              <text class="city-label" x="365" y="170" font-size="8" font-family="Inter" font-weight="500">SHANGHAI</text>
+            </g>
+
+            <g class="city" data-city="DUBAI" data-x="350" data-y="180">
+              <circle class="city-main" cx="350" cy="180" r="6" fill="#FF1F3D" filter="url(#dot-glow)"/>
+              <circle class="city-dot" cx="350" cy="180" r="4" fill="#fff"/>
+              <text class="city-label" x="338" y="197" font-size="8" font-family="Inter" font-weight="500">DUBAI</text>
+            </g>
+
             <g class="city" data-city="LA" data-x="80" data-y="155">
               <circle class="city-main" cx="80" cy="155" r="6" fill="#FF1F3D" filter="url(#dot-glow)"/>
               <circle class="city-dot" cx="80" cy="155" r="4" fill="#fff"/>
@@ -2253,17 +2602,7 @@
         </svg>
       </div>
 
-      <div class="loop-stats">
-        <div class="loop-stat">
-          <div class="loop-stat-num" data-i18n="loop.stat2.value">전세계</div>
-          <div class="loop-stat-label" data-i18n="loop.stat2.label">다른 팬과 매칭 예정</div>
-        </div>
-        <div class="loop-stats-divider"></div>
-        <div class="loop-stat">
-          <div class="loop-stat-num">∞</div>
-          <div class="loop-stat-label" data-i18n="loop.stat1.label">매칭 가능성</div>
-        </div>
-      </div>
+      <p class="loop-tagline" data-i18n="loop.tagline">내 굿즈로 전세계 팬덤과 연결된다.</p>
     </div>
   </section>
 
@@ -2274,11 +2613,11 @@
     <div class="proof-stats">
       <div class="proof-stat">
         <div class="proof-stat-label" data-i18n="proof.stat1.label">사전예약 팬덤</div>
-        <div class="proof-stat-num">158<span class="unit">명</span></div>
+        <div class="proof-stat-num"><span id="proofPreregCount">158</span><span class="unit">명</span></div>
       </div>
       <div class="proof-stat">
         <div class="proof-stat-label" data-i18n="proof.stat2.label">베타테스터</div>
-        <div class="proof-stat-num">75<span class="unit">명</span></div>
+        <div class="proof-stat-num"><span id="proofBetaCount">75</span><span class="unit">명</span></div>
       </div>
     </div>
 
@@ -2309,7 +2648,7 @@
           <article class="chip">
             <div class="chip-emoji">✨</div>
             <div class="chip-body">
-              <h4 data-i18n="int.2">애니메 굿즈</h4>
+              <h4 data-i18n="int.2">애니메이션 굿즈</h4>
               <p data-i18n="int.2.sub">아크릴 스탠드·뱃지·트레카</p>
             </div>
           </article>
@@ -2366,6 +2705,78 @@
     </div>
   </section>
 
+  <!-- ============ APP NAV PREVIEW ============ -->
+  <section class="section app-nav-section">
+    <div class="app-nav-head">
+      <h2 class="app-nav-h" data-i18n="appnav.h">팬덤을 위한,<br><span class="accent">콘텐츠 커머스 플랫폼</span></h2>
+      <p class="app-nav-sub" data-i18n="appnav.sub">발견부터 거래, 경험까지<br>팬덤의 모든 순간을 하나의 서비스에서.</p>
+    </div>
+
+    <div class="app-nav-grid">
+      <div class="app-nav-tile">
+        <div class="app-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+            <circle cx="12" cy="12" r="3"/>
+          </svg>
+        </div>
+        <div class="app-nav-label">CONTENT</div>
+        <div class="app-nav-sub-label" data-i18n="appnav.home">발견</div>
+      </div>
+
+      <div class="app-nav-tile">
+        <div class="app-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/>
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <path d="M16 10a4 4 0 0 1-8 0"/>
+          </svg>
+        </div>
+        <div class="app-nav-label">SHOP</div>
+        <div class="app-nav-sub-label" data-i18n="appnav.shop">구매</div>
+      </div>
+
+      <div class="app-nav-tile featured">
+        <div class="app-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="17 1 21 5 17 9"/>
+            <path d="M3 11V9a4 4 0 0 1 4-4h14"/>
+            <polyline points="7 23 3 19 7 15"/>
+            <path d="M21 13v2a4 4 0 0 1-4 4H3"/>
+          </svg>
+        </div>
+        <div class="app-nav-label">TRADE</div>
+        <div class="app-nav-sub-label app-nav-new"><span data-i18n="appnav.trade">교환</span> <span class="badge-new">NEW</span></div>
+      </div>
+
+      <div class="app-nav-tile">
+        <div class="app-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+            <line x1="16" y1="2" x2="16" y2="6"/>
+            <line x1="8" y1="2" x2="8" y2="6"/>
+            <line x1="3" y1="10" x2="21" y2="10"/>
+          </svg>
+        </div>
+        <div class="app-nav-label">EVENTS</div>
+        <div class="app-nav-sub-label" data-i18n="appnav.events">경험</div>
+      </div>
+
+      <div class="app-nav-tile">
+        <div class="app-nav-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="app-nav-label">COMMUNITY</div>
+        <div class="app-nav-sub-label" data-i18n="appnav.community">연결</div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ CTA / FORM ============ -->
   <section class="cta" id="cta">
     <div class="cta-inner">
@@ -2382,19 +2793,22 @@
           <label for="artist" class="form-label" data-i18n="form.artist">최애 아티스트</label>
           <select id="artist" name="artist" class="form-select" required onchange="toggleArtistOther(this)">
             <option value="" data-i18n="form.artist.placeholder">선택해주세요</option>
-            <option>NewJeans</option>
             <option>aespa</option>
-            <option>LE SSERAFIM</option>
-            <option>IVE</option>
-            <option>ITZY</option>
-            <option>Stray Kids</option>
-            <option>TXT</option>
-            <option>SEVENTEEN</option>
-            <option>ENHYPEN</option>
-            <option>NCT</option>
-            <option>RIIZE</option>
-            <option>BTS</option>
+            <option>ATEEZ</option>
             <option>BLACKPINK</option>
+            <option>BTS</option>
+            <option>ENHYPEN</option>
+            <option>Hearts2Hearts</option>
+            <option>ITZY</option>
+            <option>IVE</option>
+            <option>LE SSERAFIM</option>
+            <option>NCT</option>
+            <option>NewJeans</option>
+            <option>RIIZE</option>
+            <option>SEVENTEEN</option>
+            <option>Stray Kids</option>
+            <option>TWICE</option>
+            <option>TXT</option>
             <option value="other" data-i18n="form.artist.other">기타 (직접 입력)</option>
           </select>
           <input type="text" id="artist-other" name="artist_other" class="form-input" style="display:none; margin-top:8px;" data-i18n-attr="placeholder:form.artist.other.placeholder" placeholder="좋아하는 아티스트를 입력해주세요">
@@ -2445,17 +2859,18 @@
                 </span>
               </span>
             </label>
-            <label class="toggle">
-              <input type="checkbox" name="tier" value="beta">
+            <label class="toggle" id="betaToggle">
+              <input type="checkbox" name="tier" value="beta" id="betaCheckbox">
               <span class="toggle-box">
                 <span class="toggle-check">✓</span>
                 <span class="toggle-text">
                   <strong data-i18n="form.type.beta">베타테스터</strong>
-                  <small data-i18n="form.type.beta.d">정식 출시 전 사용권 + VIP 굿즈</small>
+                  <small data-i18n="form.type.beta.d" id="betaDesc">출시전 사용 가능 + VIP 굿즈</small>
                 </span>
               </span>
             </label>
           </div>
+          <div class="beta-closed-msg" id="betaClosedMsg" data-i18n="form.beta.closed"><span class="emoji">🙏</span> 베타테스터는 마감되었어요. 사전예약으로 함께해주세요!</div>
         </div>
 
         <label class="agree">
@@ -2475,7 +2890,7 @@
         <div class="form-success-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h3 data-i18n="form.success.h">합류 완료!</h3>
+        <h3 data-i18n="form.success.h">등록 완료!</h3>
         <p data-i18n="form.success.d">FNDM 론칭 소식을<br>가장 먼저 알려드릴게요.<br><br>같이 교환하고 싶은 친구를<br>초대해주세요!</p>
         <button type="button" class="btn-secondary" id="shareBtn" onclick="copyShareLink(this)" style="min-width:0;" data-i18n="form.success.share">친구에게 공유하기</button>
       </div>
@@ -2643,6 +3058,69 @@
     }
   })();
 
+  // ============================================================
+  // FNDM Counter & Beta-Closed System (backend-ready)
+  // ============================================================
+  // Backend wires up to these:
+  //   window.FNDM.setCounts({ prereg: 200, beta: 100 })
+  //   window.FNDM.refresh()
+  //
+  // The system reads from these globals (replace with API later):
+  window.FNDM = window.FNDM || {};
+  window.FNDM.BETA_CAP = 11000;         // 1만 1천명 마감
+  window.FNDM.preregCount = 158;        // initial starting value (current display)
+  window.FNDM.betaCount   = 75;         // initial starting value (current display)
+
+  // Format number with thousand separators
+  function _fmtNum(n) {
+    return new Intl.NumberFormat().format(Math.max(0, Math.floor(Number(n) || 0)));
+  }
+
+  // Render the current state to the DOM
+  function _renderCounts() {
+    const prereg = window.FNDM.preregCount;
+    const beta   = window.FNDM.betaCount;
+
+    const set = (id, val) => {
+      const el = document.getElementById(id);
+      if (el) el.textContent = _fmtNum(val);
+    };
+    set('preregCount', prereg);
+    set('betaCount', beta);
+    set('proofPreregCount', prereg);
+    set('proofBetaCount', beta);
+
+    // Toggle beta-closed state
+    const isClosed = beta >= window.FNDM.BETA_CAP;
+    const toggle   = document.getElementById('betaToggle');
+    const checkbox = document.getElementById('betaCheckbox');
+    const msg      = document.getElementById('betaClosedMsg');
+    if (toggle && checkbox && msg) {
+      if (isClosed) {
+        toggle.classList.add('is-closed');
+        checkbox.checked = false;
+        checkbox.disabled = true;
+        msg.classList.add('show');
+      } else {
+        toggle.classList.remove('is-closed');
+        checkbox.disabled = false;
+        msg.classList.remove('show');
+      }
+    }
+  }
+
+  // Public API for backend integration
+  window.FNDM.setCounts = function(payload) {
+    if (typeof payload !== 'object' || !payload) return;
+    if (typeof payload.prereg === 'number') window.FNDM.preregCount = payload.prereg;
+    if (typeof payload.beta   === 'number') window.FNDM.betaCount   = payload.beta;
+    _renderCounts();
+  };
+  window.FNDM.refresh = _renderCounts;
+
+  // Initial render on load
+  _renderCounts();
+
   // Show/hide artist "other" input
   function toggleArtistOther(sel) {
     const other = document.getElementById('artist-other');
@@ -2655,6 +3133,57 @@
       other.style.display = 'none';
       other.required = false;
       other.value = '';
+    }
+  }
+
+  // Show centered toast for form errors (replaces native alert)
+  function showFormToast(message) {
+    const toast = document.getElementById('formToast');
+    if (!toast) {
+      // Fallback if toast element somehow missing
+      alert(message);
+      return;
+    }
+    const textEl = toast.querySelector('.form-toast-text');
+    if (textEl) textEl.textContent = message;
+    toast.classList.add('show');
+    if (window._formToastTimer) clearTimeout(window._formToastTimer);
+    window._formToastTimer = setTimeout(() => {
+      toast.classList.remove('show');
+    }, 2400);
+  }
+
+  // ============================================================
+  // Beta tester cap check — disable when 11,000+ registrations
+  // ============================================================
+  const BETA_CAP = 11000;
+  function checkBetaCap() {
+    const countEl = document.getElementById('betaCount');
+    const toggle = document.getElementById('betaToggle');
+    const checkbox = document.getElementById('betaCheckbox');
+    const desc = document.getElementById('betaDesc');
+    if (!countEl || !toggle || !checkbox || !desc) return;
+
+    // Parse current count (strip commas etc.)
+    const raw = (countEl.textContent || '').replace(/[^0-9]/g, '');
+    const count = parseInt(raw, 10) || 0;
+
+    const dict = (typeof I18N !== 'undefined' && typeof currentLocale !== 'undefined') ? I18N[currentLocale] : null;
+
+    if (count >= BETA_CAP) {
+      // Sold out
+      toggle.classList.add('is-disabled');
+      checkbox.checked = false;
+      checkbox.disabled = true;
+      const soldOutText = (dict && dict['form.type.beta.soldout']) || 'Beta registration is closed.';
+      desc.innerHTML = '<span class="sold-out-badge">' + ((dict && dict['form.type.beta.soldoutBadge']) || 'CLOSED') + '</span> ' + soldOutText;
+    } else {
+      // Still open — restore normal description
+      toggle.classList.remove('is-disabled');
+      checkbox.disabled = false;
+      if (dict && dict['form.type.beta.d']) {
+        desc.textContent = dict['form.type.beta.d'];
+      }
     }
   }
 
@@ -2674,7 +3203,7 @@
     const emailVal = (emailInput.value || '').trim();
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailVal);
     if (!emailOk) {
-      alert(msgEmail);
+      showFormToast(msgEmail);
       emailInput.focus();
       return false;
     }
@@ -2685,7 +3214,7 @@
     tierChecks.forEach(c => { if (c.checked) anyTierChecked = true; });
     if (tierChecks.length > 0 && !anyTierChecked) {
       const msgTier = (dict && dict['form.error.tier']) || 'Please select at least one participation type.';
-      alert(msgTier);
+      showFormToast(msgTier);
       const firstTier = tierChecks[0];
       if (firstTier && typeof firstTier.scrollIntoView === 'function') {
         firstTier.scrollIntoView({ behavior: 'smooth', block: 'center' });
@@ -2695,7 +3224,7 @@
 
     // Validate agreement checkbox
     if (agreeChk && !agreeChk.checked) {
-      alert(msgAgree);
+      showFormToast(msgAgree);
       if (typeof agreeChk.scrollIntoView === 'function') {
         agreeChk.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
@@ -2894,7 +3423,7 @@
       'swipe.waiting': '상대의 매칭을 기다려주세요',
       'swipe.matched': '매칭되었습니다!',
       'mail.subject': 'FNDM 서비스 문의',
-      'hero.title': '포카 교환,<br>이제 그만 기다려요.',
+      'hero.title': '<span class="accent">포카 교환</span>,<br>이제 그만 기다려요.',
       'hero.sub': '트위터에서 헤매던 포카 교환,<br>이제는 FNDM에서 <strong>매칭</strong>으로 한번에!',
       'prereg.headline': '가장 먼저 FNDM 서비스를 이용해보세요!',
       'prereg.tag': 'LIVE',
@@ -2912,15 +3441,15 @@
       'problem.3.d': '불투명한 사람에게 계좌이체 거래하고, 미발송 당한 적,<br>신고해도 돌려받기 어려운 그 답답함.',
       'problem.4.h': '상태가 달라요',
       'problem.4.d': '실물이 사진과 다른 경우가 많아요.<br>중고 거래의 가장 흔한 사기 패턴.',
-      'how.h': '포카교환 이제는,<br>3단계로 끝.',
-      'how.lead': '복잡할 필요 없어요. 3단계로 안전한 교환이 끝납니다.',
-      'how.1.h': '내 포카 사진과<br>위시리스트를 등록하세요',
+      'how.h': '포카 교환 이제는,<br><span class="accent">3단계로 끝</span>.',
+      'how.lead': '복잡할 필요 없어요. <strong>3단계로 안전한 교환</strong>이 끝납니다.',
+      'how.1.h': '내 포카 사진과<br><span class="accent">위시리스트</span>를 등록하세요',
       'how.1.d': 'AI가 자동으로 멤버·앨범·상태를 인식해요.<br>사진 한 장이면 5초만에 등록이 끝납니다.',
       'how.2.h': '내 취향에 맞는 포카가 도착해요',
-      'how.2.d': '등록한 위시리스트를 기반으로,<br>내 취향에 맞는 포카가 자동으로 도착해요.<br>마음에 드는 카드에 교환 신청을 보내면 끝!',
+      'how.2.d': '등록한 위시리스트를 기반으로,<br><span class="accent">내 취향에 맞는</span> 포카가 자동으로 도착해요.<br>마음에 드는 카드에 교환 신청을 보내면 끝!',
       'how.3.h': '안전하게 교환이 완료됩니다',
-      'how.3.d': 'FNDM이 양쪽 발송을 확인한 후 정산해드려요.<br>잠수, 미발송, 사기 걱정은 이제 그만.',
-      'solution.h': '내가 교환하고 싶던 포카,<br>이제는 매칭 하세요!',
+      'how.3.d': 'FNDM이 양쪽 발송을 확인 후<br><span class="accent">안전하게 교환</span>이 완료됩니다.',
+      'solution.h': '내가 교환하고 싶던 포카,<br><span class="accent">이제는 매칭</span> 하세요!',
       'solution.1.h': 'AI 포카인증',
       'solution.1.d': '사진 1장만 올리면 멤버·앨범·버전을 자동인식.<br>시간 세이브는 1/10로.',
       'solution.2.h': '스마트 매칭',
@@ -2931,6 +3460,12 @@
       'solution.4.d': '거래 후기와 컬렉션이 누적되어 컬렉터 레벨로 표시.<br>신뢰도 높은 유저일수록 매칭 우선권을 받습니다.',
       'loop.h': '누군가에겐 <em>백 장보다</em><br>소중한 한 장.',
       'loop.sub': '나의 포카 한 장으로 글로벌 팬덤과 매칭되어보세요!',
+      'loop.tagline': '내 굿즈로 전세계 팬덤과 연결된다.',
+      'lang.modal.flag': '🇰🇷',
+      'lang.modal.title': '한국에서 오셨군요!',
+      'lang.modal.sub': '한국어로 변경해드릴까요?',
+      'lang.modal.yes': '네',
+      'lang.modal.no': '아니오',
       'loop.stat1.label': '매칭 가능성',
       'loop.stat2.value': '전세계',
       'loop.stat2.label': '다른 팬과 매칭 예정',
@@ -2940,7 +3475,7 @@
       'proof.interests.h': '관심 컬렉터블',
       'proof.interests.sub': 'FNDM이 곧 다룰 컬렉터블 카테고리예요.<br>옆으로 드래그해보세요.',
       'int.1': 'K-POP 포토카드', 'int.1.sub': '아이돌 멤버별·앨범별 매칭',
-      'int.2': '애니메 굿즈', 'int.2.sub': '아크릴 스탠드·뱃지·트레카',
+      'int.2': '애니메이션 굿즈', 'int.2.sub': '아크릴 스탠드·뱃지·트레카',
       'int.3': 'TCG · 트레이딩 카드', 'int.3.sub': '포켓몬·MTG·유희왕 등',
       'int.4': '피규어 · 인형', 'int.4.sub': '아트토이·디자이너 피규어',
       'int.5': 'e-스포츠', 'int.5.sub': '프로팀 굿즈와 한정판 MD',
@@ -2962,20 +3497,31 @@
       'form.type.prereg': '사전예약',
       'form.type.prereg.d': '출시 알림 + 300명 한정판 굿즈',
       'form.type.beta': '베타테스터',
-      'form.type.beta.d': '정식 출시 전 사용권 + VIP 굿즈',
+      'form.type.beta.d': '출시전 사용 가능 + VIP 굿즈',
+      'form.beta.closed': '<span class="emoji">🙏</span> 베타테스터 모집이 마감되었어요! 사전예약으로 만나뵙겠습니다.',
+      'form.type.beta.soldout': '베타테스터 모집이 마감되었습니다.',
+      'form.type.beta.soldoutBadge': '마감',
       'form.agree': '정보 수집·이용에 동의합니다. (필수)',
       'form.error.email': '올바른 이메일 주소를 입력해주세요.',
       'form.error.agree': '정보 수집·이용에 동의해주세요.',
       'form.error.tier': '참여 유형을 1개 이상 선택해주세요.',
       'form.submit': '포카 매칭 시작하기',
       'form.terms': '제출 시 FNDM 이용약관 · 개인정보처리방침에 동의한 것으로 간주됩니다.',
-      'form.success.h': '합류 완료!',
+      'form.success.h': '등록 완료!',
       'form.success.d': 'FNDM 론칭 소식을<br>가장 먼저 알려드릴게요.<br><br>같이 교환하고 싶은 친구를<br>초대해주세요!',
       'form.success.share': '공유하기',
       'form.success.copied': '링크가 복사되었어요!',
       'footer.tagline': 'For the Real Ones.',
       'footer.privacy': '개인정보처리방침',
       'footer.terms': '이용약관',
+      'appnav.kicker': 'FNDM APP',
+      'appnav.h': '팬덤을 위한,<br><span class="accent">콘텐츠 커머스 플랫폼</span>',
+      'appnav.sub': '발견부터 거래, 경험까지<br>팬덤의 모든 순간을 하나의 서비스에서.',
+      'appnav.home': '발견',
+      'appnav.shop': '구매',
+      'appnav.trade': '교환',
+      'appnav.events': '경험',
+      'appnav.community': '연결',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -2986,7 +3532,7 @@
       'swipe.waiting': 'Waiting for the other side to match...',
       'swipe.matched': "It's a match!",
       'mail.subject': 'FNDM Inquiry',
-      'hero.title': "Stop waiting for<br>your photocard match.",
+      'hero.title': '<span class="accent">Photocard trading</span>,<br>stop the wait.',
       'hero.sub': "Done hunting trades on Twitter?<br>Find your match on <strong>FNDM</strong>—instantly.",
       'prereg.headline': 'Be the first to try FNDM.',
       'prereg.tag': 'LIVE',
@@ -3004,15 +3550,15 @@
       'problem.3.d': "Sent money to a stranger, they vanished. Reporting won't get your money back.",
       'problem.4.h': 'Not as described',
       'problem.4.d': 'Same story—you keep posting trade tweets but nobody replies.',
-      'how.h': 'Photocard trading,<br>now in just 3 steps.',
-      'how.lead': "No need to overthink it. Safe trades close in 3 steps.",
-      'how.1.h': 'Upload your cards & wishlist',
+      'how.h': 'Photocard trading,<br><span class="accent">now in just 3 steps</span>.',
+      'how.lead': 'No need to overthink it. <strong>Safe trades close in 3 steps</strong>.',
+      'how.1.h': 'Upload your cards &<br><span class="accent">wishlist</span>',
       'how.1.d': 'AI auto-detects member, album, condition.<br>One photo, registered in 5 seconds.',
       'how.2.h': 'Get matches you actually want',
-      'how.2.d': 'Based on your wishlist, FNDM sends curated cards straight to your phone. Like one? Send a trade request.',
+      'how.2.d': 'Based on your wishlist, <span class="accent">cards matching your taste</span> arrive automatically. Like one? Send a trade request.',
       'how.3.h': 'Trade safely, every time',
-      'how.3.d': 'We verify both shipments before settling. No more ghosting, no more scams.',
-      'solution.h': 'The cards you wanted—<br>now matched, not chased.',
+      'how.3.d': 'We verify both shipments, then your <span class="accent">trade is safely completed</span>.',
+      'solution.h': 'The cards you wanted—<br><span class="accent">now matched</span>, not chased.',
       'solution.1.h': 'AI Card Verification',
       'solution.1.d': 'Upload one photo. Member, album, version—auto-detected. Registration in 1/10th the time.',
       'solution.2.h': 'Smart Matching',
@@ -3023,6 +3569,12 @@
       'solution.4.d': 'Your trades and collection build your Collector Level. Higher trust, higher match priority.',
       'loop.h': 'One card—<br><em>worth more</em> than a hundred.',
       'loop.sub': 'Match a single photocard with fans worldwide.',
+      'loop.tagline': 'Your goods connect you to fandom worldwide.',
+      'lang.modal.flag': '🌐',
+      'lang.modal.title': 'Welcome!',
+      'lang.modal.sub': 'Switch to your language?',
+      'lang.modal.yes': 'Yes',
+      'lang.modal.no': 'No',
       'loop.stat1.label': 'Match potential',
       'loop.stat2.value': 'Worldwide',
       'loop.stat2.label': 'Fans waiting to match',
@@ -3054,20 +3606,31 @@
       'form.type.prereg': 'Pre-register',
       'form.type.prereg.d': 'Launch alert + first-300 goods drop',
       'form.type.beta': 'Beta Tester',
-      'form.type.beta.d': 'Early access + VIP goods',
+      'form.type.beta.d': 'Pre-launch access + VIP goods',
+      'form.beta.closed': '<span class="emoji">🙏</span> Beta sign-ups are full! Pre-register and we\'ll see you at launch.',
+      'form.type.beta.soldout': 'Beta tester registration is closed.',
+      'form.type.beta.soldoutBadge': 'CLOSED',
       'form.agree': 'I agree to the collection and use of my data. (Required)',
       'form.error.email': 'Please enter a valid email address.',
       'form.error.agree': 'Please agree to the data collection terms to continue.',
       'form.error.tier': 'Please select at least one participation type.',
       'form.submit': 'Start matching',
       'form.terms': 'By submitting, you agree to our Terms and Privacy Policy.',
-      'form.success.h': "You're in!",
+      'form.success.h': "You're registered!",
       'form.success.d': "We'll be the first to tell you<br>when FNDM launches.<br><br>Invite a friend<br>you want to trade with!",
       'form.success.share': 'Share link',
       'form.success.copied': 'Link copied!',
       'footer.tagline': 'For the Real Ones.',
       'footer.privacy': 'Privacy Policy',
       'footer.terms': 'Terms of Use',
+      'appnav.kicker': 'FNDM APP',
+      'appnav.h': 'A content commerce platform<br><span class="accent">made for fandom</span>',
+      'appnav.sub': 'From discovery to trading and events—<br>every fandom moment, in one service.',
+      'appnav.home': 'Discover',
+      'appnav.shop': 'Shop',
+      'appnav.trade': 'Trade',
+      'appnav.events': 'Experience',
+      'appnav.community': 'Connect',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -3078,7 +3641,7 @@
       'swipe.waiting': '相手のマッチングを待っています...',
       'swipe.matched': 'マッチしました!',
       'mail.subject': 'FNDMサービスお問い合わせ',
-      'hero.title': 'トレカ交換、<br>もう待たなくていい。',
+      'hero.title': '<span class="accent">トレカ交換</span>、<br>もう待たなくていい。',
       'hero.sub': 'Xで彷徨ったトレカ交換も、<br>FNDMなら<strong>マッチング</strong>で一発。',
       'prereg.headline': 'FNDMをいち早く体験しよう。',
       'prereg.tag': 'LIVE',
@@ -3096,15 +3659,15 @@
       'problem.3.d': '素性の分からない相手に振り込んだら、商品が届かない。通報しても返金は難しい、あのモヤモヤ。',
       'problem.4.h': '状態が違う',
       'problem.4.d': '毎回交換ツイートを上げてるのに、誰からも連絡が来ない。',
-      'how.h': 'トレカ交換は今、<br>たった3ステップ。',
-      'how.lead': '難しく考えなくて大丈夫。たった3ステップで安全な交換が完了。',
-      'how.1.h': 'トレカと欲しいリストを登録',
+      'how.h': 'トレカ交換は今、<br><span class="accent">たった3ステップ</span>。',
+      'how.lead': '難しく考えなくて大丈夫。<strong>たった3ステップで安全な交換が完了</strong>。',
+      'how.1.h': 'トレカと<br><span class="accent">欲しいリスト</span>を登録',
       'how.1.d': 'AIがメンバー・アルバム・状態を自動認識。<br>写真1枚で5秒登録完了。',
       'how.2.h': '好みのトレカが届く',
-      'how.2.d': '登録した欲しいリストをもとに、好みのトレカが自動で届きます。気に入ったら交換リクエストを送るだけ。',
+      'how.2.d': '登録した欲しいリストをもとに、<span class="accent">好みのトレカ</span>が自動で届きます。気に入ったら交換リクエストを送るだけ。',
       'how.3.h': '安全に交換完了',
-      'how.3.d': 'FNDMが両者の発送を確認してから精算。音信不通も詐欺も、もう心配なし。',
-      'solution.h': '欲しかったあのトレカ、<br>今はマッチングで。',
+      'how.3.d': 'FNDMが両者の発送を確認後、<span class="accent">安全にトレードが完了</span>します。',
+      'solution.h': '欲しかったあのトレカ、<br><span class="accent">今はマッチング</span>で。',
       'solution.1.h': 'AIトレカ認証',
       'solution.1.d': '写真1枚でメンバー・アルバム・バージョンを自動認識。登録時間は1/10に。',
       'solution.2.h': 'スマートマッチング',
@@ -3115,6 +3678,12 @@
       'solution.4.d': '取引履歴とコレクションが蓄積され、コレクターレベルとして表示。信頼度の高いユーザーほどマッチング優先。',
       'loop.h': '誰かにとっては、<em>百枚より</em><br>大切な一枚。',
       'loop.sub': 'あなたの1枚で、世界中のファンとマッチング。',
+      'loop.tagline': '推しグッズで世界中のファンダムと繋がる。',
+      'lang.modal.flag': '🇯🇵',
+      'lang.modal.title': '日本からお越しですね!',
+      'lang.modal.sub': '日本語に変更しますか?',
+      'lang.modal.yes': 'はい',
+      'lang.modal.no': 'いいえ',
       'loop.stat1.label': 'マッチング可能性',
       'loop.stat2.value': '世界中',
       'loop.stat2.label': '他ファンとマッチング予定',
@@ -3146,20 +3715,31 @@
       'form.type.prereg': '事前予約',
       'form.type.prereg.d': 'リリース通知 + 300名限定グッズ',
       'form.type.beta': 'ベータテスター',
-      'form.type.beta.d': '正式リリース前の利用権 + VIPグッズ',
+      'form.type.beta.d': 'リリース前に利用可能 + VIPグッズ',
+      'form.beta.closed': '<span class="emoji">🙏</span> ベータテスター募集は終了しました!事前登録でお会いしましょう。',
+      'form.type.beta.soldout': 'ベータテスター募集は終了しました。',
+      'form.type.beta.soldoutBadge': '終了',
       'form.agree': '情報の収集・利用に同意します。(必須)',
       'form.error.email': '正しいメールアドレスを入力してください。',
       'form.error.agree': '情報の収集・利用にご同意ください。',
       'form.error.tier': '参加タイプを1つ以上選択してください。',
       'form.submit': 'マッチングを始める',
       'form.terms': '送信により、FNDM利用規約・プライバシーポリシーに同意したものとみなされます。',
-      'form.success.h': 'ようこそ!',
+      'form.success.h': '登録完了!',
       'form.success.d': 'FNDMのローンチを<br>いち早くお知らせします。<br><br>一緒にトレードしたい<br>友達を招待してね!',
       'form.success.share': 'リンクを共有',
       'form.success.copied': 'リンクをコピーしました!',
       'footer.tagline': 'For the Real Ones.',
       'footer.privacy': 'プライバシーポリシー',
       'footer.terms': '利用規約',
+      'appnav.kicker': 'FNDM APP',
+      'appnav.h': 'ファンダムのための、<br><span class="accent">コンテンツ コマースプラットフォーム</span>',
+      'appnav.sub': '発見から取引、体験まで—<br>推し活のすべてを一つのサービスで。',
+      'appnav.home': '発見',
+      'appnav.shop': '購入',
+      'appnav.trade': '交換',
+      'appnav.events': '体験',
+      'appnav.community': '繋がる',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -3170,7 +3750,7 @@
       'swipe.waiting': '正在等待对方匹配...',
       'swipe.matched': '匹配成功!',
       'mail.subject': 'FNDM 服务咨询',
-      'hero.title': '小卡交换,<br>不用再等了。',
+      'hero.title': '<span class="accent">小卡交换</span>,<br>不用再等了。',
       'hero.sub': '在微博/推特上苦苦寻找小卡的日子,<br>到FNDM<strong>一键匹配</strong>结束!',
       'prereg.headline': '抢先体验FNDM。',
       'prereg.tag': '直播中',
@@ -3188,14 +3768,14 @@
       'problem.3.d': '给陌生人转账后对方失踪,举报也很难拿回钱,那种郁闷。',
       'problem.4.h': '货不对版',
       'problem.4.d': '每次都发交换帖,但根本没人联系。',
-      'how.h': '小卡交换,<br>现在三步搞定。',
-      'how.lead': '不用复杂。三步完成安全交换。',
-      'how.1.h': '上传你的小卡和心愿单',
+      'how.h': '小卡交换,<br><span class="accent">现在三步搞定</span>。',
+      'how.lead': '不用复杂。<strong>三步完成安全交换</strong>。',
+      'how.1.h': '上传你的小卡和<br><span class="accent">心愿单</span>',
       'how.1.d': 'AI自动识别成员、专辑、品相。<br>一张照片,5秒登记完成。',
       'how.2.h': '心仪小卡主动找上门',
-      'how.2.d': '根据你的心愿单,FNDM自动为你匹配合适的小卡。看中哪张就发交换请求,完成!',
+      'how.2.d': '根据你的心愿单,<span class="accent">合你心意的小卡</span>会自动出现。看中哪张就发交换请求,完成!',
       'how.3.h': '安全完成交换',
-      'how.3.d': 'FNDM确认双方发货后再结算。跑路、不发货、骗局,统统拜拜。',
+      'how.3.d': 'FNDM确认双方发货后,<span class="accent">安全完成交换</span>。',
       'solution.h': '想要的那张小卡,<br>现在就匹配。',
       'solution.1.h': 'AI小卡验证',
       'solution.1.d': '只需上传一张照片,自动识别成员·专辑·版本。登记时间缩短到1/10。',
@@ -3207,6 +3787,12 @@
       'solution.4.d': '交易记录和收藏积累成收藏家等级。信用越高,匹配优先级越高。',
       'loop.h': '对某些人来说,<em>比百张</em><br>更珍贵的一张。',
       'loop.sub': '用你的一张小卡,与全球粉丝匹配。',
+      'loop.tagline': '用我的周边,与全球粉丝群相连。',
+      'lang.modal.flag': '🇨🇳',
+      'lang.modal.title': '您来自中国!',
+      'lang.modal.sub': '切换到中文吗?',
+      'lang.modal.yes': '是',
+      'lang.modal.no': '否',
       'loop.stat1.label': '匹配可能性',
       'loop.stat2.value': '全球',
       'loop.stat2.label': '粉丝等你匹配',
@@ -3238,20 +3824,31 @@
       'form.type.prereg': '预约',
       'form.type.prereg.d': '上线通知 + 300名限定周边',
       'form.type.beta': '内测用户',
-      'form.type.beta.d': '正式上线前体验权 + VIP周边',
+      'form.type.beta.d': '上线前可使用 + VIP周边',
+      'form.beta.closed': '<span class="emoji">🙏</span> 内测招募已结束!请通过预约一起加入吧。',
+      'form.type.beta.soldout': '内测招募已结束。',
+      'form.type.beta.soldoutBadge': '已截止',
       'form.agree': '我同意收集和使用个人信息。(必填)',
       'form.error.email': '请输入有效的邮箱地址。',
       'form.error.agree': '请同意信息收集和使用条款。',
       'form.error.tier': '请至少选择一种参与类型。',
       'form.submit': '开始匹配',
       'form.terms': '提交即视为同意FNDM用户协议·隐私政策。',
-      'form.success.h': '欢迎加入!',
+      'form.success.h': '注册完成!',
       'form.success.d': 'FNDM 上线时<br>我们将第一时间通知您。<br><br>邀请想一起交换的<br>朋友加入吧!',
       'form.success.share': '分享链接',
       'form.success.copied': '链接已复制!',
       'footer.tagline': 'For the Real Ones.',
       'footer.privacy': '隐私政策',
       'footer.terms': '使用条款',
+      'appnav.kicker': 'FNDM APP',
+      'appnav.h': '为粉丝打造的<br><span class="accent">内容商业平台</span>',
+      'appnav.sub': '从发现、交易到体验—<br>粉丝文化的每一刻,集于一项服务。',
+      'appnav.home': '发现',
+      'appnav.shop': '购买',
+      'appnav.trade': '交换',
+      'appnav.events': '体验',
+      'appnav.community': '社区',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -3262,7 +3859,7 @@
       'swipe.waiting': 'Esperando match del otro lado...',
       'swipe.matched': '¡Es un match!',
       'mail.subject': 'Consulta FNDM',
-      'hero.title': 'Deja de esperar<br>tu intercambio de photocards.',
+      'hero.title': '<span class="accent">Intercambio de photocards</span>,<br>basta de esperar.',
       'hero.sub': '¿Cansada de cazar trades en Twitter?<br>Encuentra tu match en <strong>FNDM</strong>, al instante.',
       'prereg.headline': 'Sé la primera en probar FNDM.',
       'prereg.tag': 'EN VIVO',
@@ -3280,7 +3877,7 @@
       'problem.3.d': 'Mandaste plata a un desconocido y desapareció. Reportar no te devuelve el dinero.',
       'problem.4.h': 'No es lo de la foto',
       'problem.4.d': 'La misma historia: subís trade tweets y nadie responde.',
-      'how.h': 'Intercambio de photocards,<br>ahora en solo 3 pasos.',
+      'how.h': 'Intercambio de photocards,<br><span class="accent">ahora en solo 3 pasos</span>.',
       'how.lead': 'No te compliques. Trade seguro en 3 pasos.',
       'how.1.h': 'Subí tus cards y wishlist',
       'how.1.d': 'La IA detecta miembro, álbum y condición.<br>Una foto, registrada en 5 segundos.',
@@ -3299,6 +3896,12 @@
       'solution.4.d': 'Tus trades y colección suben tu nivel. Más confianza, más prioridad en los matches.',
       'loop.h': 'Para alguien, <em>una sola card</em><br>vale más que cien.',
       'loop.sub': 'Hacé match con fans de todo el mundo con una sola photocard.',
+      'loop.tagline': 'Tu merch te conecta con el fandom global.',
+      'lang.modal.flag': '🌎',
+      'lang.modal.title': '¡Hola!',
+      'lang.modal.sub': '¿Cambiamos al español?',
+      'lang.modal.yes': 'Sí',
+      'lang.modal.no': 'No',
       'loop.stat1.label': 'Potencial de match',
       'loop.stat2.value': 'Mundial',
       'loop.stat2.label': 'Fans esperando hacer match',
@@ -3330,20 +3933,31 @@
       'form.type.prereg': 'Pre-registro',
       'form.type.prereg.d': 'Aviso de lanzamiento + merch para las primeras 300',
       'form.type.beta': 'Beta Tester',
-      'form.type.beta.d': 'Acceso anticipado + merch VIP',
+      'form.type.beta.d': 'Acceso pre-lanzamiento + merch VIP',
+      'form.beta.closed': '<span class="emoji">🙏</span> ¡Cupos de beta agotados! Sumate al pre-registro y nos vemos en el lanzamiento.',
+      'form.type.beta.soldout': 'El registro de beta testers está cerrado.',
+      'form.type.beta.soldoutBadge': 'CERRADO',
       'form.agree': 'Acepto la recolección y uso de mis datos. (Obligatorio)',
       'form.error.email': 'Por favor ingresá un email válido.',
       'form.error.agree': 'Debés aceptar los términos para continuar.',
       'form.error.tier': 'Seleccioná al menos un tipo de participación.',
       'form.submit': 'Empezar a matchear',
       'form.terms': 'Al enviar, aceptás los Términos y la Política de Privacidad.',
-      'form.success.h': '¡Estás dentro!',
+      'form.success.h': '¡Registro completo!',
       'form.success.d': 'Te avisamos primero<br>cuando FNDM lance.<br><br>¡Invitá a una amiga<br>con quien quieras hacer trade!',
       'form.success.share': 'Compartir enlace',
       'form.success.copied': '¡Enlace copiado!',
       'footer.tagline': 'For the Real Ones.',
       'footer.privacy': 'Política de Privacidad',
       'footer.terms': 'Términos de Uso',
+      'appnav.kicker': 'FNDM APP',
+      'appnav.h': 'Una plataforma de content commerce<br><span class="accent">hecha para el fandom</span>',
+      'appnav.sub': 'Desde descubrir hasta intercambiar y vivir eventos—<br>cada momento del fandom, en un solo servicio.',
+      'appnav.home': 'Descubrí',
+      'appnav.shop': 'Comprá',
+      'appnav.trade': 'Trade',
+      'appnav.events': 'Experiencia',
+      'appnav.community': 'Conectá',
       'footer.copyright': '© CultureCode Inc. Todos los derechos reservados',
       'footer.location': 'Hecho en Corea del Sur <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     }
@@ -3351,11 +3965,16 @@
 
   // Detect initial locale from browser; fallback to EN
   function detectLocale() {
+    // Always default to EN unless user explicitly chose another locale before
     try {
       const saved = localStorage.getItem('fndm-locale');
       if (saved && I18N[saved]) return saved;
     } catch (e) {}
+    return 'EN';
+  }
 
+  // Detect browser locale separately — only used to suggest a switch via modal
+  function detectSuggestedLocale() {
     const langs = navigator.languages || [navigator.language || 'en'];
     for (const raw of langs) {
       const l = raw.toLowerCase();
@@ -3408,10 +4027,77 @@
       const subject = encodeURIComponent(dict['mail.subject']);
       mailLink.setAttribute('href', 'mailto:fndm@culturecode.co.kr?subject=' + subject);
     }
+    // Re-check beta cap (uses localized strings)
+    if (typeof checkBetaCap === 'function') checkBetaCap();
   }
 
   let currentLocale = detectLocale();
   applyLocale(currentLocale);
+
+  // ============================================================
+  // Language Suggestion Modal — first-visit only
+  // ============================================================
+  (function() {
+    const modal = document.getElementById('langModal');
+    if (!modal) return;
+
+    let dismissed = false;
+    try {
+      dismissed = localStorage.getItem('fndm-lang-prompted') === '1';
+    } catch (e) {}
+
+    // Only show if:
+    // 1. User hasn't been prompted before
+    // 2. Suggested locale differs from current (which is EN by default)
+    // 3. User hasn't manually picked a locale before (no fndm-locale in storage)
+    let hasManualChoice = false;
+    try {
+      hasManualChoice = !!localStorage.getItem('fndm-locale');
+    } catch (e) {}
+
+    if (dismissed || hasManualChoice) return;
+
+    const suggested = detectSuggestedLocale();
+    if (suggested === 'EN' || suggested === currentLocale) {
+      // No need to suggest — already matching
+      try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+      return;
+    }
+
+    const dict = I18N[suggested] || I18N.EN;
+    document.getElementById('langModalFlag').textContent = dict['lang.modal.flag'] || '🌐';
+    document.getElementById('langModalTitle').textContent = dict['lang.modal.title'] || 'Welcome!';
+    document.getElementById('langModalSub').textContent = dict['lang.modal.sub'] || 'Switch to your language?';
+    document.getElementById('langModalYes').textContent = dict['lang.modal.yes'] || 'Yes';
+    document.getElementById('langModalNo').textContent = dict['lang.modal.no'] || 'No';
+
+    // Show after slight delay for smooth perception
+    setTimeout(() => {
+      modal.classList.add('show');
+    }, 700);
+
+    function dismiss() {
+      modal.classList.remove('show');
+      try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
+    }
+
+    document.getElementById('langModalYes').addEventListener('click', () => {
+      currentLocale = suggested;
+      try { localStorage.setItem('fndm-locale', suggested); } catch (e) {}
+      applyLocale(suggested);
+      dismiss();
+    });
+
+    document.getElementById('langModalNo').addEventListener('click', dismiss);
+
+    // Click backdrop = dismiss (treat as "no")
+    document.getElementById('langModalBackdrop').addEventListener('click', dismiss);
+
+    // Esc to dismiss
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('show')) dismiss();
+    });
+  })();
 
   // Language switcher dropdown — wired to i18n
   (function() {
@@ -3501,6 +4187,32 @@
     }, 280);
   });
 </script>
+
+<!-- ============ FORM ERROR TOAST (centered) ============ -->
+<div class="form-toast" id="formToast" role="alert" aria-live="polite">
+  <div class="form-toast-icon">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <line x1="12" y1="8" x2="12" y2="12"/>
+      <line x1="12" y1="16" x2="12.01" y2="16"/>
+    </svg>
+  </div>
+  <div class="form-toast-text"></div>
+</div>
+
+<!-- ============ LANGUAGE SUGGESTION MODAL ============ -->
+<div class="lang-modal" id="langModal" role="dialog" aria-modal="true" aria-labelledby="langModalTitle">
+  <div class="lang-modal-backdrop" id="langModalBackdrop"></div>
+  <div class="lang-modal-box">
+    <div class="lang-modal-flag" id="langModalFlag">🇰🇷</div>
+    <h3 class="lang-modal-title" id="langModalTitle"></h3>
+    <p class="lang-modal-sub" id="langModalSub"></p>
+    <div class="lang-modal-actions">
+      <button type="button" class="lang-modal-btn lang-modal-btn-no" id="langModalNo">No</button>
+      <button type="button" class="lang-modal-btn lang-modal-btn-yes" id="langModalYes">Yes</button>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
