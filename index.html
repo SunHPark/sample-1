@@ -4,6 +4,8 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
 <title>FNDM TRADE — 트위터에서 헤매던 포카 교환, 이제 FNDM에서</title>
 <meta name="description" content="K-POP 팬덤의 첫 안전한 포토카드 교환 플랫폼. 내가 가진 포카로, 갖고 싶던 포카를. AI 인증 · 스마트 매칭 · 안심검수.">
 <meta property="og:title" content="FNDM TRADE — K-POP 포카 교환의 새로운 기준">
@@ -15,6 +17,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Pretendard:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
+    color-scheme: light !important;
+    forced-color-adjust: none;
     --bg: #FFFFFF;
     --bg-soft: #FAFBFD;
     --bg-card: #FFFFFF;
@@ -40,7 +44,9 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   html, body {
-    background: var(--bg);
+    background-color: #FFFFFF !important;
+    color: #0A0E1A !important;
+    background: #FFFFFF !important;
     font-family: var(--tx-body);
     color: var(--ink);
     -webkit-font-smoothing: antialiased;
@@ -55,21 +61,16 @@
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 9000;
     padding: 14px 0 28px;
     pointer-events: none;
-    -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
-            mask-image: linear-gradient(180deg, #000 0%, #000 55%, transparent 100%);
     background:
       linear-gradient(180deg,
-        rgba(255, 255, 255, 0.85) 0%,
-        rgba(255, 255, 255, 0.7) 40%,
-        rgba(255, 255, 255, 0.35) 75%,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(255, 255, 255, 0.85) 30%,
+        rgba(255, 255, 255, 0.6) 60%,
+        rgba(255, 255, 255, 0.2) 85%,
         rgba(255, 255, 255, 0) 100%);
-    backdrop-filter: blur(18px) saturate(180%);
-    -webkit-backdrop-filter: blur(18px) saturate(180%);
-    transform: translateZ(0);
-    will-change: transform;
   }
 
   .nav {
@@ -121,14 +122,16 @@
     position: absolute;
     top: calc(100% + 8px);
     right: 0;
-    min-width: 160px;
+    min-width: 110px;
+    width: max-content;
     background: white;
     border: 1px solid var(--line);
     border-radius: 12px;
     padding: 6px;
     list-style: none;
     box-shadow: 0 16px 40px -12px rgba(10, 14, 26, 0.15);
-    z-index: 1100;
+    z-index: 9999;
+    pointer-events: auto;
   }
   .lang-menu[hidden] { display: none; }
 
@@ -136,7 +139,7 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 12px;
     padding: 9px 12px;
     background: transparent;
@@ -147,12 +150,12 @@
     font-weight: 600;
     font-size: 13px;
     color: var(--ink);
-    text-align: left;
+    text-align: right;
     transition: background 0.12s ease;
   }
   .lang-item span {
     font-weight: 500;
-    color: var(--ink-3);
+    color: var(--ink);
     font-size: 12px;
   }
   .lang-item:hover {
@@ -160,11 +163,11 @@
   }
   .lang-item[aria-current="true"] {
     background: var(--bg-soft);
-    color: var(--primary);
+    color: var(--ink);
   }
   .lang-item[aria-current="true"] span {
-    color: var(--primary);
-    opacity: 0.7;
+    color: var(--ink-2);
+    opacity: 1;
   }
 
   /* ============ HERO ============ */
@@ -639,9 +642,9 @@
   /* Step 1: scan */
   .how-step-visual.s1 .scan-frame {
     width: 110px;
-    height: 150px;
+    height: 220px;
     border: 2px solid var(--primary);
-    border-radius: 10px;
+    border-radius: 18px;
     background: white;
     box-shadow:
       0 0 24px rgba(255, 31, 61, 0.25),
@@ -660,8 +663,8 @@
     animation: scan 2.4s ease-in-out infinite;
   }
   @keyframes scan {
-    0%, 100% { transform: translateY(-55px); opacity: 0.6; }
-    50% { transform: translateY(55px); opacity: 1; }
+    0%, 100% { transform: translateY(-90px); opacity: 0.6; }
+    50% { transform: translateY(90px); opacity: 1; }
   }
 
   /* Step 2: phone with swipeable card stack (Tinder-style discovery) */
@@ -983,10 +986,10 @@
     text-align: center;
   }
   .loop-stat-num {
-    font-family: var(--tx-display);
-    font-weight: 700;
-    font-size: 26px;
-    letter-spacing: -0.03em;
+    font-family: var(--tx-body);
+    font-weight: 800;
+    font-size: 28px;
+    letter-spacing: -0.035em;
     color: white;
     line-height: 1;
   }
@@ -1070,17 +1073,12 @@
     text-align: center;
     margin-bottom: 28px;
   }
-  .interests-h {
+  .interests-sub {
     font-weight: 700;
     font-size: 22px;
     letter-spacing: -0.03em;
     color: var(--ink);
-    margin-bottom: 8px;
-  }
-  .interests-sub {
-    font-size: 14px;
-    color: var(--ink-3);
-    letter-spacing: -0.01em;
+    line-height: 1.35;
   }
   /* Scroll container with edge fade mask */
   .interests-scroll {
@@ -1498,8 +1496,7 @@
     .proof-stats { grid-template-columns: repeat(2, 1fr); }
     .proof-h { font-size: 28px; margin-bottom: 40px; }
     .interests { margin-top: 48px; }
-    .interests-h { font-size: 18px; }
-    .interests-sub { font-size: 13px; }
+    .interests-sub { font-size: 18px; }
     .interests-scroll { margin: 0 -20px; }
     .interests-track { padding: 0 20px; gap: 10px; }
     .chip { width: 220px; padding: 20px 20px 22px; border-radius: 16px; }
@@ -1526,7 +1523,7 @@
   <div class="nav-wrapper">
     <nav class="nav">
       <a href="#" class="logo">
-        <img src="fndm-logo.svg" alt="FNDM">
+        <img src="fndm-logo.png" alt="FNDM">
       </a>
       <div class="lang-switcher">
         <button class="lang-btn" type="button" aria-haspopup="listbox" aria-expanded="false" id="langBtn">
@@ -1536,11 +1533,11 @@
           </svg>
         </button>
         <ul class="lang-menu" id="langMenu" role="listbox" hidden>
-          <li><button type="button" class="lang-item" data-lang="EN">EN <span>English</span></button></li>
-          <li><button type="button" class="lang-item" data-lang="KR">KR <span>한국어</span></button></li>
-          <li><button type="button" class="lang-item" data-lang="JP">JP <span>日本語</span></button></li>
-          <li><button type="button" class="lang-item" data-lang="CN">CN <span>中文</span></button></li>
-          <li><button type="button" class="lang-item" data-lang="Esp">Esp <span>Español</span></button></li>
+          <li><button type="button" class="lang-item" data-lang="EN"><span>English</span></button></li>
+          <li><button type="button" class="lang-item" data-lang="KOR"><span>한국어</span></button></li>
+          <li><button type="button" class="lang-item" data-lang="JP"><span>日本語</span></button></li>
+          <li><button type="button" class="lang-item" data-lang="CN"><span>中文</span></button></li>
+          <li><button type="button" class="lang-item" data-lang="Esp"><span>Español</span></button></li>
         </ul>
       </div>
     </nav>
@@ -1551,86 +1548,76 @@
     <div class="hero-icon-container">
       <div class="hero-icon"></div>
     </div>
-    <h1 class="hero-title">
-      포카 교환,<br>
-      이제 그만 기다려요.
-    </h1>
-    <p class="hero-sub">
-      트위터에서 헤매던 포카 교환,<br>
-      이제는 FNDM에서 <strong>매칭</strong>으로 한번에!
-    </p>
+    <h1 class="hero-title" data-i18n="hero.title">포카 교환,<br>이제 그만 기다려요.</h1>
+    <p class="hero-sub" data-i18n="hero.sub">트위터에서 헤매던 포카 교환,<br>이제는 FNDM에서 <strong>매칭</strong>으로 한번에!</p>
   </header>
 
   <!-- ============ PRE-REGISTER CARD ============ -->
   <section class="preregister-wrap" id="preregister">
     <div class="card-main">
-      <p class="card-headline">가장 먼저 FNDM 서비스를 이용해보세요!</p>
+      <p class="card-headline" data-i18n="prereg.headline">가장 먼저 FNDM 서비스를 이용해보세요!</p>
 
       <div class="card-tag">
         <span class="dot"></span>
-        LIVE
+        <span data-i18n="prereg.tag">LIVE</span>
       </div>
 
       <div class="stats-row">
         <div class="stat-item">
           <div class="stat-value">2,885</div>
-          <div class="stat-label">사전예약 팬덤</div>
+          <div class="stat-label" data-i18n="prereg.stat1.label">사전예약 팬덤</div>
         </div>
         <div class="stats-divider"></div>
         <div class="stat-item">
           <div class="stat-value">412</div>
-          <div class="stat-label">베타테스터</div>
+          <div class="stat-label" data-i18n="prereg.stat2.label">베타테스터</div>
         </div>
       </div>
 
       <div class="actions-row">
-        <a href="#cta" class="btn-primary">
-          사전예약하기 <span class="arrow">→</span>
-        </a>
-        <a href="#cta" class="btn-secondary">
-          베타테스터 신청
-        </a>
+        <a href="#cta" class="btn-primary"><span data-i18n="prereg.btn.primary">사전예약하기</span> <span class="arrow">→</span></a>
+        <a href="#cta" class="btn-secondary" data-i18n="prereg.btn.secondary">베타테스터 신청</a>
       </div>
 
-      <p class="card-foot">첫 <strong>100명</strong>에게 한정 굿즈를 드립니다.</p>
+      <p class="card-foot" data-i18n="prereg.note">첫 <strong>100명</strong>에게 한정 굿즈를 드립니다.</p>
     </div>
   </section>
 
   <!-- ============ PROBLEM ============ -->
   <section class="section" id="problem">
-    <h2 class="problem-h">이런 적, 한번쯤 있었죠?</h2>
+    <h2 class="problem-h" data-i18n="problem.h">이런 적, 한번쯤 있었죠?</h2>
 
     <div class="pain-grid">
       <article class="pain reveal">
         <div class="pain-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
         </div>
-        <h3 class="pain-h">DM 답장이 안 와요</h3>
-        <p class="pain-desc">트위터 교환 트윗 올렸는데 답이 없거나, 답장 기다리다 다른 사람이 먼저 가져가는 경험.</p>
+        <h3 class="pain-h" data-i18n="problem.1.h">DM 답장이 안 와요</h3>
+        <p class="pain-desc" data-i18n="problem.1.d">트위터 교환 트윗 올렸는데 답이 없거나,<br>답장 기다리다 다른 사람이 먼저 가져가는 경험.</p>
       </article>
 
       <article class="pain reveal">
         <div class="pain-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
-        <h3 class="pain-h">시간이 오래걸려요</h3>
-        <p class="pain-desc">매번 교환 트윗을 올려놓지만 아무도 저에게 연락오지 않아 기다리고 있어요.</p>
+        <h3 class="pain-h" data-i18n="problem.2.h">시간이 오래걸려요</h3>
+        <p class="pain-desc" data-i18n="problem.2.d">매번 교환 트윗을 올려놓지만 아무도 저에게 연락오지 않아<br>기다리고 있어요.</p>
       </article>
 
       <article class="pain reveal">
         <div class="pain-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg>
         </div>
-        <h3 class="pain-h">송금했는데 잠수</h3>
-        <p class="pain-desc">불투명한 사람에게 계좌이체 거래하고, 미발송 당한 적. 신고해도 돌려받기 어려운 그 답답함.</p>
+        <h3 class="pain-h" data-i18n="problem.3.h">송금했는데 잠수</h3>
+        <p class="pain-desc" data-i18n="problem.3.d">불투명한 사람에게 계좌이체 거래하고, 미발송 당한 적,<br>신고해도 돌려받기 어려운 그 답답함.</p>
       </article>
 
       <article class="pain reveal">
         <div class="pain-icon">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
         </div>
-        <h3 class="pain-h">상태가 달라요</h3>
-        <p class="pain-desc">매번 교환 트윗을 올려놓지만 아무도 연락오지 않고 기다리고 있어요.</p>
+        <h3 class="pain-h" data-i18n="problem.4.h">상태가 달라요</h3>
+        <p class="pain-desc" data-i18n="problem.4.d">실물이 사진과 다른 경우가 많아요.<br>중고 거래의 가장 흔한 사기 패턴.</p>
       </article>
     </div>
   </section>
@@ -1638,15 +1625,15 @@
   <!-- ============ HOW IT WORKS ============ -->
   <section class="how" id="how">
     <div class="how-inner">
-      <h2 class="how-h">이제는,<br>3단계로 끝.</h2>
-      <p class="how-lead">복잡할 필요 없어요. 3단계로 안전한 교환이 끝납니다.</p>
+      <h2 class="how-h" data-i18n="how.h">포카교환 이제는,<br>3단계로 끝.</h2>
+      <p class="how-lead" data-i18n="how.lead">복잡할 필요 없어요. 3단계로 안전한 교환이 끝납니다.</p>
 
       <div class="how-steps">
         <article class="how-step reveal">
           <div class="how-step-text">
             <div class="how-step-num">STEP 01</div>
-            <h3 class="how-step-h">내 포카 사진과 위시리스트를 등록하세요</h3>
-            <p class="how-step-desc">AI가 자동으로 멤버·앨범·상태를 인식해요.<br>사진 한 장이면 5초만에 등록이 끝납니다.</p>
+            <h3 class="how-step-h" data-i18n="how.1.h">내 포카 사진과<br>위시리스트를 등록하세요</h3>
+            <p class="how-step-desc" data-i18n="how.1.d">AI가 자동으로 멤버·앨범·상태를 인식해요.<br>사진 한 장이면 5초만에 등록이 끝납니다.</p>
           </div>
           <div class="how-step-visual s1">
             <div class="scan-frame"></div>
@@ -1657,8 +1644,8 @@
         <article class="how-step reveal reverse">
           <div class="how-step-text">
             <div class="how-step-num">STEP 02</div>
-            <h3 class="how-step-h">내 취향에 맞는 포카가 도착해요</h3>
-            <p class="how-step-desc">등록한 위시리스트를 기반으로,<br>내 취향에 맞는 포카가 자동으로 도착해요. 마음에 드는 카드에 교환 신청을 보내면 끝!</p>
+            <h3 class="how-step-h" data-i18n="how.2.h">내 취향에 맞는 포카가 도착해요</h3>
+            <p class="how-step-desc" data-i18n="how.2.d">등록한 위시리스트를 기반으로,<br>내 취향에 맞는 포카가 자동으로 도착해요.<br>마음에 드는 카드에 교환 신청을 보내면 끝!</p>
           </div>
           <div class="how-step-visual s2">
             <div class="phone-frame">
@@ -1687,8 +1674,8 @@
         <article class="how-step reveal">
           <div class="how-step-text">
             <div class="how-step-num">STEP 03</div>
-            <h3 class="how-step-h">안전하게 교환이 완료됩니다</h3>
-            <p class="how-step-desc">FNDM이 양쪽 발송을 확인한 후 정산해드려요. 잠수, 미발송, 사기 걱정은 이제 그만.</p>
+            <h3 class="how-step-h" data-i18n="how.3.h">안전하게 교환이 완료됩니다</h3>
+            <p class="how-step-desc" data-i18n="how.3.d">FNDM이 양쪽 발송을 확인한 후 정산해드려요.<br>잠수, 미발송, 사기 걱정은 이제 그만.</p>
           </div>
           <div class="how-step-visual s3">
             <div class="check-circle">
@@ -1702,38 +1689,38 @@
 
   <!-- ============ SOLUTION ============ -->
   <section class="section" id="solution">
-    <h2 class="solution-h">내가 교환하고 싶던 포카,<br>이제는 매칭 하세요!</h2>
+    <h2 class="solution-h" data-i18n="solution.h">내가 교환하고 싶던 포카,<br>이제는 매칭 하세요!</h2>
 
     <div class="axes">
       <article class="axis reveal">
         <div class="axis-num">01</div>
         <div class="axis-body">
-          <h3 class="axis-h">AI 포카인증</h3>
-          <p class="axis-desc">사진 1장만 올리면 멤버·앨범·버전을 자동인식. 등록시간은 1/10로.</p>
+          <h3 class="axis-h" data-i18n="solution.1.h">AI 포카인증</h3>
+          <p class="axis-desc" data-i18n="solution.1.d">사진 1장만 올리면 멤버·앨범·버전을 자동인식.<br>시간 세이브는 1/10로.</p>
         </div>
       </article>
 
       <article class="axis reveal">
         <div class="axis-num">02</div>
         <div class="axis-body">
-          <h3 class="axis-h">스마트 매칭</h3>
-          <p class="axis-desc">내 보유 포카와 다른 유저의 위시리스트를 자동 페어링.</p>
+          <h3 class="axis-h" data-i18n="solution.2.h">스마트 매칭</h3>
+          <p class="axis-desc" data-i18n="solution.2.d">내 보유 포카와 다른 유저의 위시리스트를 자동 페어링.</p>
         </div>
       </article>
 
       <article class="axis reveal">
         <div class="axis-num">03</div>
         <div class="axis-body">
-          <h3 class="axis-h">안심거래</h3>
-          <p class="axis-desc">사진과 다른 상품, 잠수, 미발송 걱정 없이. FNDM이 양쪽 포카를 먼저 검수한 뒤 상태·구성 확인 완료 후 안전하게 발송합니다.</p>
+          <h3 class="axis-h" data-i18n="solution.3.h">안심거래</h3>
+          <p class="axis-desc" data-i18n="solution.3.d">사진과 다른 상품, 잠수, 미발송 걱정 없이,<br>FNDM이 양쪽 포카를 먼저 검수한 뒤 상태·구성 확인 완료 후<br>안전하게 발송합니다.</p>
         </div>
       </article>
 
       <article class="axis reveal">
         <div class="axis-num">04</div>
         <div class="axis-body">
-          <h3 class="axis-h">컬렉터 레벨</h3>
-          <p class="axis-desc">거래 후기와 컬렉션이 누적되어 컬렉터 레벨로 표시. 신뢰도 높은 유저일수록 매칭 우선권을 받습니다.</p>
+          <h3 class="axis-h" data-i18n="solution.4.h">컬렉터 레벨</h3>
+          <p class="axis-desc" data-i18n="solution.4.d">거래 후기와 컬렉션이 누적되어 컬렉터 레벨로 표시.<br>신뢰도 높은 유저일수록 매칭 우선권을 받습니다.</p>
         </div>
       </article>
     </div>
@@ -1742,11 +1729,8 @@
   <!-- ============ TRADE LOOP (global vision) ============ -->
   <section class="loop" id="loop">
     <div class="loop-card">
-      <h2 class="loop-h">
-        누군가에겐 <em>백 장보다</em><br>
-        소중한 한 장.
-      </h2>
-      <p class="loop-sub">나의 포카 한 장으로 글로벌 팬덤과 매칭되어보세요!</p>
+      <h2 class="loop-h" data-i18n="loop.h">누군가에겐 <em>백 장보다</em><br>소중한 한 장.</h2>
+      <p class="loop-sub" data-i18n="loop.sub">나의 포카 한 장으로 글로벌 팬덤과 매칭되어보세요!</p>
 
       <div class="globe" aria-hidden="true">
         <svg viewBox="0 0 560 320" xmlns="http://www.w3.org/2000/svg">
@@ -1848,13 +1832,13 @@
 
       <div class="loop-stats">
         <div class="loop-stat">
-          <div class="loop-stat-num">∞</div>
-          <div class="loop-stat-label">매칭 가능성</div>
+          <div class="loop-stat-num" data-i18n="loop.stat2.value">전세계</div>
+          <div class="loop-stat-label" data-i18n="loop.stat2.label">다른 팬과 매칭 예정</div>
         </div>
         <div class="loop-stats-divider"></div>
         <div class="loop-stat">
-          <div class="loop-stat-num">전세계</div>
-          <div class="loop-stat-label">다른 팬과 매칭 예정</div>
+          <div class="loop-stat-num">∞</div>
+          <div class="loop-stat-label" data-i18n="loop.stat1.label">매칭 가능성</div>
         </div>
       </div>
     </div>
@@ -1862,15 +1846,15 @@
 
   <!-- ============ PROOF ============ -->
   <section class="section" id="proof">
-    <h2 class="proof-h">글로벌 팬들이<br>교환을 기다리고 있어요.</h2>
+    <h2 class="proof-h" data-i18n="proof.h">글로벌 팬들이<br>교환을 기다리고 있어요.</h2>
 
     <div class="proof-stats">
       <div class="proof-stat">
-        <div class="proof-stat-label">사전예약 팬덤</div>
+        <div class="proof-stat-label" data-i18n="proof.stat1.label">사전예약 팬덤</div>
         <div class="proof-stat-num">2,885<span class="unit">명</span></div>
       </div>
       <div class="proof-stat">
-        <div class="proof-stat-label">베타테스터</div>
+        <div class="proof-stat-label" data-i18n="proof.stat2.label">베타테스터</div>
         <div class="proof-stat-num">412<span class="unit">명</span></div>
       </div>
     </div>
@@ -1878,8 +1862,7 @@
     <!-- ============ INTERESTS (draggable) ============ -->
     <div class="interests" id="interests">
       <div class="interests-head">
-        <h3 class="interests-h">관심 컬렉터블</h3>
-        <p class="interests-sub">FNDM이 곧 다룰 컬렉터블 카테고리예요. 옆으로 드래그해보세요.</p>
+        <p class="interests-sub" data-i18n="proof.interests.sub">FNDM이 곧 다룰 컬렉터블 카테고리예요.<br>옆으로 드래그해보세요.</p>
       </div>
 
       <div class="interests-scroll" id="interestsScroll">
@@ -1887,72 +1870,72 @@
           <article class="chip">
             <div class="chip-emoji">🎤</div>
             <div class="chip-body">
-              <h4>K-POP 포토카드</h4>
-              <p>아이돌 멤버별·앨범별 매칭</p>
-            </div>
-          </article>
-
-          <article class="chip">
-            <div class="chip-emoji">✨</div>
-            <div class="chip-body">
-              <h4>애니메 굿즈</h4>
-              <p>아크릴 스탠드·뱃지·트레카</p>
+              <h4 data-i18n="int.1">K-POP 포토카드</h4>
+              <p data-i18n="int.1.sub">아이돌 멤버별·앨범별 매칭</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">🃏</div>
             <div class="chip-body">
-              <h4>TCG · 트레이딩 카드</h4>
-              <p>포켓몬·MTG·유희왕 등</p>
+              <h4 data-i18n="int.3">TCG · 트레이딩 카드</h4>
+              <p data-i18n="int.3.sub">포켓몬·MTG·유희왕 등</p>
+            </div>
+          </article>
+
+          <article class="chip">
+            <div class="chip-emoji">✨</div>
+            <div class="chip-body">
+              <h4 data-i18n="int.2">애니메 굿즈</h4>
+              <p data-i18n="int.2.sub">아크릴 스탠드·뱃지·트레카</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">🧸</div>
             <div class="chip-body">
-              <h4>피규어 · 인형</h4>
-              <p>아트토이·디자이너 피규어</p>
+              <h4 data-i18n="int.4">피규어 · 인형</h4>
+              <p data-i18n="int.4.sub">아트토이·디자이너 피규어</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">🎮</div>
             <div class="chip-body">
-              <h4>e-스포츠</h4>
-              <p>프로팀 굿즈와 한정판 MD</p>
+              <h4 data-i18n="int.5">e-스포츠</h4>
+              <p data-i18n="int.5.sub">프로팀 굿즈와 한정판 MD</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">📺</div>
             <div class="chip-body">
-              <h4>K-드라마 굿즈</h4>
-              <p>드라마 OST·MD·트레카</p>
+              <h4 data-i18n="int.6">K-드라마 굿즈</h4>
+              <p data-i18n="int.6.sub">드라마 OST·MD·트레카</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">👾</div>
             <div class="chip-body">
-              <h4>서브컬처 게임</h4>
-              <p>RPG·모바일 게임 캐릭터 굿즈</p>
+              <h4 data-i18n="int.7">서브컬처 게임</h4>
+              <p data-i18n="int.7.sub">RPG·모바일 게임 캐릭터 굿즈</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">🎨</div>
             <div class="chip-body">
-              <h4>웹툰 · 일러스트</h4>
-              <p>캐릭터 굿즈와 일러스트 카드</p>
+              <h4 data-i18n="int.8">웹툰 · 일러스트</h4>
+              <p data-i18n="int.8.sub">캐릭터 굿즈와 일러스트 카드</p>
             </div>
           </article>
 
           <article class="chip">
             <div class="chip-emoji">🎬</div>
             <div class="chip-body">
-              <h4>영화 · 콘서트 굿즈</h4>
-              <p>오피셜 MD와 한정판 트레카</p>
+              <h4 data-i18n="int.9">영화 · 콘서트 굿즈</h4>
+              <p data-i18n="int.9.sub">오피셜 MD와 한정판 트레카</p>
             </div>
           </article>
         </div>
@@ -1963,19 +1946,19 @@
   <!-- ============ CTA / FORM ============ -->
   <section class="cta" id="cta">
     <div class="cta-inner">
-      <h2 class="cta-h">먼저 합류한 <em>100명</em>에게<br>한정 굿즈를 드립니다.</h2>
-      <p class="cta-sub">정식 출시 알림과 함께, 가입 보너스 포인트까지.</p>
+      <h2 class="cta-h" data-i18n="cta.h">먼저 합류한 <em>100명</em>에게<br>한정 굿즈를 드립니다.</h2>
+      <p class="cta-sub" data-i18n="cta.sub">정식 출시 알림과 함께, 가입 보너스 포인트까지.</p>
 
       <form id="signup-form" class="form" onsubmit="return submitForm(event)" novalidate>
         <div class="form-field">
-          <label for="email" class="form-label">이메일</label>
+          <label for="email" class="form-label" data-i18n="form.email">이메일</label>
           <input type="email" id="email" name="email" class="form-input" placeholder="you@example.com" required>
         </div>
 
         <div class="form-field">
-          <label for="artist" class="form-label">최애 아티스트</label>
+          <label for="artist" class="form-label" data-i18n="form.artist">최애 아티스트</label>
           <select id="artist" name="artist" class="form-select" required>
-            <option value="">선택해주세요</option>
+            <option value="" data-i18n="form.artist.placeholder">선택해주세요</option>
             <option>NewJeans</option>
             <option>aespa</option>
             <option>LE SSERAFIM</option>
@@ -1994,15 +1977,15 @@
         </div>
 
         <div class="form-field">
-          <span class="form-label">참여 유형 (복수선택)</span>
+          <span class="form-label" data-i18n="form.type">참여 유형 (복수선택)</span>
           <div class="form-toggles">
             <label class="toggle">
               <input type="checkbox" name="tier" value="preorder" checked>
               <span class="toggle-box">
                 <span class="toggle-check">✓</span>
                 <span class="toggle-text">
-                  <strong>사전예약</strong>
-                  <small>출시 알림 + 100명 한정 굿즈</small>
+                  <strong data-i18n="form.type.prereg">사전예약</strong>
+                  <small data-i18n="form.type.prereg.d">출시 알림 + 100명 한정 굿즈</small>
                 </span>
               </span>
             </label>
@@ -2011,8 +1994,8 @@
               <span class="toggle-box">
                 <span class="toggle-check">✓</span>
                 <span class="toggle-text">
-                  <strong>베타테스터</strong>
-                  <small>정식 출시 전 사용권 + VIP 굿즈</small>
+                  <strong data-i18n="form.type.beta">베타테스터</strong>
+                  <small data-i18n="form.type.beta.d">정식 출시 전 사용권 + VIP 굿즈</small>
                 </span>
               </span>
             </label>
@@ -2021,23 +2004,23 @@
 
         <label class="agree">
           <input type="checkbox" id="agree" required>
-          <span>개인정보 수집·이용에 동의합니다. (이메일, 최애 아티스트)</span>
+          <span data-i18n="form.agree">개인정보 수집·이용에 동의합니다. (이메일, 최애 아티스트)</span>
         </label>
 
-        <button type="submit" class="btn-submit">
+        <button type="submit" class="btn-submit" data-i18n="form.submit">
           합류하기
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
 
-        <p class="form-legal">제출 시 FNDM <a href="#">이용약관</a> · <a href="#">개인정보처리방침</a>에 동의한 것으로 간주됩니다.</p>
+        <p class="form-legal" data-i18n="form.terms">제출 시 FNDM <a href="#">이용약관</a> · <a href="#">개인정보처리방침</a>에 동의한 것으로 간주됩니다.</p>
       </form>
 
       <div class="form-success" id="form-success" hidden>
         <div class="form-success-icon">
           <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
         </div>
-        <h3>합류 완료!</h3>
-        <p>FNDM TRADE 정식 출시 시<br>가장 먼저 알려드릴게요.<br><br>친구에게도 공유해주시면<br>굿즈 당첨 확률이 올라갑니다.</p>
+        <h3 data-i18n="form.success.h">합류 완료!</h3>
+        <p data-i18n="form.success.d">FNDM TRADE 정식 출시 시<br>가장 먼저 알려드릴게요.<br><br>친구에게도 공유해주시면<br>굿즈 당첨 확률이 올라갑니다.</p>
         <button type="button" class="btn-secondary" onclick="shareKakao()" style="min-width:0;">친구에게 공유하기</button>
       </div>
     </div>
@@ -2067,11 +2050,11 @@
         </a>
       </div>
 
-      <p class="footer-tagline">For the Real Ones.</p>
+      <p class="footer-tagline" data-i18n="footer.tagline">For the Real Ones.</p>
 
       <div class="footer-copy">
-        <p>© CultureCode Inc. All rights reserved</p>
-        <p>Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a></p>
+        <p data-i18n="footer.copyright">© CultureCode Inc. All rights reserved</p>
+        <p data-i18n="footer.location">Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a></p>
       </div>
     </div>
   </footer>
@@ -2221,7 +2204,426 @@
     }, true);
   })();
 
-  // Language switcher dropdown
+  // ============================================================
+  // i18n SYSTEM
+  // - Auto-detects browser language → 5 locales (EN/KOR/JP/CN/Esp)
+  // - Falls back to English if no match
+  // - Persists user override in localStorage
+  // - Toggle via dropdown switches all data-i18n elements instantly
+  // ============================================================
+  const I18N = {
+    KOR: {
+      'hero.title': '포카 교환,<br>이제 그만 기다려요.',
+      'hero.sub': '트위터에서 헤매던 포카 교환,<br>이제는 FNDM에서 <strong>매칭</strong>으로 한번에!',
+      'prereg.headline': '가장 먼저 FNDM 서비스를 이용해보세요!',
+      'prereg.tag': 'LIVE',
+      'prereg.stat1.label': '사전예약 팬덤',
+      'prereg.stat2.label': '베타테스터',
+      'prereg.btn.primary': '사전예약하기',
+      'prereg.btn.secondary': '베타테스터 신청',
+      'prereg.note': '첫 <strong>100명</strong>에게 한정 굿즈를 드립니다.',
+      'problem.h': '이런 적, 한번쯤 있었죠?',
+      'problem.1.h': 'DM 답장이 안 와요',
+      'problem.1.d': '트위터 교환 트윗 올렸는데 답이 없거나,<br>답장 기다리다 다른 사람이 먼저 가져가는 경험.',
+      'problem.2.h': '시간이 오래걸려요',
+      'problem.2.d': '매번 교환 트윗을 올려놓지만 아무도 저에게 연락오지 않아<br>기다리고 있어요.',
+      'problem.3.h': '송금했는데 잠수',
+      'problem.3.d': '불투명한 사람에게 계좌이체 거래하고, 미발송 당한 적,<br>신고해도 돌려받기 어려운 그 답답함.',
+      'problem.4.h': '상태가 달라요',
+      'problem.4.d': '실물이 사진과 다른 경우가 많아요.<br>중고 거래의 가장 흔한 사기 패턴.',
+      'how.h': '포카교환 이제는,<br>3단계로 끝.',
+      'how.lead': '복잡할 필요 없어요. 3단계로 안전한 교환이 끝납니다.',
+      'how.1.h': '내 포카 사진과<br>위시리스트를 등록하세요',
+      'how.1.d': 'AI가 자동으로 멤버·앨범·상태를 인식해요.<br>사진 한 장이면 5초만에 등록이 끝납니다.',
+      'how.2.h': '내 취향에 맞는 포카가 도착해요',
+      'how.2.d': '등록한 위시리스트를 기반으로,<br>내 취향에 맞는 포카가 자동으로 도착해요.<br>마음에 드는 카드에 교환 신청을 보내면 끝!',
+      'how.3.h': '안전하게 교환이 완료됩니다',
+      'how.3.d': 'FNDM이 양쪽 발송을 확인한 후 정산해드려요.<br>잠수, 미발송, 사기 걱정은 이제 그만.',
+      'solution.h': '내가 교환하고 싶던 포카,<br>이제는 매칭 하세요!',
+      'solution.1.h': 'AI 포카인증',
+      'solution.1.d': '사진 1장만 올리면 멤버·앨범·버전을 자동인식.<br>시간 세이브는 1/10로.',
+      'solution.2.h': '스마트 매칭',
+      'solution.2.d': '내 보유 포카와 다른 유저의 위시리스트를 자동 페어링.',
+      'solution.3.h': '안심거래',
+      'solution.3.d': '사진과 다른 상품, 잠수, 미발송 걱정 없이,<br>FNDM이 양쪽 포카를 먼저 검수한 뒤 상태·구성 확인 완료 후<br>안전하게 발송합니다.',
+      'solution.4.h': '컬렉터 레벨',
+      'solution.4.d': '거래 후기와 컬렉션이 누적되어 컬렉터 레벨로 표시.<br>신뢰도 높은 유저일수록 매칭 우선권을 받습니다.',
+      'loop.h': '누군가에겐 <em>백 장보다</em><br>소중한 한 장.',
+      'loop.sub': '나의 포카 한 장으로 글로벌 팬덤과 매칭되어보세요!',
+      'loop.stat1.label': '매칭 가능성',
+      'loop.stat2.value': '전세계',
+      'loop.stat2.label': '다른 팬과 매칭 예정',
+      'proof.h': '글로벌 팬들이<br>교환을 기다리고 있어요.',
+      'proof.stat1.label': '사전예약 팬덤',
+      'proof.stat2.label': '베타테스터',
+      'proof.interests.h': '관심 컬렉터블',
+      'proof.interests.sub': 'FNDM이 곧 다룰 컬렉터블 카테고리예요.<br>옆으로 드래그해보세요.',
+      'int.1': 'K-POP 포토카드', 'int.1.sub': '아이돌 멤버별·앨범별 매칭',
+      'int.2': '애니메 굿즈', 'int.2.sub': '아크릴 스탠드·뱃지·트레카',
+      'int.3': 'TCG · 트레이딩 카드', 'int.3.sub': '포켓몬·MTG·유희왕 등',
+      'int.4': '피규어 · 인형', 'int.4.sub': '아트토이·디자이너 피규어',
+      'int.5': 'e-스포츠', 'int.5.sub': '프로팀 굿즈와 한정판 MD',
+      'int.6': 'K-드라마 굿즈', 'int.6.sub': '드라마 OST·MD·트레카',
+      'int.7': '서브컬처 게임', 'int.7.sub': 'RPG·모바일 게임 캐릭터 굿즈',
+      'int.8': '웹툰 · 일러스트', 'int.8.sub': '캐릭터 굿즈와 일러스트 카드',
+      'int.9': '영화 · 콘서트 굿즈', 'int.9.sub': '오피셜 MD와 한정판 트레카',
+      'cta.h': '먼저 합류한 <em>100명</em>에게<br>한정 굿즈를 드립니다.',
+      'cta.sub': '정식 출시 알림과 함께, 가입 보너스 포인트까지.',
+      'form.email': '이메일',
+      'form.artist': '최애 아티스트',
+      'form.artist.placeholder': '선택해주세요',
+      'form.type': '참여 유형 (복수선택)',
+      'form.type.prereg': '사전예약',
+      'form.type.prereg.d': '출시 알림 + 100명 한정 굿즈',
+      'form.type.beta': '베타테스터',
+      'form.type.beta.d': '정식 출시 전 사용권 + VIP 굿즈',
+      'form.agree': '개인정보 수집·이용에 동의합니다. (이메일, 최애 아티스트)',
+      'form.submit': '합류하기',
+      'form.terms': '제출 시 FNDM <a href="#">이용약관</a> · <a href="#">개인정보처리방침</a>에 동의한 것으로 간주됩니다.',
+      'form.success.h': '합류 완료!',
+      'form.success.d': 'FNDM TRADE 정식 출시 시<br>가장 먼저 알려드릴게요.<br><br>친구에게도 공유해주시면<br>굿즈 당첨 확률이 올라갑니다.',
+      'footer.tagline': 'For the Real Ones.',
+      'footer.copyright': '© CultureCode Inc. All rights reserved',
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
+    },
+
+    EN: {
+      'hero.title': "Stop waiting for<br>your photocard match.",
+      'hero.sub': "Done hunting trades on Twitter?<br>Find your match on <strong>FNDM</strong>—instantly.",
+      'prereg.headline': 'Be the first to try FNDM.',
+      'prereg.tag': 'LIVE',
+      'prereg.stat1.label': 'Pre-registered',
+      'prereg.stat2.label': 'Beta testers',
+      'prereg.btn.primary': 'Pre-register',
+      'prereg.btn.secondary': 'Join Beta',
+      'prereg.note': 'First <strong>100 fans</strong> get limited-edition merch.',
+      'problem.h': 'Sound familiar?',
+      'problem.1.h': 'Ghosted in DMs',
+      'problem.1.d': 'Posted a trade tweet but got no reply—or someone else snagged it while you were waiting.',
+      'problem.2.h': 'Takes forever',
+      'problem.2.d': 'Reposting the same trade tweet every day, still no one reaches out.',
+      'problem.3.h': 'Scammed mid-trade',
+      'problem.3.d': "Sent money to a stranger, they vanished. Reporting won't get your money back.",
+      'problem.4.h': 'Not as described',
+      'problem.4.d': 'Same story—you keep posting trade tweets but nobody replies.',
+      'how.h': 'Photocard trading,<br>now in just 3 steps.',
+      'how.lead': "No need to overthink it. Safe trades close in 3 steps.",
+      'how.1.h': 'Upload your cards & wishlist',
+      'how.1.d': 'AI auto-detects member, album, condition.<br>One photo, registered in 5 seconds.',
+      'how.2.h': 'Get matches you actually want',
+      'how.2.d': 'Based on your wishlist, FNDM sends curated cards straight to your phone. Like one? Send a trade request.',
+      'how.3.h': 'Trade safely, every time',
+      'how.3.d': 'We verify both shipments before settling. No more ghosting, no more scams.',
+      'solution.h': 'The cards you wanted—<br>now matched, not chased.',
+      'solution.1.h': 'AI Card Verification',
+      'solution.1.d': 'Upload one photo. Member, album, version—auto-detected. Registration in 1/10th the time.',
+      'solution.2.h': 'Smart Matching',
+      'solution.2.d': 'Auto-pairs your cards with other users\' wishlists.',
+      'solution.3.h': 'Protected Trades',
+      'solution.3.d': "No 'not as described,' no ghosting, no missing packages. FNDM inspects both cards first, confirms condition and contents, then ships safely.",
+      'solution.4.h': 'Collector Level',
+      'solution.4.d': 'Your trades and collection build your Collector Level. Higher trust, higher match priority.',
+      'loop.h': 'One card—<br><em>worth more</em> than a hundred.',
+      'loop.sub': 'Match a single photocard with fans worldwide.',
+      'loop.stat1.label': 'Match potential',
+      'loop.stat2.value': 'Worldwide',
+      'loop.stat2.label': 'Fans waiting to match',
+      'proof.h': 'Fans worldwide are<br>waiting to trade.',
+      'proof.stat1.label': 'Pre-registered',
+      'proof.stat2.label': 'Beta testers',
+      'proof.interests.h': 'Collectibles you love',
+      'proof.interests.sub': 'Categories FNDM is launching with.<br>Drag to explore.',
+      'int.1': 'K-POP Photocards', 'int.1.sub': 'Match by member, album, version',
+      'int.2': 'Anime Goods', 'int.2.sub': 'Acrylic stands, badges, trading cards',
+      'int.3': 'TCG & Trading Cards', 'int.3.sub': 'Pokémon, MTG, Yu-Gi-Oh! & more',
+      'int.4': 'Figures & Plush', 'int.4.sub': 'Art toys & designer figures',
+      'int.5': 'Esports', 'int.5.sub': 'Team merch & limited drops',
+      'int.6': 'K-Drama Merch', 'int.6.sub': 'OSTs, MDs, trading cards',
+      'int.7': 'Subculture Games', 'int.7.sub': 'RPG & mobile game character goods',
+      'int.8': 'Webtoon & Illustration', 'int.8.sub': 'Character goods & illustration cards',
+      'int.9': 'Film & Concert Goods', 'int.9.sub': 'Official MDs & limited trading cards',
+      'cta.h': "The first <em>100 fans</em><br>get limited-edition merch.",
+      'cta.sub': "Launch notifications, plus signup bonus points.",
+      'form.email': 'Email',
+      'form.artist': 'Your bias',
+      'form.artist.placeholder': 'Choose your favorite',
+      'form.type': 'Join as (select all that apply)',
+      'form.type.prereg': 'Pre-register',
+      'form.type.prereg.d': 'Launch alert + first-100 merch drop',
+      'form.type.beta': 'Beta Tester',
+      'form.type.beta.d': 'Early access + VIP merch',
+      'form.agree': 'I consent to data collection (email & bias).',
+      'form.submit': 'Join FNDM',
+      'form.terms': 'By submitting, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.',
+      'form.success.h': "You're in!",
+      'form.success.d': "We'll email you the moment FNDM TRADE launches.<br><br>Share with friends<br>to boost your merch-draw odds.",
+      'footer.tagline': 'For the Real Ones.',
+      'footer.copyright': '© CultureCode Inc. All rights reserved',
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
+    },
+
+    JP: {
+      'hero.title': 'トレカ交換、<br>もう待たなくていい。',
+      'hero.sub': 'Xで彷徨ったトレカ交換も、<br>FNDMなら<strong>マッチング</strong>で一発。',
+      'prereg.headline': 'FNDMをいち早く体験しよう。',
+      'prereg.tag': 'LIVE',
+      'prereg.stat1.label': '事前予約数',
+      'prereg.stat2.label': 'ベータテスター',
+      'prereg.btn.primary': '事前予約する',
+      'prereg.btn.secondary': 'ベータに参加',
+      'prereg.note': '先着<strong>100名様</strong>に限定グッズプレゼント。',
+      'problem.h': 'こんな経験、ありませんか?',
+      'problem.1.h': 'DMが返ってこない',
+      'problem.1.d': 'X(旧Twitter)に交換ツイートしても返信ゼロ。待ってる間に他の人が先に取っちゃった経験。',
+      'problem.2.h': '時間がかかりすぎる',
+      'problem.2.d': '毎回交換ツイートを上げてるのに、誰からも連絡が来なくてただ待つだけ。',
+      'problem.3.h': '入金後に音信不通',
+      'problem.3.d': '素性の分からない相手に振り込んだら、商品が届かない。通報しても返金は難しい、あのモヤモヤ。',
+      'problem.4.h': '状態が違う',
+      'problem.4.d': '毎回交換ツイートを上げてるのに、誰からも連絡が来ない。',
+      'how.h': 'トレカ交換は今、<br>たった3ステップ。',
+      'how.lead': '難しく考えなくて大丈夫。たった3ステップで安全な交換が完了。',
+      'how.1.h': 'トレカと欲しいリストを登録',
+      'how.1.d': 'AIがメンバー・アルバム・状態を自動認識。<br>写真1枚で5秒登録完了。',
+      'how.2.h': '好みのトレカが届く',
+      'how.2.d': '登録した欲しいリストをもとに、好みのトレカが自動で届きます。気に入ったら交換リクエストを送るだけ。',
+      'how.3.h': '安全に交換完了',
+      'how.3.d': 'FNDMが両者の発送を確認してから精算。音信不通も詐欺も、もう心配なし。',
+      'solution.h': '欲しかったあのトレカ、<br>今はマッチングで。',
+      'solution.1.h': 'AIトレカ認証',
+      'solution.1.d': '写真1枚でメンバー・アルバム・バージョンを自動認識。登録時間は1/10に。',
+      'solution.2.h': 'スマートマッチング',
+      'solution.2.d': '自分のトレカと他ユーザーの欲しいリストを自動ペアリング。',
+      'solution.3.h': '安心取引',
+      'solution.3.d': '写真と違う、音信不通、未発送の心配なし。FNDMが両者のトレカを先に検品し、状態・構成を確認してから安全に発送します。',
+      'solution.4.h': 'コレクターレベル',
+      'solution.4.d': '取引履歴とコレクションが蓄積され、コレクターレベルとして表示。信頼度の高いユーザーほどマッチング優先。',
+      'loop.h': '誰かにとっては、<em>百枚より</em><br>大切な一枚。',
+      'loop.sub': 'あなたの1枚で、世界中のファンとマッチング。',
+      'loop.stat1.label': 'マッチング可能性',
+      'loop.stat2.value': '世界中',
+      'loop.stat2.label': '他ファンとマッチング予定',
+      'proof.h': '世界中のファンが<br>交換を待っています。',
+      'proof.stat1.label': '事前予約数',
+      'proof.stat2.label': 'ベータテスター',
+      'proof.interests.h': '興味のあるコレクタブル',
+      'proof.interests.sub': 'FNDMがまもなく扱うコレクタブルカテゴリー。<br>横にドラッグしてみて。',
+      'int.1': 'K-POPトレカ', 'int.1.sub': 'メンバー・アルバム別マッチング',
+      'int.2': 'アニメグッズ', 'int.2.sub': 'アクスタ・缶バッジ・トレカ',
+      'int.3': 'TCG・トレーディングカード', 'int.3.sub': 'ポケカ・MTG・遊戯王など',
+      'int.4': 'フィギュア・ぬいぐるみ', 'int.4.sub': 'アートトイ・デザイナーフィギュア',
+      'int.5': 'eスポーツ', 'int.5.sub': 'チーム公式グッズ&限定MD',
+      'int.6': 'K-ドラマグッズ', 'int.6.sub': 'ドラマOST・MD・トレカ',
+      'int.7': 'サブカルゲーム', 'int.7.sub': 'RPG・モバイルゲームのキャラグッズ',
+      'int.8': 'Webtoon・イラスト', 'int.8.sub': 'キャラグッズ&イラストカード',
+      'int.9': '映画・コンサートグッズ', 'int.9.sub': '公式MD&限定トレカ',
+      'cta.h': '先着<em>100名</em>に<br>限定グッズプレゼント。',
+      'cta.sub': 'リリース通知と、加入ボーナスポイントも。',
+      'form.email': 'メールアドレス',
+      'form.artist': '推しアーティスト',
+      'form.artist.placeholder': '選択してください',
+      'form.type': '参加タイプ(複数選択可)',
+      'form.type.prereg': '事前予約',
+      'form.type.prereg.d': 'リリース通知 + 100名限定グッズ',
+      'form.type.beta': 'ベータテスター',
+      'form.type.beta.d': '正式リリース前の利用権 + VIPグッズ',
+      'form.agree': '個人情報の収集・利用に同意します。(メール・推し)',
+      'form.submit': 'FNDMに参加',
+      'form.terms': '送信により、FNDM<a href="#">利用規約</a>・<a href="#">プライバシーポリシー</a>に同意したものとみなされます。',
+      'form.success.h': 'ようこそ!',
+      'form.success.d': 'FNDM TRADE 正式リリース時に<br>いち早くお知らせします。<br><br>友達にシェアしてくれると<br>グッズ当選確率がアップ。',
+      'footer.tagline': 'For the Real Ones.',
+      'footer.copyright': '© CultureCode Inc. All rights reserved',
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
+    },
+
+    CN: {
+      'hero.title': '小卡交换,<br>不用再等了。',
+      'hero.sub': '在微博/推特上苦苦寻找小卡的日子,<br>到FNDM<strong>一键匹配</strong>结束!',
+      'prereg.headline': '抢先体验FNDM。',
+      'prereg.tag': '直播中',
+      'prereg.stat1.label': '已预约',
+      'prereg.stat2.label': '内测用户',
+      'prereg.btn.primary': '立即预约',
+      'prereg.btn.secondary': '申请内测',
+      'prereg.note': '前<strong>100名</strong>粉丝可领取限定周边。',
+      'problem.h': '是不是很熟悉?',
+      'problem.1.h': '私信不回',
+      'problem.1.d': '在推特发了交换帖,等不到回复,或者等回复期间被别人先抢走了。',
+      'problem.2.h': '太耗时',
+      'problem.2.d': '每次都发交换帖,但没有人联系我,只能干等。',
+      'problem.3.h': '付款后跑路',
+      'problem.3.d': '给陌生人转账后对方失踪,举报也很难拿回钱,那种郁闷。',
+      'problem.4.h': '货不对版',
+      'problem.4.d': '每次都发交换帖,但根本没人联系。',
+      'how.h': '小卡交换,<br>现在三步搞定。',
+      'how.lead': '不用复杂。三步完成安全交换。',
+      'how.1.h': '上传你的小卡和心愿单',
+      'how.1.d': 'AI自动识别成员、专辑、品相。<br>一张照片,5秒登记完成。',
+      'how.2.h': '心仪小卡主动找上门',
+      'how.2.d': '根据你的心愿单,FNDM自动为你匹配合适的小卡。看中哪张就发交换请求,完成!',
+      'how.3.h': '安全完成交换',
+      'how.3.d': 'FNDM确认双方发货后再结算。跑路、不发货、骗局,统统拜拜。',
+      'solution.h': '想要的那张小卡,<br>现在就匹配。',
+      'solution.1.h': 'AI小卡验证',
+      'solution.1.d': '只需上传一张照片,自动识别成员·专辑·版本。登记时间缩短到1/10。',
+      'solution.2.h': '智能匹配',
+      'solution.2.d': '把你的小卡和其他用户的心愿单自动配对。',
+      'solution.3.h': '担保交易',
+      'solution.3.d': '不用担心货不对版、跑路、不发货。FNDM先检验双方小卡,确认品相和构成后再安全发货。',
+      'solution.4.h': '收藏家等级',
+      'solution.4.d': '交易记录和收藏积累成收藏家等级。信用越高,匹配优先级越高。',
+      'loop.h': '对某些人来说,<em>比百张</em><br>更珍贵的一张。',
+      'loop.sub': '用你的一张小卡,与全球粉丝匹配。',
+      'loop.stat1.label': '匹配可能性',
+      'loop.stat2.value': '全球',
+      'loop.stat2.label': '粉丝等你匹配',
+      'proof.h': '全球粉丝<br>都在等交换。',
+      'proof.stat1.label': '已预约',
+      'proof.stat2.label': '内测用户',
+      'proof.interests.h': '你感兴趣的收藏',
+      'proof.interests.sub': 'FNDM即将上线的收藏品类。<br>向旁边拖动看看。',
+      'int.1': 'K-POP小卡', 'int.1.sub': '按成员·专辑匹配',
+      'int.2': '动漫周边', 'int.2.sub': '亚克力立牌·徽章·小卡',
+      'int.3': 'TCG·集换式卡牌', 'int.3.sub': '宝可梦·MTG·游戏王等',
+      'int.4': '手办·毛绒玩具', 'int.4.sub': '艺术玩具·设计师手办',
+      'int.5': '电竞', 'int.5.sub': '战队官方周边&限定MD',
+      'int.6': '韩剧周边', 'int.6.sub': '剧集OST·MD·小卡',
+      'int.7': '亚文化游戏', 'int.7.sub': 'RPG·手游角色周边',
+      'int.8': '漫画·插画', 'int.8.sub': '角色周边&插画卡',
+      'int.9': '电影·演唱会周边', 'int.9.sub': '官方MD&限定小卡',
+      'cta.h': '前<em>100名</em>粉丝<br>独享限定周边。',
+      'cta.sub': '上线通知,还有加入奖励积分。',
+      'form.email': '邮箱',
+      'form.artist': '本命艺人',
+      'form.artist.placeholder': '请选择',
+      'form.type': '参与类型(可多选)',
+      'form.type.prereg': '预约',
+      'form.type.prereg.d': '上线通知 + 100名限定周边',
+      'form.type.beta': '内测用户',
+      'form.type.beta.d': '正式上线前体验权 + VIP周边',
+      'form.agree': '我同意收集和使用个人信息。(邮箱、本命艺人)',
+      'form.submit': '加入FNDM',
+      'form.terms': '提交即视为同意FNDM<a href="#">用户协议</a>·<a href="#">隐私政策</a>。',
+      'form.success.h': '欢迎加入!',
+      'form.success.d': 'FNDM TRADE 正式上线时<br>我们将第一时间通知您。<br><br>分享给好友<br>可提高周边中奖概率。',
+      'footer.tagline': 'For the Real Ones.',
+      'footer.copyright': '© CultureCode Inc. All rights reserved',
+      'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
+    },
+
+    Esp: {
+      'hero.title': 'Deja de esperar<br>tu intercambio de photocards.',
+      'hero.sub': '¿Cansada de cazar trades en Twitter?<br>Encuentra tu match en <strong>FNDM</strong>, al instante.',
+      'prereg.headline': 'Sé la primera en probar FNDM.',
+      'prereg.tag': 'EN VIVO',
+      'prereg.stat1.label': 'Pre-registradas',
+      'prereg.stat2.label': 'Beta testers',
+      'prereg.btn.primary': 'Pre-registrarme',
+      'prereg.btn.secondary': 'Unirme al Beta',
+      'prereg.note': 'Las primeras <strong>100 fans</strong> reciben merch de edición limitada.',
+      'problem.h': '¿Te suena familiar?',
+      'problem.1.h': 'No te responden los DMs',
+      'problem.1.d': 'Subiste tu trade tweet y no llega ninguna respuesta, o mientras esperabas alguien más se lo llevó.',
+      'problem.2.h': 'Tarda una eternidad',
+      'problem.2.d': 'Repostear el mismo trade tweet cada día y nadie te contacta.',
+      'problem.3.h': 'Estafa después del pago',
+      'problem.3.d': 'Mandaste plata a un desconocido y desapareció. Reportar no te devuelve el dinero.',
+      'problem.4.h': 'No es lo de la foto',
+      'problem.4.d': 'La misma historia: subís trade tweets y nadie responde.',
+      'how.h': 'Intercambio de photocards,<br>ahora en solo 3 pasos.',
+      'how.lead': 'No te compliques. Trade seguro en 3 pasos.',
+      'how.1.h': 'Subí tus cards y wishlist',
+      'how.1.d': 'La IA detecta miembro, álbum y condición.<br>Una foto, registrada en 5 segundos.',
+      'how.2.h': 'Recibí matches que sí querías',
+      'how.2.d': 'Según tu wishlist, FNDM te envía cards curadas directo al celular. ¿Te gusta alguna? Mandá tu trade request.',
+      'how.3.h': 'Intercambio 100% seguro',
+      'how.3.d': 'Verificamos los dos envíos antes de cerrar. Cero estafas, cero ghosting.',
+      'solution.h': 'Las cards que querías,<br>ahora matched, no perseguidas.',
+      'solution.1.h': 'Verificación con IA',
+      'solution.1.d': 'Subí una foto. Miembro, álbum, versión—detectados automáticamente. Registro en 1/10 del tiempo.',
+      'solution.2.h': 'Matching inteligente',
+      'solution.2.d': 'Auto-empareja tus cards con las wishlists de otros usuarios.',
+      'solution.3.h': 'Trades protegidos',
+      'solution.3.d': 'Sin "no era lo de la foto", sin ghosting, sin paquetes perdidos. FNDM inspecciona ambas cards primero, confirma condición y contenido, y luego envía con seguridad.',
+      'solution.4.h': 'Nivel de Coleccionista',
+      'solution.4.d': 'Tus trades y colección suben tu nivel. Más confianza, más prioridad en los matches.',
+      'loop.h': 'Para alguien, <em>una sola card</em><br>vale más que cien.',
+      'loop.sub': 'Hacé match con fans de todo el mundo con una sola photocard.',
+      'loop.stat1.label': 'Potencial de match',
+      'loop.stat2.value': 'Mundial',
+      'loop.stat2.label': 'Fans esperando hacer match',
+      'proof.h': 'Fans de todo el mundo<br>esperan intercambiar.',
+      'proof.stat1.label': 'Pre-registradas',
+      'proof.stat2.label': 'Beta testers',
+      'proof.interests.h': 'Coleccionables que amás',
+      'proof.interests.sub': 'Las categorías con las que arranca FNDM.<br>Arrastrá para explorar.',
+      'int.1': 'Photocards K-POP', 'int.1.sub': 'Match por miembro y álbum',
+      'int.2': 'Merch de Anime', 'int.2.sub': 'Acrílicos, badges, trading cards',
+      'int.3': 'TCG y Cards Coleccionables', 'int.3.sub': 'Pokémon, MTG, Yu-Gi-Oh! y más',
+      'int.4': 'Figuras y Peluches', 'int.4.sub': 'Art toys y figuras de diseñador',
+      'int.5': 'Esports', 'int.5.sub': 'Merch de equipo & drops limitados',
+      'int.6': 'Merch K-Drama', 'int.6.sub': 'OSTs, MDs, trading cards',
+      'int.7': 'Juegos Subculturales', 'int.7.sub': 'Merch de personajes RPG y mobile',
+      'int.8': 'Webtoon e Ilustración', 'int.8.sub': 'Merch de personajes & cards ilustradas',
+      'int.9': 'Cine y Conciertos', 'int.9.sub': 'MDs oficiales & trading cards limitadas',
+      'cta.h': "Las primeras <em>100 fans</em><br>reciben merch limitada.",
+      'cta.sub': 'Aviso de lanzamiento + puntos bonus al registrarte.',
+      'form.email': 'Email',
+      'form.artist': 'Tu bias',
+      'form.artist.placeholder': 'Elegí tu favorita/o',
+      'form.type': 'Quiero (podés elegir varios)',
+      'form.type.prereg': 'Pre-registro',
+      'form.type.prereg.d': 'Aviso de lanzamiento + merch para las primeras 100',
+      'form.type.beta': 'Beta Tester',
+      'form.type.beta.d': 'Acceso anticipado + merch VIP',
+      'form.agree': 'Acepto el uso de mis datos (email y bias).',
+      'form.submit': 'Unirme a FNDM',
+      'form.terms': 'Al enviar, aceptás los <a href="#">Términos</a> y la <a href="#">Política de Privacidad</a>.',
+      'form.success.h': '¡Estás dentro!',
+      'form.success.d': 'Te avisamos por mail<br>apenas FNDM TRADE esté disponible.<br><br>Compartilo con amigas<br>para subir tus chances de merch.',
+      'footer.tagline': 'For the Real Ones.',
+      'footer.copyright': '© CultureCode Inc. Todos los derechos reservados',
+      'footer.location': 'Hecho en Corea del Sur <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
+    }
+  };
+
+  // Detect initial locale from browser; fallback to EN
+  function detectLocale() {
+    try {
+      const saved = localStorage.getItem('fndm-locale');
+      if (saved && I18N[saved]) return saved;
+    } catch (e) {}
+
+    const langs = navigator.languages || [navigator.language || 'en'];
+    for (const raw of langs) {
+      const l = raw.toLowerCase();
+      if (l.startsWith('ko')) return 'KOR';
+      if (l.startsWith('ja')) return 'JP';
+      if (l.startsWith('zh')) return 'CN';
+      if (l.startsWith('es')) return 'Esp';
+      if (l.startsWith('en')) return 'EN';
+    }
+    return 'EN';
+  }
+
+  function applyLocale(lang) {
+    const dict = I18N[lang] || I18N.EN;
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key] !== undefined) el.innerHTML = dict[key];
+    });
+    document.documentElement.lang = lang === 'EN' ? 'en' :
+      lang === 'KOR' ? 'ko' :
+      lang === 'JP' ? 'ja' :
+      lang === 'CN' ? 'zh' :
+      lang === 'Esp' ? 'es' : 'en';
+  }
+
+  let currentLocale = detectLocale();
+  applyLocale(currentLocale);
+
+  // Language switcher dropdown — wired to i18n
   (function() {
     const btn = document.getElementById('langBtn');
     const menu = document.getElementById('langMenu');
@@ -2230,11 +2632,9 @@
     const current = btn.querySelector('.lang-current');
     const items = menu.querySelectorAll('.lang-item');
 
-    // Mark initial active
+    current.textContent = currentLocale;
     items.forEach(item => {
-      if (item.dataset.lang === current.textContent) {
-        item.setAttribute('aria-current', 'true');
-      }
+      if (item.dataset.lang === currentLocale) item.setAttribute('aria-current', 'true');
     });
 
     function close() {
@@ -2257,16 +2657,15 @@
         current.textContent = lang;
         items.forEach(i => i.removeAttribute('aria-current'));
         item.setAttribute('aria-current', 'true');
+        currentLocale = lang;
+        applyLocale(lang);
+        try { localStorage.setItem('fndm-locale', lang); } catch (e) {}
         close();
-        // hook: integrate i18n here when ready
-        // e.g., loadLocale(lang)
       });
     });
 
     document.addEventListener('click', (e) => {
-      if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) {
-        close();
-      }
+      if (!menu.hidden && !menu.contains(e.target) && e.target !== btn) close();
     });
 
     document.addEventListener('keydown', (e) => {
