@@ -145,6 +145,18 @@
     overflow-x: hidden;
     line-height: 1.5;
   }
+  /* Page fade transitions */
+  body {
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+  body.loaded {
+    opacity: 1;
+  }
+  body.fading-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
   /* ============ NAV — Cluely-style floating sticky ============ */
   .nav-wrapper {
     position: fixed;
@@ -3450,6 +3462,44 @@
       if (e.key === 'Escape' && !menu.hidden) close();
     });
   })();
+
+  // ============================================================
+  // Page fade-in / fade-out transitions
+  // ============================================================
+  // Fade in
+  if (document.readyState === 'complete') {
+    document.body.classList.add('loaded');
+  } else {
+    window.addEventListener('load', () => {
+      document.body.classList.add('loaded');
+    });
+    requestAnimationFrame(() => document.body.classList.add('loaded'));
+  }
+
+  // Fade out on navigation to legal page (or back to index)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+    const isInternal = (
+      href === 'index.html' ||
+      href.startsWith('index.html#') ||
+      href === 'legal.html' ||
+      href.startsWith('legal.html#') ||
+      href === './index.html' ||
+      href === './legal.html'
+    );
+    if (!isInternal) return;
+    if (href.startsWith('#')) return;
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === '_blank') return;
+
+    e.preventDefault();
+    document.body.classList.add('fading-out');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 280);
+  });
 </script>
 
 </body>

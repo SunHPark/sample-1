@@ -266,25 +266,98 @@
     font-style: italic;
   }
 
-  /* ============ FOOTER ============ */
-  .legal-footer {
-    border-top: 1px solid var(--line);
-    padding: 40px 24px 60px;
+  /* ============ FADE-IN TRANSITION ============ */
+  body {
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+  body.loaded {
+    opacity: 1;
+  }
+  body.fading-out {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  /* ============ FOOTER (matches main page exactly) ============ */
+  .footer {
+    background: #FFFFFF;
+    padding: 72px 24px 56px;
+  }
+  .footer-inner {
+    max-width: 920px;
+    margin: 0 auto;
     text-align: center;
-    color: var(--ink-4);
-    font-size: 12px;
   }
-  .legal-footer p { margin-bottom: 4px; }
-  .legal-footer .tagline {
-    font-family: var(--tx-display);
-    font-weight: 800;
-    font-size: 16px;
+  .footer-socials {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 22px;
+    margin-bottom: 24px;
+  }
+  .social-icon {
     color: var(--ink);
-    letter-spacing: -0.02em;
-    margin-bottom: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0.85;
+    transition: opacity 0.15s ease, transform 0.15s ease;
   }
-  .legal-footer a { color: var(--ink-3); text-decoration: none; }
-  .legal-footer a:hover { color: var(--ink); }
+  .social-icon:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+  .footer-tagline {
+    font-family: var(--tx-display);
+    font-weight: 500;
+    font-size: 17px;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .footer-legal a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .footer-legal a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  .footer-legal .sep {
+    color: var(--ink-4);
+  }
+  .footer-copy {
+    font-size: 13px;
+    color: var(--ink-3);
+    line-height: 1.7;
+    letter-spacing: -0.005em;
+  }
+  .footer-copy p { margin: 0; }
+  .footer-copy a {
+    color: var(--ink-3);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+  .footer-copy a:hover {
+    color: var(--ink);
+  }
+  .footer-copy .sep {
+    color: var(--ink-4);
+    margin: 0 4px;
+  }
 
   /* ============ MOBILE ============ */
   @media (max-width: 720px) {
@@ -341,11 +414,43 @@
   <!-- Content injected dynamically -->
 </main>
 
-<!-- ============ FOOTER ============ -->
-<footer class="legal-footer">
-  <p class="tagline">For the Real Ones.</p>
-  <p>© CultureCode Inc. All rights reserved</p>
-  <p>Rooted in South Korea | <a href="https://www.culturecode.co.kr" target="_blank">www.culturecode.co.kr</a></p>
+<!-- ============ FOOTER (matches main page) ============ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-socials">
+      <a href="https://instagram.com/fndmofficial" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="3" width="18" height="18" rx="5" ry="5"/>
+          <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+          <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+        </svg>
+      </a>
+      <a href="https://x.com/fndm_official" target="_blank" rel="noopener noreferrer" class="social-icon" aria-label="X">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+        </svg>
+      </a>
+      <a href="mailto:fndm@culturecode.co.kr" id="mailLink" class="social-icon" aria-label="이메일">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+          <polyline points="22,6 12,13 2,6"/>
+        </svg>
+      </a>
+    </div>
+
+    <p class="footer-tagline">For the Real Ones.</p>
+
+    <div class="footer-legal">
+      <a href="legal.html#privacy" data-i18n="footer.privacy">개인정보처리방침</a>
+      <span class="sep">·</span>
+      <a href="legal.html#terms" data-i18n="footer.terms">이용약관</a>
+    </div>
+
+    <div class="footer-copy">
+      <p>© CultureCode Inc. All rights reserved</p>
+      <p>Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a></p>
+    </div>
+  </div>
 </footer>
 
 <script>
@@ -358,6 +463,9 @@
       'legal.kicker': '법적 고지',
       'legal.tab.privacy': '개인정보처리방침',
       'legal.tab.terms': '이용약관',
+      'footer.privacy': '개인정보처리방침',
+      'mail.subject': 'FNDM 서비스 문의',
+      'footer.terms': '이용약관',
       'privacy': `
         <h2>개인정보처리방침</h2>
         <p>㈜컬처코드(이하 "회사")는 이용자의 개인정보를 중요하게 생각하며, 관련 법령에 따라 개인정보를 안전하게 보호하기 위해 최선을 다합니다.</p>
@@ -428,6 +536,9 @@
       'legal.kicker': 'Legal',
       'legal.tab.privacy': 'Privacy Policy',
       'legal.tab.terms': 'Terms of Use',
+      'footer.privacy': 'Privacy Policy',
+      'mail.subject': 'FNDM Inquiry',
+      'footer.terms': 'Terms of Use',
       'privacy': `
         <h2>Privacy Policy</h2>
         <p>CultureCode Inc. (the "Company," "we," "us," or "our") values users' personal information and is committed to protecting it safely in accordance with applicable laws and regulations.</p>
@@ -498,6 +609,9 @@
       'legal.kicker': '法的事項',
       'legal.tab.privacy': 'プライバシーポリシー',
       'legal.tab.terms': '利用規約',
+      'footer.privacy': 'プライバシーポリシー',
+      'mail.subject': 'FNDMサービスお問い合わせ',
+      'footer.terms': '利用規約',
       'privacy': `
         <h2>プライバシーポリシー</h2>
         <p>株式会社CultureCode(以下「当社」といいます)は、利用者の個人情報を重要なものと認識し、関連法令に従って個人情報を安全に保護するよう努めます。</p>
@@ -568,6 +682,9 @@
       'legal.kicker': '法律声明',
       'legal.tab.privacy': '隐私政策',
       'legal.tab.terms': '使用条款',
+      'footer.privacy': '隐私政策',
+      'mail.subject': 'FNDM 服务咨询',
+      'footer.terms': '使用条款',
       'privacy': `
         <h2>隐私政策</h2>
         <p>CultureCode Inc.(以下简称"公司")重视用户的个人信息,并将根据相关法律法规尽力安全保护用户的个人信息。</p>
@@ -638,6 +755,9 @@
       'legal.kicker': 'Legal',
       'legal.tab.privacy': 'Política de Privacidad',
       'legal.tab.terms': 'Términos de Uso',
+      'footer.privacy': 'Política de Privacidad',
+      'mail.subject': 'Consulta FNDM',
+      'footer.terms': 'Términos de Uso',
       'privacy': `
         <h2>Política de Privacidad</h2>
         <p>CultureCode Inc. ("la Compañía", "nosotros" o "nuestro") valora la información personal de los usuarios y se compromete a protegerla de forma segura de acuerdo con las leyes y regulaciones aplicables.</p>
@@ -760,6 +880,11 @@
     }
     // Title
     document.title = 'FNDM | ' + (dict['legal.tab.' + currentTab] || 'Legal');
+    // Update mailto link with localized subject
+    const mailLink = document.getElementById('mailLink');
+    if (mailLink && dict['mail.subject']) {
+      mailLink.setAttribute('href', 'mailto:fndm@culturecode.co.kr?subject=' + encodeURIComponent(dict['mail.subject']));
+    }
   }
 
   document.querySelectorAll('.lang-btn').forEach(btn => {
@@ -779,6 +904,49 @@
 
   // Initial
   apply();
+
+  // ============================================================
+  // Page fade-in / fade-out transitions
+  // ============================================================
+  // Fade in on load
+  window.addEventListener('load', () => {
+    document.body.classList.add('loaded');
+  });
+  // Also add immediately in case load already fired
+  if (document.readyState === 'complete') {
+    document.body.classList.add('loaded');
+  } else {
+    requestAnimationFrame(() => document.body.classList.add('loaded'));
+  }
+
+  // Fade out on internal navigation (links going to index.html or legal.html)
+  document.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (!href) return;
+    // Only intercept internal page transitions (index.html, legal.html, or pure hash going to another page)
+    const isInternal = (
+      href === 'index.html' ||
+      href.startsWith('index.html#') ||
+      href === 'legal.html' ||
+      href.startsWith('legal.html#') ||
+      href === '/' ||
+      href === './index.html' ||
+      href === './legal.html'
+    );
+    if (!isInternal) return;
+    // Skip if it's just a hash on the current page (no actual navigation)
+    if (href.startsWith('#')) return;
+    // Skip if modifier key held (open in new tab etc.)
+    if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey || link.target === '_blank') return;
+
+    e.preventDefault();
+    document.body.classList.add('fading-out');
+    setTimeout(() => {
+      window.location.href = href;
+    }, 280);
+  });
 </script>
 
 </body>
