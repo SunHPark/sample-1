@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light only">
+<meta name="supported-color-schemes" content="light">
+<title>FNDM | Legal</title>
+<meta name="description" content="FNDM Privacy Policy and Terms of Use">
+<meta name="robots" content="noindex, follow">
+<link rel="canonical" href="https://www.thefndm.com/legal.html">
+
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="favicon-192.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Pretendard:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    color-scheme: light !important;
+    forced-color-adjust: none;
+    --bg: #FFFFFF;
+    --bg-soft: #FAFBFD;
+    --ink: #0A0E1A;
+    --ink-2: #2A2F3D;
+    --ink-3: #5A6172;
+    --ink-4: #8B92A3;
+    --line: rgba(10, 14, 26, 0.06);
+    --line-strong: rgba(10, 14, 26, 0.12);
+    --primary: #FF1F3D;
+    --tx-display: 'Inter', 'Pretendard', -apple-system, BlinkMacSystemFont, sans-serif;
+    --tx-body: 'Pretendard', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --tx-mono: 'JetBrains Mono', monospace;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    background-color: #FFFFFF !important;
+    color: #0A0E1A !important;
+    background: #FFFFFF !important;
+    font-family: var(--tx-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    line-height: 1.6;
+    letter-spacing: -0.005em;
+  }
+
+  /* ============ NAV (mirrors main page gradient) ============ */
+  .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+    padding: 14px 0 28px;
+    pointer-events: none;
+    background:
+      linear-gradient(180deg,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(255, 255, 255, 0.85) 30%,
+        rgba(255, 255, 255, 0.6) 60%,
+        rgba(255, 255, 255, 0.2) 85%,
+        rgba(255, 255, 255, 0) 100%);
+  }
+  .nav {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 6px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    pointer-events: auto;
+  }
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+  }
+  .logo img {
+    height: 28px;
+    width: auto;
+    display: block;
+  }
+  .nav-back {
+    font-size: 13px;
+    color: var(--ink-3);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .nav-back:hover { color: var(--ink); }
+
+  /* Push content below fixed nav */
+  body { padding-top: 70px; }
+
+  /* ============ HERO ============ */
+  .legal-hero {
+    text-align: center;
+    padding: 80px 24px 40px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .legal-hero-logo {
+    height: 64px;
+    margin: 0 auto 32px;
+    display: flex;
+    justify-content: center;
+  }
+  .legal-hero-logo img { height: 100%; width: auto; display: block; }
+  .legal-hero-title {
+    font-family: var(--tx-display);
+    font-weight: 900;
+    font-size: 44px;
+    letter-spacing: -0.04em;
+    color: var(--ink);
+    line-height: 1.05;
+    margin-bottom: 12px;
+  }
+  .legal-hero-sub {
+    color: var(--ink-3);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+
+  /* ============ LANG + TAB SWITCHER ============ */
+  .legal-controls {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 24px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    align-items: center;
+  }
+  .lang-switcher {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .lang-btn {
+    background: transparent;
+    border: 1px solid var(--line-strong);
+    border-radius: 999px;
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-3);
+    cursor: pointer;
+    transition: all 0.15s ease;
+    font-family: var(--tx-body);
+  }
+  .lang-btn:hover {
+    border-color: var(--ink);
+    color: var(--ink);
+  }
+  .lang-btn.active {
+    background: var(--ink);
+    border-color: var(--ink);
+    color: white;
+  }
+
+  .tab-switcher {
+    display: inline-flex;
+    background: #F0F2F5;
+    border-radius: 999px;
+    padding: 4px;
+    gap: 2px;
+  }
+  .tab-btn {
+    background: transparent;
+    border: none;
+    padding: 9px 22px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-3);
+    cursor: pointer;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+    font-family: var(--tx-body);
+    letter-spacing: -0.01em;
+  }
+  .tab-btn.active {
+    background: white;
+    color: var(--ink);
+    box-shadow: 0 1px 3px rgba(10, 14, 26, 0.08), 0 0 0 0.5px rgba(10, 14, 26, 0.04);
+  }
+
+  /* ============ CONTENT ============ */
+  .legal-content {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 12px 28px 100px;
+  }
+
+  .legal-section { display: none; }
+  .legal-section.active { display: block; }
+
+  .legal-content h2 {
+    font-family: var(--tx-display);
+    font-weight: 800;
+    font-size: 24px;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+    margin: 40px 0 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+  }
+  .legal-content h2:first-of-type {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+  }
+  .legal-content p {
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .legal-content ol, .legal-content ul {
+    margin: 8px 0 20px 24px;
+    color: var(--ink-2);
+    font-size: 15px;
+    line-height: 1.85;
+  }
+  .legal-content li {
+    margin-bottom: 4px;
+  }
+  .legal-content .strong-block {
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 24px;
+  }
+  .legal-content .contact-block {
+    background: var(--bg-soft);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 24px 0;
+  }
+  .legal-content .contact-block p {
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+  .legal-content .contact-block .label {
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .legal-content a {
+    color: var(--primary);
+    text-decoration: none;
+  }
+  .legal-content a:hover { text-decoration: underline; }
+  .legal-content .updated {
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+    font-size: 13px;
+    color: var(--ink-4);
+    font-style: italic;
+  }
+
+  /* ============ FOOTER ============ */
+  .legal-footer {
+    border-top: 1px solid var(--line);
+    padding: 40px 24px 60px;
+    text-align: center;
+    color: var(--ink-4);
+    font-size: 12px;
+  }
+  .legal-footer p { margin-bottom: 4px; }
+  .legal-footer .tagline {
+    font-family: var(--tx-display);
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+  .legal-footer a { color: var(--ink-3); text-decoration: none; }
+  .legal-footer a:hover { color: var(--ink); }
+
+  /* ============ MOBILE ============ */
+  @media (max-width: 720px) {
+    .legal-hero { padding: 48px 20px 32px; }
+    .legal-hero-logo { height: 48px; margin-bottom: 24px; }
+    .legal-hero-title { font-size: 32px; }
+    .legal-hero-sub { font-size: 12px; }
+    .legal-controls { padding: 0 20px 24px; }
+    .tab-btn { padding: 8px 18px; font-size: 13px; }
+    .legal-content { padding: 8px 20px 60px; }
+    .legal-content h2 { font-size: 20px; margin: 32px 0 14px; }
+    .legal-content p, .legal-content ol, .legal-content ul { font-size: 14px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<div class="nav-wrapper">
+  <nav class="nav">
+    <a href="index.html" class="logo">
+      <img src="fndm-logo.png" alt="FNDM">
+    </a>
+    <a href="index.html" class="nav-back" data-i18n="nav.back">← Back to FNDM</a>
+  </nav>
+</div>
+
+<!-- ============ HERO ============ -->
+<header class="legal-hero">
+  <div class="legal-hero-logo">
+    <img src="fndm-logo-black.png" alt="FNDM">
+  </div>
+  <h1 class="legal-hero-title">For the Real Ones.</h1>
+  <p class="legal-hero-sub" data-i18n="legal.kicker">Legal</p>
+</header>
+
+<!-- ============ LANG + TAB ============ -->
+<div class="legal-controls">
+  <div class="lang-switcher" id="langSwitcher">
+    <button class="lang-btn" data-lang="KOR">한국어</button>
+    <button class="lang-btn" data-lang="EN">English</button>
+    <button class="lang-btn" data-lang="JP">日本語</button>
+    <button class="lang-btn" data-lang="CN">中文</button>
+    <button class="lang-btn" data-lang="Esp">Español</button>
+  </div>
+  <div class="tab-switcher" id="tabSwitcher">
+    <button class="tab-btn active" data-tab="privacy" data-i18n="legal.tab.privacy">개인정보처리방침</button>
+    <button class="tab-btn" data-tab="terms" data-i18n="legal.tab.terms">이용약관</button>
+  </div>
+</div>
+
+<!-- ============ CONTENT ============ -->
+<main class="legal-content" id="legalContent">
+  <!-- Content injected dynamically -->
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="legal-footer">
+  <p class="tagline">For the Real Ones.</p>
+  <p>© CultureCode Inc. All rights reserved</p>
+  <p>Rooted in South Korea | <a href="https://www.culturecode.co.kr" target="_blank">www.culturecode.co.kr</a></p>
+</footer>
+
+<script>
+  // ============================================================
+  // i18n data — Privacy Policy + Terms of Use for 5 languages
+  // ============================================================
+  const CONTENT = {
+    KOR: {
+      'nav.back': '← FNDM으로 돌아가기',
+      'legal.kicker': '법적 고지',
+      'legal.tab.privacy': '개인정보처리방침',
+      'legal.tab.terms': '이용약관',
+      'privacy': `
+        <h2>개인정보처리방침</h2>
+        <p>㈜컬처코드(이하 "회사")는 이용자의 개인정보를 중요하게 생각하며, 관련 법령에 따라 개인정보를 안전하게 보호하기 위해 최선을 다합니다.</p>
+        <p>회사는 서비스 제공, 사전 알림 신청, 문의 응대, 서비스 개선을 위해 필요한 최소한의 개인정보를 수집할 수 있습니다.</p>
+
+        <p class="strong-block">회사가 수집할 수 있는 개인정보 항목은 다음과 같습니다.</p>
+        <ol>
+          <li>이메일 주소</li>
+          <li>국가</li>
+          <li>최애 아티스트</li>
+          <li>접속 기록 등 서비스 이용 과정에서 자동으로 생성되는 정보</li>
+        </ol>
+        <p>위 개인정보는 이용자가 직접 입력하거나 서비스 이용 과정에서 자동으로 생성되는 정보를 기준으로 수집될 수 있습니다.</p>
+
+        <p class="strong-block">회사는 수집한 개인정보를 다음 목적을 위해 사용합니다.</p>
+        <ol>
+          <li>서비스 제공 및 운영</li>
+          <li>사전 알림 및 서비스 관련 안내 제공</li>
+          <li>이용자 문의 확인 및 답변</li>
+          <li>서비스 개선 및 사용자 경험 분석</li>
+          <li>국가별 이용자 관심사 분석 및 맞춤형 서비스 기획</li>
+          <li>팬덤 기반 콘텐츠·커머스 경험 제공</li>
+          <li>법령상 의무 이행</li>
+        </ol>
+
+        <p>회사는 개인정보를 수집 및 이용 목적이 달성된 후 지체 없이 파기합니다. 단, 관련 법령에 따라 일정 기간 보관이 필요한 경우에는 해당 기간 동안 보관할 수 있습니다.</p>
+        <p>회사는 이용자의 동의 없이 개인정보를 제3자에게 제공하지 않습니다. 다만, 법령에 따른 요청이 있거나 이용자의 사전 동의가 있는 경우에는 예외로 합니다.</p>
+        <p>이용자는 언제든지 자신의 개인정보에 대한 열람, 정정, 삭제, 처리 정지를 요청할 수 있습니다.</p>
+
+        <div class="contact-block">
+          <p class="label">개인정보 처리담당자</p>
+          <p>㈜컬처코드</p>
+          <p>담당자: 임형중</p>
+          <p>이메일: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+
+        <p class="updated">본 개인정보처리방침은 서비스 운영 상황 및 관련 법령 변경에 따라 수정될 수 있습니다.</p>
+      `,
+      'terms': `
+        <h2>이용약관</h2>
+        <p>본 약관은 ㈜컬처코드(이하 "회사")가 운영하는 웹사이트 및 관련 서비스의 이용 조건과 절차, 회사와 이용자의 권리 및 의무를 규정합니다.</p>
+        <p>이용자는 본 웹사이트를 이용함으로써 본 약관에 동의한 것으로 간주됩니다. 본 약관에 동의하지 않는 경우 웹사이트 이용을 중단해 주시기 바랍니다.</p>
+        <p>회사는 콘텐츠, 정보, 브랜드 소개, 서비스 안내 및 기타 관련 정보를 제공할 수 있습니다. 회사는 서비스의 일부 또는 전부를 운영상 필요에 따라 변경, 중단 또는 종료할 수 있습니다.</p>
+
+        <p class="strong-block">이용자는 웹사이트 이용 시 다음 행위를 해서는 안 됩니다.</p>
+        <ol>
+          <li>타인의 권리 또는 명예를 침해하는 행위</li>
+          <li>허위 정보를 입력하거나 부정한 목적으로 서비스를 이용하는 행위</li>
+          <li>회사의 사전 동의 없이 콘텐츠를 복제, 배포, 상업적으로 이용하는 행위</li>
+          <li>웹사이트의 정상적인 운영을 방해하는 행위</li>
+          <li>관련 법령 또는 공공질서에 위반되는 행위</li>
+        </ol>
+
+        <p>웹사이트에 포함된 콘텐츠, 로고, 텍스트, 이미지, 디자인 및 기타 자료에 대한 권리는 회사 또는 정당한 권리자에게 있습니다. 이용자는 회사의 사전 서면 동의 없이 이를 무단으로 사용할 수 없습니다.</p>
+        <p>회사는 웹사이트 내 정보의 정확성과 최신성을 유지하기 위해 노력하나, 모든 정보의 완전성 또는 정확성을 보장하지는 않습니다. 이용자가 해당 정보를 사용함으로써 발생하는 손해에 대해 회사는 법령상 허용되는 범위 내에서 책임을 부담하지 않습니다.</p>
+        <p>회사는 필요에 따라 본 약관을 변경할 수 있으며, 변경된 약관은 웹사이트에 게시된 시점부터 효력이 발생합니다.</p>
+
+        <div class="contact-block">
+          <p class="label">문의처</p>
+          <p>㈜컬처코드</p>
+          <p>이메일: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+      `
+    },
+
+    EN: {
+      'nav.back': '← Back to FNDM',
+      'legal.kicker': 'Legal',
+      'legal.tab.privacy': 'Privacy Policy',
+      'legal.tab.terms': 'Terms of Use',
+      'privacy': `
+        <h2>Privacy Policy</h2>
+        <p>CultureCode Inc. (the "Company," "we," "us," or "our") values users' personal information and is committed to protecting it safely in accordance with applicable laws and regulations.</p>
+        <p>We may collect the minimum personal information necessary to provide our services, manage pre-launch notifications, respond to inquiries, and improve our services.</p>
+
+        <p class="strong-block">The personal information we may collect includes:</p>
+        <ol>
+          <li>Email address</li>
+          <li>Country</li>
+          <li>Favorite artist</li>
+          <li>Access logs and other information automatically generated during use of the service</li>
+        </ol>
+        <p>The above information may be collected based on information directly entered by users or automatically generated during use of the service.</p>
+
+        <p class="strong-block">We use the personal information collected for the following purposes:</p>
+        <ol>
+          <li>Providing and operating the service</li>
+          <li>Providing pre-launch notifications and service-related notices</li>
+          <li>Confirming and responding to user inquiries</li>
+          <li>Improving the service and analyzing user experience</li>
+          <li>Analyzing user interests by country and planning customized services</li>
+          <li>Providing fandom-based content and commerce experiences</li>
+          <li>Complying with legal obligations</li>
+        </ol>
+
+        <p>We delete personal information without delay once the purposes of collection and use have been achieved. However, if retention is required under applicable laws, we may retain such information for the legally required period.</p>
+        <p>We do not provide users' personal information to third parties without consent, except where required by law or with the user's prior consent.</p>
+        <p>Users may request access to, correction, deletion, or suspension of processing of their personal information at any time.</p>
+
+        <div class="contact-block">
+          <p class="label">Personal Information Manager</p>
+          <p>CultureCode Inc.</p>
+          <p>Manager: Hyungjoong Lim</p>
+          <p>Email: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+
+        <p class="updated">This Privacy Policy may be updated due to changes in service operations or applicable laws and regulations.</p>
+      `,
+      'terms': `
+        <h2>Terms of Use</h2>
+        <p>These Terms of Use govern the terms, procedures, rights, and obligations between CultureCode Inc. (the "Company," "we," "us," or "our") and users in relation to the website and related services operated by the Company.</p>
+        <p>By using this website, users are deemed to have agreed to these Terms. If you do not agree to these Terms, please discontinue use of the website.</p>
+        <p>The Company may provide content, information, brand introductions, service announcements, and other related information. The Company may modify, suspend, or terminate all or part of the service when necessary.</p>
+
+        <p class="strong-block">Users must not engage in the following activities when using the website:</p>
+        <ol>
+          <li>Infringing upon the rights or reputation of others</li>
+          <li>Entering false information or using the service for improper purposes</li>
+          <li>Copying, distributing, or commercially using content without the Company's prior consent</li>
+          <li>Interfering with the normal operation of the website</li>
+          <li>Violating applicable laws, regulations, or public order</li>
+        </ol>
+
+        <p>All rights to the content, logos, text, images, designs, and other materials included on the website belong to the Company or rightful owners. Users may not use them without the Company's prior written consent.</p>
+        <p>The Company strives to maintain the accuracy and timeliness of information on the website, but does not guarantee the completeness or accuracy of all information. To the extent permitted by law, the Company shall not be liable for any damages resulting from the user's use of such information.</p>
+        <p>The Company may amend these Terms as necessary, and the amended Terms shall take effect when posted on the website.</p>
+
+        <div class="contact-block">
+          <p class="label">Contact</p>
+          <p>CultureCode Inc.</p>
+          <p>Email: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+      `
+    },
+
+    JP: {
+      'nav.back': '← FNDMに戻る',
+      'legal.kicker': '法的事項',
+      'legal.tab.privacy': 'プライバシーポリシー',
+      'legal.tab.terms': '利用規約',
+      'privacy': `
+        <h2>プライバシーポリシー</h2>
+        <p>株式会社CultureCode(以下「当社」といいます)は、利用者の個人情報を重要なものと認識し、関連法令に従って個人情報を安全に保護するよう努めます。</p>
+        <p>当社は、サービスの提供、事前通知の申請受付、お問い合わせ対応、サービス改善のために必要最小限の個人情報を収集する場合があります。</p>
+
+        <p class="strong-block">当社が収集する可能性のある個人情報の項目は以下のとおりです。</p>
+        <ol>
+          <li>メールアドレス</li>
+          <li>国</li>
+          <li>好きなアーティスト</li>
+          <li>アクセス記録など、サービス利用過程で自動的に生成される情報</li>
+        </ol>
+        <p>上記の個人情報は、利用者が直接入力した情報またはサービス利用過程で自動的に生成される情報に基づいて収集される場合があります。</p>
+
+        <p class="strong-block">当社は、収集した個人情報を以下の目的で利用します。</p>
+        <ol>
+          <li>サービスの提供および運営</li>
+          <li>事前通知およびサービス関連案内の提供</li>
+          <li>利用者からのお問い合わせの確認および回答</li>
+          <li>サービス改善およびユーザー体験の分析</li>
+          <li>国別の利用者関心分析およびカスタマイズされたサービス企画</li>
+          <li>ファンダムを基盤としたコンテンツおよびコマース体験の提供</li>
+          <li>法令上の義務の履行</li>
+        </ol>
+
+        <p>当社は、個人情報の収集および利用目的が達成された後、遅滞なく当該情報を削除します。ただし、関連法令により一定期間の保管が必要な場合は、その期間中保管することがあります。</p>
+        <p>当社は、利用者の同意なく個人情報を第三者に提供しません。ただし、法令に基づく要請がある場合、または利用者の事前同意がある場合を除きます。</p>
+        <p>利用者は、自己の個人情報について、開示、訂正、削除、処理停止をいつでも請求することができます。</p>
+
+        <div class="contact-block">
+          <p class="label">個人情報管理責任者</p>
+          <p>株式会社CultureCode</p>
+          <p>担当者: Lim Hyungjoong</p>
+          <p>メール: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+
+        <p class="updated">本プライバシーポリシーは、サービス運営状況または関連法令の変更により改定される場合があります。</p>
+      `,
+      'terms': `
+        <h2>利用規約</h2>
+        <p>本利用規約は、株式会社CultureCode(以下「当社」といいます)が運営するウェブサイトおよび関連サービスの利用条件、手続き、ならびに当社と利用者の権利および義務を定めるものです。</p>
+        <p>利用者は、本ウェブサイトを利用することにより、本規約に同意したものとみなされます。本規約に同意しない場合は、本ウェブサイトの利用を中止してください。</p>
+        <p>当社は、本ウェブサイトを通じて、コンテンツ、情報、ブランド紹介、サービス案内およびその他関連情報を提供することがあります。当社は、運営上必要な場合、サービスの一部または全部を変更、中断、または終了することができます。</p>
+
+        <p class="strong-block">利用者は、本ウェブサイトの利用にあたり、以下の行為を行ってはなりません。</p>
+        <ol>
+          <li>他者の権利または名誉を侵害する行為</li>
+          <li>虚偽の情報を入力し、または不正な目的でサービスを利用する行為</li>
+          <li>当社の事前同意なくコンテンツを複製、配布、商業利用する行為</li>
+          <li>ウェブサイトの正常な運営を妨害する行為</li>
+          <li>関連法令または公序良俗に反する行為</li>
+        </ol>
+
+        <p>本ウェブサイトに含まれるコンテンツ、ロゴ、テキスト、画像、デザインその他の資料に関する権利は、当社または正当な権利者に帰属します。利用者は、当社の事前の書面による同意なく、これらを無断で使用することはできません。</p>
+        <p>当社は、本ウェブサイト上の情報の正確性および最新性を維持するよう努めますが、すべての情報の完全性または正確性を保証するものではありません。利用者が当該情報を利用したことにより生じた損害について、当社は法令上認められる範囲内で責任を負いません。</p>
+        <p>当社は、必要に応じて本規約を変更することがあります。変更後の規約は、本ウェブサイトに掲載された時点で効力を生じます。</p>
+
+        <div class="contact-block">
+          <p class="label">お問い合わせ</p>
+          <p>株式会社CultureCode</p>
+          <p>メール: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+      `
+    },
+
+    CN: {
+      'nav.back': '← 返回 FNDM',
+      'legal.kicker': '法律声明',
+      'legal.tab.privacy': '隐私政策',
+      'legal.tab.terms': '使用条款',
+      'privacy': `
+        <h2>隐私政策</h2>
+        <p>CultureCode Inc.(以下简称"公司")重视用户的个人信息,并将根据相关法律法规尽力安全保护用户的个人信息。</p>
+        <p>公司可能会在提供服务、管理上线前通知申请、回复咨询以及改善服务所需的最小范围内收集个人信息。</p>
+
+        <p class="strong-block">公司可能收集的个人信息项目如下:</p>
+        <ol>
+          <li>电子邮件地址</li>
+          <li>国家</li>
+          <li>最喜欢的艺人</li>
+          <li>访问记录等在服务使用过程中自动生成的信息</li>
+        </ol>
+        <p>上述个人信息可能基于用户直接填写的信息或在服务使用过程中自动生成的信息进行收集。</p>
+
+        <p class="strong-block">公司将收集的个人信息用于以下目的:</p>
+        <ol>
+          <li>提供及运营服务</li>
+          <li>提供上线前通知及服务相关说明</li>
+          <li>确认并回复用户咨询</li>
+          <li>改善服务及分析用户体验</li>
+          <li>按国家分析用户兴趣并规划定制化服务</li>
+          <li>提供基于粉丝文化的内容及商业体验</li>
+          <li>履行法律法规规定的义务</li>
+        </ol>
+
+        <p>公司将在个人信息的收集及使用目的达成后及时删除相关信息。但根据相关法律法规需要保存一定期限的情况除外。</p>
+        <p>未经用户同意,公司不会向第三方提供个人信息。但根据法律法规要求或获得用户事先同意的情况除外。</p>
+        <p>用户可随时要求查询、更正、删除或停止处理其个人信息。</p>
+
+        <div class="contact-block">
+          <p class="label">个人信息处理负责人</p>
+          <p>CultureCode Inc.</p>
+          <p>负责人:Lim Hyungjoong</p>
+          <p>电子邮件:<a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+
+        <p class="updated">本隐私政策可能会根据服务运营情况或相关法律法规的变更进行修改。</p>
+      `,
+      'terms': `
+        <h2>使用条款</h2>
+        <p>本使用条款规定了用户使用 CultureCode Inc.(以下简称"公司")运营的网站及相关服务的条件、程序,以及公司与用户之间的权利和义务。</p>
+        <p>用户访问或使用本网站,即视为同意本条款。如不同意本条款,请停止使用本网站。</p>
+        <p>公司可能通过本网站提供内容、信息、品牌介绍、服务说明及其他相关资料。公司可根据运营需要,对网站或服务的全部或部分内容进行变更、中断或终止。</p>
+
+        <p class="strong-block">用户在使用本网站时不得从事以下行为:</p>
+        <ol>
+          <li>侵犯他人的权利或名誉</li>
+          <li>提供虚假信息或以不正当目的使用服务</li>
+          <li>未经公司事先同意,复制、分发或商业使用内容</li>
+          <li>妨碍网站的正常运营</li>
+          <li>违反相关法律法规或公共秩序的行为</li>
+        </ol>
+
+        <p>本网站所包含的内容、标志、文字、图片、设计及其他资料的权利归公司或合法权利人所有。未经公司事先书面同意,用户不得擅自使用。</p>
+        <p>公司将努力保持本网站信息的准确性和及时性,但不保证所有信息的完整性或准确性。在法律允许的范围内,公司不对用户使用本网站信息所产生的损害承担责任。</p>
+        <p>公司可根据需要修改本条款。修改后的条款自发布于本网站之日起生效。</p>
+
+        <div class="contact-block">
+          <p class="label">联系方式</p>
+          <p>CultureCode Inc.</p>
+          <p>电子邮件:<a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+      `
+    },
+
+    Esp: {
+      'nav.back': '← Volver a FNDM',
+      'legal.kicker': 'Legal',
+      'legal.tab.privacy': 'Política de Privacidad',
+      'legal.tab.terms': 'Términos de Uso',
+      'privacy': `
+        <h2>Política de Privacidad</h2>
+        <p>CultureCode Inc. ("la Compañía", "nosotros" o "nuestro") valora la información personal de los usuarios y se compromete a protegerla de forma segura de acuerdo con las leyes y regulaciones aplicables.</p>
+        <p>Podemos recopilar la información personal mínima necesaria para prestar nuestros servicios, gestionar solicitudes de notificación previa al lanzamiento, responder consultas y mejorar nuestros servicios.</p>
+
+        <p class="strong-block">La información personal que podemos recopilar incluye:</p>
+        <ol>
+          <li>Dirección de correo electrónico</li>
+          <li>País</li>
+          <li>Artista favorito</li>
+          <li>Registros de acceso y otra información generada automáticamente durante el uso del servicio</li>
+        </ol>
+        <p>La información anterior puede recopilarse a partir de datos ingresados directamente por los usuarios o generados automáticamente durante el uso del servicio.</p>
+
+        <p class="strong-block">Utilizamos la información personal recopilada para los siguientes fines:</p>
+        <ol>
+          <li>Proporcionar y operar el servicio</li>
+          <li>Proporcionar notificaciones previas al lanzamiento y avisos relacionados con el servicio</li>
+          <li>Confirmar y responder consultas de los usuarios</li>
+          <li>Mejorar el servicio y analizar la experiencia del usuario</li>
+          <li>Analizar los intereses de los usuarios por país y planificar servicios personalizados</li>
+          <li>Ofrecer experiencias de contenido y comercio basadas en fandom</li>
+          <li>Cumplir con obligaciones legales</li>
+        </ol>
+
+        <p>Eliminaremos la información personal sin demora una vez cumplidos los fines de recopilación y uso. Sin embargo, si la legislación aplicable exige su conservación, podremos conservar dicha información durante el período legalmente requerido.</p>
+        <p>No proporcionamos información personal de los usuarios a terceros sin consentimiento, salvo cuando lo exija la ley o con el consentimiento previo del usuario.</p>
+        <p>Los usuarios pueden solicitar en cualquier momento el acceso, corrección, eliminación o suspensión del tratamiento de su información personal.</p>
+
+        <div class="contact-block">
+          <p class="label">Responsable de Información Personal</p>
+          <p>CultureCode Inc.</p>
+          <p>Responsable: Hyungjoong Lim</p>
+          <p>Correo electrónico: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+
+        <p class="updated">Esta Política de Privacidad puede actualizarse debido a cambios en la operación del servicio o en las leyes y regulaciones aplicables.</p>
+      `,
+      'terms': `
+        <h2>Términos de Uso</h2>
+        <p>Estos Términos de Uso regulan las condiciones, procedimientos, derechos y obligaciones entre CultureCode Inc. ("la Compañía", "nosotros" o "nuestro") y los usuarios en relación con el sitio web y los servicios relacionados operados por la Compañía.</p>
+        <p>Al utilizar este sitio web, el usuario acepta estos Términos. Si no está de acuerdo con estos Términos, deberá dejar de utilizar el sitio web.</p>
+        <p>La Compañía puede proporcionar contenidos, información, presentaciones de marca, anuncios de servicios y otra información relacionada. La Compañía puede modificar, suspender o finalizar todo o parte del servicio cuando sea necesario.</p>
+
+        <p class="strong-block">Los usuarios no deberán realizar las siguientes actividades al utilizar el sitio web:</p>
+        <ol>
+          <li>Infringir los derechos o la reputación de terceros</li>
+          <li>Proporcionar información falsa o utilizar el servicio con fines indebidos</li>
+          <li>Copiar, distribuir o utilizar comercialmente el contenido sin consentimiento previo de la Compañía</li>
+          <li>Interferir con el funcionamiento normal del sitio web</li>
+          <li>Violar leyes, regulaciones aplicables u orden público</li>
+        </ol>
+
+        <p>Todo el contenido, logotipos, textos, imágenes, diseños y otros materiales incluidos en el sitio web pertenecen a la Compañía o a sus legítimos titulares. Los usuarios no podrán utilizarlos sin el consentimiento previo por escrito de la Compañía.</p>
+        <p>La Compañía se esfuerza por mantener la información del sitio web precisa y actualizada, pero no garantiza la integridad o exactitud de toda la información. En la medida permitida por la ley, la Compañía no será responsable por los daños derivados del uso de dicha información por parte del usuario.</p>
+        <p>La Compañía puede modificar estos Términos según sea necesario, y los Términos modificados entrarán en vigor cuando se publiquen en el sitio web.</p>
+
+        <div class="contact-block">
+          <p class="label">Contacto</p>
+          <p>CultureCode Inc.</p>
+          <p>Correo electrónico: <a href="mailto:fndm@culturecode.co.kr">fndm@culturecode.co.kr</a></p>
+        </div>
+      `
+    }
+  };
+
+  // ============================================================
+  // Helpers
+  // ============================================================
+  const langToHtml = { KOR: 'ko', EN: 'en', JP: 'ja', CN: 'zh', Esp: 'es' };
+
+  function detectInitialLocale() {
+    try {
+      const saved = localStorage.getItem('fndm-locale');
+      if (saved && CONTENT[saved]) return saved;
+    } catch (e) {}
+    const langs = navigator.languages || [navigator.language || 'en'];
+    for (const raw of langs) {
+      const l = raw.toLowerCase();
+      if (l.startsWith('ko')) return 'KOR';
+      if (l.startsWith('ja')) return 'JP';
+      if (l.startsWith('zh')) return 'CN';
+      if (l.startsWith('es')) return 'Esp';
+      if (l.startsWith('en')) return 'EN';
+    }
+    return 'EN';
+  }
+
+  function getInitialTab() {
+    const hash = (window.location.hash || '').replace('#', '').toLowerCase();
+    if (hash === 'terms') return 'terms';
+    return 'privacy';
+  }
+
+  let currentLang = detectInitialLocale();
+  let currentTab = getInitialTab();
+
+  function apply() {
+    const dict = CONTENT[currentLang] || CONTENT.EN;
+    // Update static i18n
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      if (dict[key]) el.innerHTML = dict[key];
+    });
+    // Content
+    document.getElementById('legalContent').innerHTML = dict[currentTab] || '';
+    // <html lang>
+    document.documentElement.lang = langToHtml[currentLang] || 'en';
+    // Lang buttons
+    document.querySelectorAll('.lang-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.lang === currentLang);
+    });
+    // Tab buttons
+    document.querySelectorAll('.tab-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.tab === currentTab);
+    });
+    // Update hash
+    if (currentTab !== getInitialTab()) {
+      history.replaceState(null, '', '#' + currentTab);
+    }
+    // Title
+    document.title = 'FNDM | ' + (dict['legal.tab.' + currentTab] || 'Legal');
+  }
+
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentLang = btn.dataset.lang;
+      try { localStorage.setItem('fndm-locale', currentLang); } catch (e) {}
+      apply();
+    });
+  });
+
+  document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      currentTab = btn.dataset.tab;
+      apply();
+    });
+  });
+
+  // Initial
+  apply();
+</script>
+
+</body>
+</html>

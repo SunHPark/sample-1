@@ -50,8 +50,11 @@
 <meta name="twitter:image:alt" content="FNDM — K-POP photocard trading platform">
 
 <!-- Favicon -->
-<link rel="icon" type="image/png" href="fndm-logo.png">
-<link rel="apple-touch-icon" href="fndm-logo.png">
+<link rel="icon" type="image/x-icon" href="favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="favicon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="favicon-512.png">
+<link rel="apple-touch-icon" href="favicon-192.png">
 
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -255,6 +258,247 @@
   .lang-item[aria-current="true"] span {
     color: var(--ink-2);
     opacity: 1;
+  }
+
+  /* ============ INTERACTIVE SWIPE DEMO ============ */
+  .swipe-demo {
+    padding: 32px 24px 24px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .swipe-phone {
+    width: 240px;
+    height: 480px;
+    background: #1a1d2b;
+    border-radius: 40px;
+    padding: 10px;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 0.08) inset,
+      0 0 0 2px #0a0e1a,
+      0 22px 50px -14px rgba(10, 14, 26, 0.4),
+      0 10px 22px -8px rgba(10, 14, 26, 0.2);
+    position: relative;
+  }
+  .swipe-phone-notch {
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 76px;
+    height: 22px;
+    background: #0a0e1a;
+    border-radius: 0 0 13px 13px;
+    z-index: 3;
+  }
+  .swipe-screen {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #f8f9fb 100%);
+    border-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 42px 16px 18px;
+  }
+
+  .swipe-status {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    align-self: flex-end;
+    margin-bottom: 12px;
+  }
+  .swipe-status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 0 6px var(--primary), 0 0 12px rgba(255, 31, 61, 0.55);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  .swipe-status-text {
+    font-family: var(--tx-mono);
+    font-size: 9px;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: 0.16em;
+  }
+
+  .swipe-deck {
+    position: relative;
+    width: 100%;
+    flex: 1;
+    margin-bottom: 14px;
+  }
+
+  .swipe-card {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    background: #f0f0f0;
+    box-shadow:
+      0 10px 26px -6px rgba(10, 14, 26, 0.25),
+      0 3px 10px -2px rgba(10, 14, 26, 0.1);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+    will-change: transform, opacity;
+  }
+
+  /* Photo fills entire card — uses inline background-image */
+  .swipe-card-photo {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+
+  /* Stack positions controlled by data-pos */
+  .swipe-card[data-pos="0"] { transform: scale(1) translateY(0); z-index: 4; opacity: 1; }
+  .swipe-card[data-pos="1"] { transform: scale(0.94) translateY(-8px); z-index: 3; opacity: 0.7; }
+  .swipe-card[data-pos="2"] { transform: scale(0.88) translateY(-16px); z-index: 2; opacity: 0.4; }
+  .swipe-card[data-pos="3"] { transform: scale(0.82) translateY(-24px); z-index: 1; opacity: 0; }
+
+  /* Swipe-out states — both swipe UP, slight rotation for variation */
+  .swipe-card.swipe-yes {
+    transform: translateY(-160%) rotate(8deg) !important;
+    opacity: 0 !important;
+  }
+  .swipe-card.swipe-no {
+    transform: translateY(-160%) rotate(-8deg) !important;
+    opacity: 0 !important;
+  }
+
+  /* Stamp shown right before swipe */
+  .swipe-stamp {
+    position: absolute;
+    top: 14px;
+    font-family: var(--tx-display);
+    font-weight: 900;
+    font-size: 18px;
+    letter-spacing: 0.12em;
+    padding: 5px 10px;
+    border-radius: 6px;
+    opacity: 0;
+    transition: opacity 0.18s ease;
+    pointer-events: none;
+    z-index: 4;
+  }
+  .swipe-stamp-yes {
+    right: 14px;
+    color: #22c55e;
+    border: 2.5px solid #22c55e;
+    transform: rotate(14deg);
+    text-shadow: 0 0 8px rgba(34, 197, 94, 0.4);
+  }
+  .swipe-stamp-no {
+    left: 14px;
+    color: var(--primary);
+    border: 2.5px solid var(--primary);
+    transform: rotate(-14deg);
+    text-shadow: 0 0 8px rgba(255, 31, 61, 0.5);
+  }
+  .swipe-card.show-yes .swipe-stamp-yes { opacity: 1; }
+  .swipe-card.show-no .swipe-stamp-no { opacity: 1; }
+
+  .swipe-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 0 0;
+  }
+  .swipe-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: none;
+    background: white;
+    cursor: default;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow:
+      0 1px 0 rgba(255, 255, 255, 1) inset,
+      0 6px 16px -4px rgba(10, 14, 26, 0.18),
+      0 2px 6px -2px rgba(10, 14, 26, 0.1),
+      0 0 0 1px rgba(10, 14, 26, 0.04);
+    pointer-events: none;
+  }
+  .swipe-btn-yes { color: #22c55e; }
+  /* Auto-press animation when match happens */
+  .swipe-btn.auto-press {
+    animation: btnPress 0.4s ease-out;
+  }
+  @keyframes btnPress {
+    0% { transform: scale(1); }
+    40% { transform: scale(0.85); box-shadow: 0 0 0 8px rgba(34, 197, 94, 0.18), 0 1px 0 rgba(255, 255, 255, 1) inset, 0 4px 12px -2px rgba(34, 197, 94, 0.3); }
+    100% { transform: scale(1); }
+  }
+
+  /* Matched banner — pops in middle of phone when MATCH happens */
+  .swipe-matched {
+    position: absolute;
+    left: 50%;
+    top: 38%;
+    transform: translate(-50%, -50%) scale(0.7);
+    background: linear-gradient(135deg, #22c55e 0%, #16a34a 100%);
+    color: white;
+    padding: 14px 22px;
+    border-radius: 14px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 10;
+    box-shadow:
+      0 10px 28px -4px rgba(34, 197, 94, 0.5),
+      0 0 0 4px rgba(34, 197, 94, 0.15);
+  }
+  .swipe-matched.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .swipe-matched-emoji {
+    font-size: 28px;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .swipe-matched-text {
+    font-family: var(--tx-body);
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  /* Toast: "Waiting for match" — overlay in screen */
+  .swipe-toast {
+    position: absolute;
+    left: 50%;
+    bottom: 80px;
+    transform: translateX(-50%) translateY(8px);
+    background: rgba(10, 14, 26, 0.92);
+    color: white;
+    padding: 9px 16px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 5;
+    box-shadow: 0 6px 20px -4px rgba(10, 14, 26, 0.4);
+  }
+  .swipe-toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
   }
 
   /* ============ HERO ============ */
@@ -1442,7 +1686,6 @@
   /* ============ FOOTER ============ */
   .footer {
     background: #FFFFFF;
-    border-top: 1px solid var(--line);
     padding: 72px 24px 56px;
   }
   .footer-inner {
@@ -1481,6 +1724,29 @@
     margin-bottom: 22px;
   }
 
+  .footer-legal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    font-size: 13px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+  }
+  .footer-legal a {
+    color: var(--ink-2);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.15s ease;
+  }
+  .footer-legal a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+  .footer-legal .sep {
+    color: var(--ink-4);
+  }
+
   .footer-copy {
     font-size: 13px;
     color: var(--ink-3);
@@ -1510,6 +1776,15 @@
     .hero-icon { width: 140px; height: 140px; }
 
     .preregister-wrap { padding: 8px 20px 60px; }
+
+    /* Swipe demo mobile */
+    .swipe-demo { padding: 24px 20px 16px; }
+    .swipe-phone { width: 220px; height: 440px; border-radius: 36px; padding: 9px; }
+    .swipe-phone-notch { width: 70px; height: 20px; top: 7px; }
+    .swipe-screen { border-radius: 27px; padding: 38px 14px 16px; }
+    .swipe-btn { width: 40px; height: 40px; }
+    .swipe-actions { gap: 14px; }
+    .swipe-toast { bottom: 76px; font-size: 10.5px; padding: 8px 14px; }
     .card-main { padding: 32px 24px 28px; border-radius: 24px; }
     .card-headline { font-size: 15px; }
 
@@ -1638,6 +1913,55 @@
     <h1 class="hero-title" data-i18n="hero.title">포카 교환,<br>이제 그만 기다려요.</h1>
     <p class="hero-sub" data-i18n="hero.sub">트위터에서 헤매던 포카 교환,<br>이제는 FNDM에서 <strong>매칭</strong>으로 한번에!</p>
   </header>
+
+  <!-- ============ AUTO SWIPE DEMO ============ -->
+  <section class="section swipe-demo">
+    <div class="swipe-phone">
+      <div class="swipe-phone-notch"></div>
+      <div class="swipe-screen">
+        <div class="swipe-status">
+          <span class="swipe-status-dot"></span>
+          <span class="swipe-status-text">FNDM</span>
+        </div>
+        <div class="swipe-deck">
+          <div class="swipe-card" data-pos="0">
+            <div class="swipe-card-photo" style="background-image: url('photocard-1.jpg');"></div>
+            <div class="swipe-stamp swipe-stamp-yes">MATCH</div>
+            <div class="swipe-stamp swipe-stamp-no">PASS</div>
+          </div>
+          <div class="swipe-card" data-pos="1">
+            <div class="swipe-card-photo" style="background-image: url('photocard-2.jpg');"></div>
+            <div class="swipe-stamp swipe-stamp-yes">MATCH</div>
+            <div class="swipe-stamp swipe-stamp-no">PASS</div>
+          </div>
+          <div class="swipe-card" data-pos="2">
+            <div class="swipe-card-photo" style="background-image: url('photocard-3.jpg');"></div>
+            <div class="swipe-stamp swipe-stamp-yes">MATCH</div>
+            <div class="swipe-stamp swipe-stamp-no">PASS</div>
+          </div>
+          <div class="swipe-card" data-pos="3">
+            <div class="swipe-card-photo" style="background-image: url('photocard-1.jpg');"></div>
+            <div class="swipe-stamp swipe-stamp-yes">MATCH</div>
+            <div class="swipe-stamp swipe-stamp-no">PASS</div>
+          </div>
+        </div>
+        <div class="swipe-actions">
+          <button type="button" class="swipe-btn swipe-btn-yes" aria-label="Match" tabindex="-1">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </button>
+        </div>
+        <!-- Matched banner: shown when a YES happens, gives "It's a match!" feel -->
+        <div class="swipe-matched" id="swipeMatched">
+          <div class="swipe-matched-emoji">💚</div>
+          <div class="swipe-matched-text" data-i18n="swipe.matched">매칭되었습니다!</div>
+        </div>
+        <!-- Toast: "Waiting for the other side" -->
+        <div class="swipe-toast" id="swipeToast" data-i18n="swipe.waiting">상대의 매칭을 기다려주세요</div>
+      </div>
+    </div>
+  </section>
 
   <!-- ============ PRE-REGISTER CARD ============ -->
   <section class="preregister-wrap" id="preregister">
@@ -2044,7 +2368,7 @@
 
         <div class="form-field">
           <label for="artist" class="form-label" data-i18n="form.artist">최애 아티스트</label>
-          <select id="artist" name="artist" class="form-select" required>
+          <select id="artist" name="artist" class="form-select" required onchange="toggleArtistOther(this)">
             <option value="" data-i18n="form.artist.placeholder">선택해주세요</option>
             <option>NewJeans</option>
             <option>aespa</option>
@@ -2059,12 +2383,45 @@
             <option>RIIZE</option>
             <option>BTS</option>
             <option>BLACKPINK</option>
-            <option value="기타">기타</option>
+            <option value="other" data-i18n="form.artist.other">기타 (직접 입력)</option>
+          </select>
+          <input type="text" id="artist-other" name="artist_other" class="form-input" style="display:none; margin-top:8px;" data-i18n-attr="placeholder:form.artist.other.placeholder" placeholder="좋아하는 아티스트를 입력해주세요">
+        </div>
+
+        <div class="form-field">
+          <label for="country" class="form-label" data-i18n="form.country">국가</label>
+          <select id="country" name="country" class="form-select" required>
+            <option value="" data-i18n="form.country.placeholder">선택해주세요</option>
+            <option value="KR">🇰🇷 대한민국 (Korea)</option>
+            <option value="JP">🇯🇵 日本 (Japan)</option>
+            <option value="CN">🇨🇳 中国 (China)</option>
+            <option value="TW">🇹🇼 台灣 (Taiwan)</option>
+            <option value="HK">🇭🇰 香港 (Hong Kong)</option>
+            <option value="US">🇺🇸 United States</option>
+            <option value="CA">🇨🇦 Canada</option>
+            <option value="GB">🇬🇧 United Kingdom</option>
+            <option value="FR">🇫🇷 France</option>
+            <option value="DE">🇩🇪 Germany</option>
+            <option value="ES">🇪🇸 España</option>
+            <option value="IT">🇮🇹 Italia</option>
+            <option value="MX">🇲🇽 México</option>
+            <option value="BR">🇧🇷 Brasil</option>
+            <option value="AR">🇦🇷 Argentina</option>
+            <option value="ID">🇮🇩 Indonesia</option>
+            <option value="TH">🇹🇭 ไทย (Thailand)</option>
+            <option value="VN">🇻🇳 Việt Nam</option>
+            <option value="PH">🇵🇭 Philippines</option>
+            <option value="MY">🇲🇾 Malaysia</option>
+            <option value="SG">🇸🇬 Singapore</option>
+            <option value="IN">🇮🇳 India</option>
+            <option value="AU">🇦🇺 Australia</option>
+            <option value="NZ">🇳🇿 New Zealand</option>
+            <option value="OTHER" data-i18n="form.country.other">기타</option>
           </select>
         </div>
 
         <div class="form-field">
-          <span class="form-label" data-i18n="form.type">참여 유형 (복수선택가능)</span>
+          <span class="form-label" data-i18n="form.type">참여 유형 (중복선택 가능)</span>
           <div class="form-toggles">
             <label class="toggle">
               <input type="checkbox" name="tier" value="preorder" checked>
@@ -2099,7 +2456,7 @@
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
         </button>
 
-        <p class="form-legal" data-i18n="form.terms">제출 시 FNDM <a href="#">이용약관</a> · <a href="#">개인정보처리방침</a>에 동의한 것으로 간주됩니다.</p>
+        <p class="form-legal" data-i18n="form.terms">제출 시 FNDM 이용약관 · 개인정보처리방침에 동의한 것으로 간주됩니다.</p>
       </form>
 
       <div class="form-success" id="form-success" hidden>
@@ -2129,7 +2486,7 @@
             <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
           </svg>
         </a>
-        <a href="mailto:hello@culturecode.co.kr?subject=FNDM%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EB%AC%B8%EC%9D%98" class="social-icon" aria-label="이메일">
+        <a href="mailto:fndm@culturecode.co.kr" id="mailLink" class="social-icon" aria-label="이메일">
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
             <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
             <polyline points="22,6 12,13 2,6"/>
@@ -2139,6 +2496,12 @@
 
       <p class="footer-tagline" data-i18n="footer.tagline">For the Real Ones.</p>
 
+      <div class="footer-legal">
+        <a href="legal.html#privacy" data-i18n="footer.privacy">개인정보처리방침</a>
+        <span class="sep">·</span>
+        <a href="legal.html#terms" data-i18n="footer.terms">이용약관</a>
+      </div>
+
       <div class="footer-copy">
         <p data-i18n="footer.copyright">© CultureCode Inc. All rights reserved</p>
         <p data-i18n="footer.location">Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a></p>
@@ -2147,6 +2510,142 @@
   </footer>
 
 <script>
+  // ============================================================
+  // Auto-swipe demo — runs by itself, ✓ button auto-presses on match
+  // ============================================================
+  (function() {
+    const cards = Array.from(document.querySelectorAll('.swipe-card'));
+    const btnYes = document.querySelector('.swipe-btn-yes');
+    const toast = document.getElementById('swipeToast');
+    const matched = document.getElementById('swipeMatched');
+    const phone = document.querySelector('.swipe-phone');
+    if (!cards.length || !btnYes || !phone) return;
+
+    let stack = cards.slice();
+    let isAnimating = false;
+    let cycleTimer = null;
+    let toastTimer = null;
+    let matchedTimer = null;
+    let yesCount = 0;
+
+    function showToast() {
+      if (!toast) return;
+      toast.classList.add('show');
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove('show'), 1600);
+    }
+
+    function showMatched() {
+      if (!matched) return;
+      matched.classList.add('show');
+      if (matchedTimer) clearTimeout(matchedTimer);
+      matchedTimer = setTimeout(() => matched.classList.remove('show'), 1500);
+    }
+
+    function pressYesBtn() {
+      btnYes.classList.remove('auto-press');
+      void btnYes.offsetWidth;
+      btnYes.classList.add('auto-press');
+      setTimeout(() => btnYes.classList.remove('auto-press'), 450);
+    }
+
+    function swipe(direction) {
+      if (isAnimating || !stack.length) return;
+      isAnimating = true;
+
+      const top = stack[0];
+      top.classList.add(direction === 'yes' ? 'show-yes' : 'show-no');
+
+      if (direction === 'yes') {
+        pressYesBtn();
+        yesCount++;
+      }
+
+      setTimeout(() => {
+        top.classList.add(direction === 'yes' ? 'swipe-yes' : 'swipe-no');
+        for (let i = 1; i < stack.length; i++) {
+          stack[i].dataset.pos = String(i - 1);
+        }
+      }, 180);
+
+      if (direction === 'yes') {
+        // Every 2nd YES → show "매칭되었습니다!" banner
+        // Other YES → show "waiting for match" toast
+        if (yesCount % 2 === 0) {
+          setTimeout(showMatched, 320);
+        } else {
+          setTimeout(showToast, 280);
+        }
+      }
+
+      setTimeout(() => {
+        stack.push(stack.shift());
+        const recycled = stack[stack.length - 1];
+        recycled.classList.remove('swipe-yes', 'swipe-no', 'show-yes', 'show-no');
+        recycled.style.transition = 'none';
+        recycled.dataset.pos = String(stack.length - 1);
+        void recycled.offsetWidth;
+        recycled.style.transition = '';
+        isAnimating = false;
+      }, 700);
+    }
+
+    function nextSwipe() {
+      const direction = Math.random() < 0.7 ? 'yes' : 'no';
+      swipe(direction);
+    }
+
+    function startAuto() {
+      stopAuto();
+      // Show "매칭되었습니다!" banner immediately to grab attention
+      setTimeout(() => {
+        if (!isAnimating) {
+          yesCount = 1; // Pre-set so the first auto-swipe shows the waiting toast next
+          showMatched();
+          // Press the YES button visually
+          pressYesBtn();
+          // After banner fades, do the first swipe
+          setTimeout(() => swipe('yes'), 1200);
+        }
+      }, 200);
+      // Continue regular cycle after initial sequence
+      cycleTimer = setInterval(nextSwipe, 2600);
+    }
+    function stopAuto() {
+      if (cycleTimer) { clearInterval(cycleTimer); cycleTimer = null; }
+    }
+
+    if ('IntersectionObserver' in window) {
+      const io = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            setTimeout(startAuto, 300);
+          } else {
+            stopAuto();
+          }
+        });
+      }, { threshold: 0.2 });
+      io.observe(phone);
+    } else {
+      setTimeout(startAuto, 300);
+    }
+  })();
+
+  // Show/hide artist "other" input
+  function toggleArtistOther(sel) {
+    const other = document.getElementById('artist-other');
+    if (!other) return;
+    if (sel.value === 'other') {
+      other.style.display = '';
+      other.required = true;
+      other.focus();
+    } else {
+      other.style.display = 'none';
+      other.required = false;
+      other.value = '';
+    }
+  }
+
   function submitForm(e) {
     e.preventDefault();
 
@@ -2380,6 +2879,9 @@
     KOR: {
       'seo.title': 'FNDM | 포카 교환, 매칭으로 끝내자',
       'seo.description': '트위터에서 헤매던 K-POP 포카 교환, 이제 FNDM에서. 위시리스트 기반 스마트 매칭으로 안전한 교환을 보장합니다.',
+      'swipe.waiting': '상대의 매칭을 기다려주세요',
+      'swipe.matched': '매칭되었습니다!',
+      'mail.subject': 'FNDM 서비스 문의',
       'hero.title': '포카 교환,<br>이제 그만 기다려요.',
       'hero.sub': '트위터에서 헤매던 포카 교환,<br>이제는 FNDM에서 <strong>매칭</strong>으로 한번에!',
       'prereg.headline': '가장 먼저 FNDM 서비스를 이용해보세요!',
@@ -2439,7 +2941,12 @@
       'form.email': '이메일',
       'form.artist': '최애 아티스트',
       'form.artist.placeholder': '선택해주세요',
-      'form.type': '참여 유형 (복수선택가능)',
+      'form.artist.other': '기타 (직접 입력)',
+      'form.artist.other.placeholder': '좋아하는 아티스트를 입력해주세요',
+      'form.country': '국가',
+      'form.country.placeholder': '선택해주세요',
+      'form.country.other': '기타',
+      'form.type': '참여 유형 (중복선택 가능)',
       'form.type.prereg': '사전예약',
       'form.type.prereg.d': '출시 알림 + 300명 한정판 굿즈',
       'form.type.beta': '베타테스터',
@@ -2449,12 +2956,14 @@
       'form.error.agree': '정보 수집·이용에 동의해주세요.',
       'form.error.tier': '참여 유형을 1개 이상 선택해주세요.',
       'form.submit': '포카 매칭 시작하기',
-      'form.terms': '제출 시 FNDM <a href="#">이용약관</a> · <a href="#">개인정보처리방침</a>에 동의한 것으로 간주됩니다.',
+      'form.terms': '제출 시 FNDM 이용약관 · 개인정보처리방침에 동의한 것으로 간주됩니다.',
       'form.success.h': '합류 완료!',
       'form.success.d': 'FNDM 론칭 소식을<br>가장 먼저 알려드릴게요.<br><br>같이 교환하고 싶은 친구를<br>초대해주세요!',
       'form.success.share': '공유하기',
       'form.success.copied': '링크가 복사되었어요!',
       'footer.tagline': 'For the Real Ones.',
+      'footer.privacy': '개인정보처리방침',
+      'footer.terms': '이용약관',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -2462,6 +2971,9 @@
     EN: {
       'seo.title': 'FNDM | Stop hunting, start matching photocards',
       'seo.description': 'K-POP photocard trading—no more chasing on Twitter. Wishlist-based smart matching on FNDM makes every trade safe.',
+      'swipe.waiting': 'Waiting for the other side to match...',
+      'swipe.matched': "It's a match!",
+      'mail.subject': 'FNDM Inquiry',
       'hero.title': "Stop waiting for<br>your photocard match.",
       'hero.sub': "Done hunting trades on Twitter?<br>Find your match on <strong>FNDM</strong>—instantly.",
       'prereg.headline': 'Be the first to try FNDM.',
@@ -2521,6 +3033,11 @@
       'form.email': 'Email',
       'form.artist': 'Your bias',
       'form.artist.placeholder': 'Choose your favorite',
+      'form.artist.other': 'Other (write-in)',
+      'form.artist.other.placeholder': 'Type your favorite artist',
+      'form.country': 'Country',
+      'form.country.placeholder': 'Select your country',
+      'form.country.other': 'Other',
       'form.type': 'Join as (multiple selection allowed)',
       'form.type.prereg': 'Pre-register',
       'form.type.prereg.d': 'Launch alert + first-300 goods drop',
@@ -2531,12 +3048,14 @@
       'form.error.agree': 'Please agree to the data collection terms to continue.',
       'form.error.tier': 'Please select at least one participation type.',
       'form.submit': 'Start matching',
-      'form.terms': 'By submitting, you agree to our <a href="#">Terms</a> and <a href="#">Privacy Policy</a>.',
+      'form.terms': 'By submitting, you agree to our Terms and Privacy Policy.',
       'form.success.h': "You're in!",
       'form.success.d': "We'll be the first to tell you<br>when FNDM launches.<br><br>Invite a friend<br>you want to trade with!",
       'form.success.share': 'Share link',
       'form.success.copied': 'Link copied!',
       'footer.tagline': 'For the Real Ones.',
+      'footer.privacy': 'Privacy Policy',
+      'footer.terms': 'Terms of Use',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -2544,6 +3063,9 @@
     JP: {
       'seo.title': 'FNDM | トレカ交換、マッチングで一発。',
       'seo.description': 'Xで彷徨うトレカ交換はもう終わり。FNDMの欲しいリストベース・スマートマッチングで、安全な交換を実現します。',
+      'swipe.waiting': '相手のマッチングを待っています...',
+      'swipe.matched': 'マッチしました!',
+      'mail.subject': 'FNDMサービスお問い合わせ',
       'hero.title': 'トレカ交換、<br>もう待たなくていい。',
       'hero.sub': 'Xで彷徨ったトレカ交換も、<br>FNDMなら<strong>マッチング</strong>で一発。',
       'prereg.headline': 'FNDMをいち早く体験しよう。',
@@ -2603,6 +3125,11 @@
       'form.email': 'メールアドレス',
       'form.artist': '推しアーティスト',
       'form.artist.placeholder': '選択してください',
+      'form.artist.other': 'その他(直接入力)',
+      'form.artist.other.placeholder': '推しアーティストを入力',
+      'form.country': '国',
+      'form.country.placeholder': '選択してください',
+      'form.country.other': 'その他',
       'form.type': '参加タイプ(複数選択可能)',
       'form.type.prereg': '事前予約',
       'form.type.prereg.d': 'リリース通知 + 300名限定グッズ',
@@ -2613,12 +3140,14 @@
       'form.error.agree': '情報の収集・利用にご同意ください。',
       'form.error.tier': '参加タイプを1つ以上選択してください。',
       'form.submit': 'マッチングを始める',
-      'form.terms': '送信により、FNDM<a href="#">利用規約</a>・<a href="#">プライバシーポリシー</a>に同意したものとみなされます。',
+      'form.terms': '送信により、FNDM利用規約・プライバシーポリシーに同意したものとみなされます。',
       'form.success.h': 'ようこそ!',
       'form.success.d': 'FNDMのローンチを<br>いち早くお知らせします。<br><br>一緒にトレードしたい<br>友達を招待してね!',
       'form.success.share': 'リンクを共有',
       'form.success.copied': 'リンクをコピーしました!',
       'footer.tagline': 'For the Real Ones.',
+      'footer.privacy': 'プライバシーポリシー',
+      'footer.terms': '利用規約',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -2626,6 +3155,9 @@
     CN: {
       'seo.title': 'FNDM | 小卡交换,匹配搞定',
       'seo.description': '不用在微博/推特上苦苦寻找。FNDM 基于心愿单的智能匹配,让 K-POP 小卡交换更安全、更省心。',
+      'swipe.waiting': '正在等待对方匹配...',
+      'swipe.matched': '匹配成功!',
+      'mail.subject': 'FNDM 服务咨询',
       'hero.title': '小卡交换,<br>不用再等了。',
       'hero.sub': '在微博/推特上苦苦寻找小卡的日子,<br>到FNDM<strong>一键匹配</strong>结束!',
       'prereg.headline': '抢先体验FNDM。',
@@ -2685,6 +3217,11 @@
       'form.email': '邮箱',
       'form.artist': '本命艺人',
       'form.artist.placeholder': '请选择',
+      'form.artist.other': '其他(自行填写)',
+      'form.artist.other.placeholder': '输入你的本命艺人',
+      'form.country': '国家/地区',
+      'form.country.placeholder': '请选择',
+      'form.country.other': '其他',
       'form.type': '参与类型(可多选)',
       'form.type.prereg': '预约',
       'form.type.prereg.d': '上线通知 + 300名限定周边',
@@ -2695,12 +3232,14 @@
       'form.error.agree': '请同意信息收集和使用条款。',
       'form.error.tier': '请至少选择一种参与类型。',
       'form.submit': '开始匹配',
-      'form.terms': '提交即视为同意FNDM<a href="#">用户协议</a>·<a href="#">隐私政策</a>。',
+      'form.terms': '提交即视为同意FNDM用户协议·隐私政策。',
       'form.success.h': '欢迎加入!',
       'form.success.d': 'FNDM 上线时<br>我们将第一时间通知您。<br><br>邀请想一起交换的<br>朋友加入吧!',
       'form.success.share': '分享链接',
       'form.success.copied': '链接已复制!',
       'footer.tagline': 'For the Real Ones.',
+      'footer.privacy': '隐私政策',
+      'footer.terms': '使用条款',
       'footer.copyright': '© CultureCode Inc. All rights reserved',
       'footer.location': 'Rooted in South Korea <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     },
@@ -2708,6 +3247,9 @@
     Esp: {
       'seo.title': 'FNDM | Photocards K-POP, matching real',
       'seo.description': 'Se acabó cazar trades en Twitter. En FNDM el matching inteligente basado en wishlist garantiza intercambios 100% seguros.',
+      'swipe.waiting': 'Esperando match del otro lado...',
+      'swipe.matched': '¡Es un match!',
+      'mail.subject': 'Consulta FNDM',
       'hero.title': 'Deja de esperar<br>tu intercambio de photocards.',
       'hero.sub': '¿Cansada de cazar trades en Twitter?<br>Encuentra tu match en <strong>FNDM</strong>, al instante.',
       'prereg.headline': 'Sé la primera en probar FNDM.',
@@ -2767,6 +3309,11 @@
       'form.email': 'Email',
       'form.artist': 'Tu bias',
       'form.artist.placeholder': 'Elegí tu favorita/o',
+      'form.artist.other': 'Otro (escribir)',
+      'form.artist.other.placeholder': 'Escribí tu artista favorita/o',
+      'form.country': 'País',
+      'form.country.placeholder': 'Elegí tu país',
+      'form.country.other': 'Otro',
       'form.type': 'Quiero (selección múltiple permitida)',
       'form.type.prereg': 'Pre-registro',
       'form.type.prereg.d': 'Aviso de lanzamiento + merch para las primeras 300',
@@ -2777,12 +3324,14 @@
       'form.error.agree': 'Debés aceptar los términos para continuar.',
       'form.error.tier': 'Seleccioná al menos un tipo de participación.',
       'form.submit': 'Empezar a matchear',
-      'form.terms': 'Al enviar, aceptás los <a href="#">Términos</a> y la <a href="#">Política de Privacidad</a>.',
+      'form.terms': 'Al enviar, aceptás los Términos y la Política de Privacidad.',
       'form.success.h': '¡Estás dentro!',
       'form.success.d': 'Te avisamos primero<br>cuando FNDM lance.<br><br>¡Invitá a una amiga<br>con quien quieras hacer trade!',
       'form.success.share': 'Compartir enlace',
       'form.success.copied': '¡Enlace copiado!',
       'footer.tagline': 'For the Real Ones.',
+      'footer.privacy': 'Política de Privacidad',
+      'footer.terms': 'Términos de Uso',
       'footer.copyright': '© CultureCode Inc. Todos los derechos reservados',
       'footer.location': 'Hecho en Corea del Sur <span class="sep">|</span> <a href="https://www.culturecode.co.kr" target="_blank" rel="noopener noreferrer">www.culturecode.co.kr</a>'
     }
@@ -2840,6 +3389,12 @@
     if (ogLocale) {
       const localeMap = { EN: 'en_US', KOR: 'ko_KR', JP: 'ja_JP', CN: 'zh_CN', Esp: 'es_ES' };
       ogLocale.setAttribute('content', localeMap[lang] || 'en_US');
+    }
+    // Update mailto link with localized subject
+    const mailLink = document.getElementById('mailLink');
+    if (mailLink && dict['mail.subject']) {
+      const subject = encodeURIComponent(dict['mail.subject']);
+      mailLink.setAttribute('href', 'mailto:fndm@culturecode.co.kr?subject=' + subject);
     }
   }
 
