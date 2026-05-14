@@ -373,6 +373,7 @@
   .swipe-card[data-pos="1"] { transform: scale(0.94) translateY(-8px); z-index: 3; opacity: 0.7; }
   .swipe-card[data-pos="2"] { transform: scale(0.88) translateY(-16px); z-index: 2; opacity: 0.4; }
   .swipe-card[data-pos="3"] { transform: scale(0.82) translateY(-24px); z-index: 1; opacity: 0; }
+  .swipe-card[data-pos="4"] { transform: scale(0.76) translateY(-32px); z-index: 0; opacity: 0; }
 
   /* Swipe-out states — both swipe UP, slight rotation for variation */
   .swipe-card.swipe-yes {
@@ -1427,6 +1428,16 @@
     transform: scale(0.88) translateY(16px);
     animation: stackPromoteDeep 4s ease-in-out infinite;
   }
+  .swipe-card.sc-4 {
+    z-index: 0;
+    transform: scale(0.82) translateY(24px);
+    opacity: 0.5;
+  }
+  .swipe-card.sc-5 {
+    z-index: -1;
+    transform: scale(0.76) translateY(32px);
+    opacity: 0;
+  }
 
   /* Photo fills the entire card */
   .pc-photo {
@@ -2289,7 +2300,12 @@
             <div class="swipe-stamp swipe-stamp-no">PASS</div>
           </div>
           <div class="swipe-card" data-pos="3">
-            <div class="swipe-card-photo" style="background-image: url('photocard-1.jpg');"></div>
+            <div class="swipe-card-photo" style="background-image: url('photocard-4.jpg');"></div>
+            <div class="swipe-stamp swipe-stamp-yes">MATCH</div>
+            <div class="swipe-stamp swipe-stamp-no">PASS</div>
+          </div>
+          <div class="swipe-card" data-pos="4">
+            <div class="swipe-card-photo" style="background-image: url('photocard-5.jpg');"></div>
             <div class="swipe-stamp swipe-stamp-yes">MATCH</div>
             <div class="swipe-stamp swipe-stamp-no">PASS</div>
           </div>
@@ -2423,6 +2439,14 @@
                   </div>
                   <div class="swipe-card sc-3">
                     <div class="pc-photo" style="background-image: url('photocard-3.jpg');"></div>
+                    <div class="pc-brand">FNDM</div>
+                  </div>
+                  <div class="swipe-card sc-4">
+                    <div class="pc-photo" style="background-image: url('photocard-4.jpg');"></div>
+                    <div class="pc-brand">FNDM</div>
+                  </div>
+                  <div class="swipe-card sc-5">
+                    <div class="pc-photo" style="background-image: url('photocard-5.jpg');"></div>
                     <div class="pc-brand">FNDM</div>
                   </div>
                 </div>
@@ -4039,27 +4063,44 @@
   // ============================================================
   (function() {
     const modal = document.getElementById('langModal');
-    if (!modal) return;
+    if (!modal) {
+      console.warn('[lang-modal] Modal element not found in DOM');
+      return;
+    }
+
+    // ?reset URL param forces clear localStorage (useful for testing)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('reset')) {
+      try {
+        localStorage.removeItem('fndm-lang-prompted');
+        localStorage.removeItem('fndm-locale');
+        console.log('[lang-modal] localStorage reset');
+      } catch (e) {}
+    }
 
     let dismissed = false;
     try {
       dismissed = localStorage.getItem('fndm-lang-prompted') === '1';
     } catch (e) {}
 
-    // Only show if:
-    // 1. User hasn't been prompted before
-    // 2. Suggested locale differs from current (which is EN by default)
-    // 3. User hasn't manually picked a locale before (no fndm-locale in storage)
     let hasManualChoice = false;
     try {
       hasManualChoice = !!localStorage.getItem('fndm-locale');
     } catch (e) {}
 
-    if (dismissed || hasManualChoice) return;
-
     const suggested = detectSuggestedLocale();
+    console.log('[lang-modal] dismissed:', dismissed, '| hasManualChoice:', hasManualChoice, '| suggested:', suggested, '| current:', currentLocale, '| browser:', navigator.language);
+
+    if (dismissed) {
+      console.log('[lang-modal] Skipping: user already dismissed');
+      return;
+    }
+    if (hasManualChoice) {
+      console.log('[lang-modal] Skipping: user already chose a locale');
+      return;
+    }
     if (suggested === 'EN' || suggested === currentLocale) {
-      // No need to suggest — already matching
+      console.log('[lang-modal] Skipping: suggested locale matches current/EN');
       try { localStorage.setItem('fndm-lang-prompted', '1'); } catch (e) {}
       return;
     }
@@ -4070,6 +4111,8 @@
     document.getElementById('langModalSub').textContent = dict['lang.modal.sub'] || 'Switch to your language?';
     document.getElementById('langModalYes').textContent = dict['lang.modal.yes'] || 'Yes';
     document.getElementById('langModalNo').textContent = dict['lang.modal.no'] || 'No';
+
+    console.log('[lang-modal] Showing modal for:', suggested);
 
     // Show after slight delay for smooth perception
     setTimeout(() => {
@@ -4089,11 +4132,8 @@
     });
 
     document.getElementById('langModalNo').addEventListener('click', dismiss);
-
-    // Click backdrop = dismiss (treat as "no")
     document.getElementById('langModalBackdrop').addEventListener('click', dismiss);
 
-    // Esc to dismiss
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape' && modal.classList.contains('show')) dismiss();
     });
